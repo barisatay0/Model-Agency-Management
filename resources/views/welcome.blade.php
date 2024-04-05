@@ -214,7 +214,7 @@
                     <input class="form-control mx-2 py-2 border-black" type="search" id="searchInput"
                         placeholder="Search" aria-label="Search">
                 </form>
-                <a href="editor.php"><button type="button" class="btn btn-dark mx-2 py-2 addBtn_res" id="addBtn_res"><i
+                <a href="Editor"><button type="button" class="btn btn-dark mx-2 py-2 addBtn_res" id="addBtn_res"><i
                             class="fa-solid fa-plus mx-2" style="color: #fff;"></i>Model Editor</button></a>
                 <a href="Signup"><button type="button" class="btn btn-outline-primary mx-2 py-2">SignUp</button></a>
                 <form action="logout.php" method="POST">
@@ -327,9 +327,6 @@
                     if (index !== -1) {
                         selectedCheckboxIDs.splice(index, 1);
                     }
-                    const anyCheckboxChecked = [...checkboxes].some(checkbox => checkbox.checked);
-                    selectAllButton.disabled = !anyCheckboxChecked;
-                    selectAllButton2.disabled = !anyCheckboxChecked;
                 });
 
                 addedButtons.appendChild(button);
@@ -343,10 +340,6 @@
                 if (index !== -1) {
                     selectedCheckboxIDs.splice(index, 1);
                 }
-
-                const anyCheckboxChecked = [...checkboxes].some(checkbox => checkbox.checked);
-                selectAllButton.disabled = !anyCheckboxChecked;
-                selectAllButton2.disabled = !anyCheckboxChecked;
             }
         }
 
@@ -361,8 +354,6 @@
                 const event = new Event("change");
                 checkbox.dispatchEvent(event);
             });
-            selectAllButton.disabled = true;
-            selectAllButton2.disabled = true;
         });
 
         deleteAllButton.addEventListener("click", function() {
@@ -372,18 +363,16 @@
                 checkbox.dispatchEvent(event);
             });
             addedButtons.innerHTML = "";
-            selectAllButton.disabled = false;
-            selectAllButton2.disabled = false;
         });
+
         selectAllButton2.addEventListener("click", function() {
             checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-                const event = new Event("change");
-                checkbox.dispatchEvent(event);
+                if (!checkbox.checked) {
+                    checkbox.checked = true;
+                    const event = new Event("change");
+                    checkbox.dispatchEvent(event);
+                }
             });
-
-            selectAllButton.disabled = true;
-            selectAllButton2.disabled = true;
         });
 
         deleteAllButton2.addEventListener("click", function() {
@@ -393,8 +382,6 @@
                 checkbox.dispatchEvent(event);
             });
             addedButtons.innerHTML = "";
-            selectAllButton.disabled = false;
-            selectAllButton2.disabled = false;
         });
 
         document.getElementById("saveSelectionBtn").addEventListener("click", function() {
@@ -420,9 +407,8 @@
 
         });
 
-
-
     });
+
     document.addEventListener("DOMContentLoaded", function() {
         const searchInput = document.getElementById("searchInput");
         const cardsContainer = document.querySelector(".row");
@@ -476,6 +462,7 @@
             }, 300);
         });
     });
+
     const toggleSidebarButton = document.getElementById("toggleSidebarButton");
     const sidebarContent = document.querySelector(".sidebar-content");
 
@@ -495,6 +482,7 @@
     if (window.innerWidth < 576) {
         sidebarContent.classList.add("hidden");
     }
+
     document.getElementById("copyButton").addEventListener("click", function() {
         var input = document.getElementById("linker");
         var valueToCopy = input.value;

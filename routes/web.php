@@ -22,5 +22,11 @@ Route::get('/Login', function () {
 Route::get('/Signup', function () {
     return view('signup');
 });
+Route::get('/Editor', function () {
+    return view('editor');
+});
+Route::get('/Pack', function () {
+    return view('pack');
+});
 
 
