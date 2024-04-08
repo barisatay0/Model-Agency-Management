@@ -61,10 +61,7 @@
 
         #toggleSidebarButton {
 
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            z-index: 9999;
+            display: none;
         }
 
         .small_btn_res {
@@ -73,6 +70,15 @@
 
         @media(max-width:576px) {
             .small_btn_res {
+                display: block;
+            }
+
+            #toggleSidebarButton {
+
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                z-index: 9999;
                 display: block;
             }
 
@@ -262,7 +268,7 @@
     <div class="container mt-3" style="padding-left: 12rem; margin-right: 4rem;">
         <div class="row g-0">
             <div class="col-sm-3 mb-3 name=">
-                <div class="card" style="width: 17rem;" data-id="">
+                <div class="card" style="width: 17rem;" data-id="2">
                     <li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">MAR</li>
                     <div class="card-body">
                         <a href="model.php?id="><img src="{{ asset('Data\Photos\005-copy.jpg') }}"
@@ -283,6 +289,7 @@
                                 <li><a class="dropdown-item" href="">SHOES:16</a></li>
                                 <li><a class="dropdown-item" href="">EYES:18</a></li>
                                 <li><a class="dropdown-item" href="">GENDER:12</a></li>
+                                <li><a class="dropdown-item" href="">NATİON:TURK</a></li>
                                 <li><a class="dropdown-item" href="">JANUARY 8 - FEBRUARY 9</a></li>
                             </ul>
                         </div>
@@ -313,23 +320,26 @@
             if (e.target.checked) {
                 const dataId = e.target.closest(".card").getAttribute("data-id");
                 const cardName = e.target.closest(".card").querySelector(".list-group-item").textContent.trim();
-                const button = document.createElement("button");
-                button.innerText = cardName;
-                button.id = `${dataId}`;
-                button.classList.add("btn", "btn-dark", "text-capitalize", "mx-1", "mb-2");
-                selectedCheckboxIDs.push(dataId);
-                console.log(selectedCheckboxIDs)
-                button.addEventListener("click", function() {
-                    button.remove();
+                // Kontrol ekleniyor
+                if (!selectedCheckboxIDs.includes(dataId)) {
+                    const button = document.createElement("button");
+                    button.innerText = cardName;
+                    button.id = `${dataId}`;
+                    button.classList.add("btn", "btn-dark", "text-capitalize", "mx-1", "mb-2");
+                    selectedCheckboxIDs.push(dataId);
+                    console.log(selectedCheckboxIDs)
+                    button.addEventListener("click", function() {
+                        button.remove();
 
-                    e.target.checked = false;
-                    const index = selectedCheckboxIDs.indexOf(dataId);
-                    if (index !== -1) {
-                        selectedCheckboxIDs.splice(index, 1);
-                    }
-                });
+                        e.target.checked = false;
+                        const index = selectedCheckboxIDs.indexOf(dataId);
+                        if (index !== -1) {
+                            selectedCheckboxIDs.splice(index, 1);
+                        }
+                    });
 
-                addedButtons.appendChild(button);
+                    addedButtons.appendChild(button);
+                }
             } else {
                 const dataId = e.target.closest(".card").getAttribute("data-id");
                 const buttonToRemove = document.getElementById(`${dataId}`);
@@ -342,6 +352,7 @@
                 }
             }
         }
+
 
         const checkboxes = document.querySelectorAll(".myCheckbox");
         checkboxes.forEach(function(checkbox) {
