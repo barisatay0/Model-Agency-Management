@@ -41,18 +41,6 @@
                                     <label class="form-check-label" for="rememberMe">Remember me</label>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Log in</button>
-                                @if(session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            
-                            @if($errors->has('loginError'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('loginError') }}
-                                </div>
-                            @endif
-                            
                             </form>
                         </div>
                     </div>

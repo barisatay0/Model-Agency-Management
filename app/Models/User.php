@@ -30,10 +30,6 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
     /**
      * The attributes that should be cast.
@@ -50,15 +46,7 @@ class User extends Authenticatable
      * @param  string  $value
      * @return void
      */
-    public function setPasswordAttribute($value)
-    {
-        // Eğer verilen değer zaten hashlenmişse (bazı durumlarda, örneğin, veritabanından alınan bir parola), yeniden hashleme işlemi yapılmaz.
-        if (!Hash::needsRehash($value)) {
-            $this->attributes['password'] = Hash::make($value);
-        } else {
-            $this->attributes['password'] = $value;
-        }
-    }
+
 
     // Diğer model kodlarınız
 

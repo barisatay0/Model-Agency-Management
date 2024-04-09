@@ -29,6 +29,6 @@ Route::get('/Pack', function () {
     return view('pack');
 });
 Route::post('/register', 'App\Http\Controllers\UserController@store')->name('register');
-Route::post('/userlogin', 'App\Http\Controllers\AuthController@login')->name('userlogin');
+Route::post('/userlogin', 'App\Http\Controllers\UserController@login')->name('userlogin');
 
 

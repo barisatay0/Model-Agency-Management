@@ -32,4 +32,15 @@ class UserController extends Controller
 
         return redirect('/')->with('success', 'Registration completed successfully.');
     }
+    public function login(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        if (auth()->attempt($credentials)) {
+            return redirect('/')->with('success', 'Login completed successfully.');
+        } else {
+            return redirect()->back()->withErrors(['login' => 'Login failed. Please check your username and password.']);
+        }
+    }
+
 }
