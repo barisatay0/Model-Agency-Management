@@ -1,6 +1,7 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,21 +15,38 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome',['name' => 'James']);
+    if (Auth::check()) {
+        return view('/welcome');
+    } else {
+        return redirect('/Login');
+    }
 });
+
+
 Route::get('/Login', function () {
     return view('login');
 });
 Route::get('/Signup', function () {
-    return view('signup');
+    if (Auth::check()) {
+        return view('/signup');
+    } else {
+        return redirect('/Login');
+    }
 });
 Route::get('/Editor', function () {
-    return view('editor');
+    if (Auth::check()) {
+        return view('/editor');
+    } else {
+        return redirect('/Login');
+    }
 });
 Route::get('/Pack', function () {
-    return view('pack');
+    if (Auth::check()) {
+        return view('/pack');
+    } else {
+        return redirect('/Login');
+    }
 });
 Route::post('/register', 'App\Http\Controllers\UserController@store')->name('register');
 Route::post('/userlogin', 'App\Http\Controllers\UserController@login')->name('userlogin');
-
-
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');

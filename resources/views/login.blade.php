@@ -12,7 +12,7 @@
 
     <body>
         <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
-            <a href="pack.html"><img src="{{ asset('images/Logo.png') }}" alt="Logo"></a>
+            <a href="#"><img src="{{ asset('images/Logo.png') }}" alt="Logo"></a>
 
         </nav>
         <div class="container mt-5">
@@ -37,11 +37,18 @@
                                         placeholder="Enter password..." required>
                                 </div>
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
+                                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                    <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
                                 <button type="submit" class="btn btn-dark">Log in</button>
                             </form>
+
+                            <br>
+                            @if ($errors->has('login'))
+                                <div class="alert alert-danger">
+                                    {{ $errors->first('login') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

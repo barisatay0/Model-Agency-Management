@@ -189,7 +189,6 @@
         }
     </style>
 </head>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -223,7 +222,8 @@
                 <a href="Editor"><button type="button" class="btn btn-dark mx-2 py-2 addBtn_res" id="addBtn_res"><i
                             class="fa-solid fa-plus mx-2" style="color: #fff;"></i>Model Editor</button></a>
                 <a href="Signup"><button type="button" class="btn btn-outline-primary mx-2 py-2">SignUp</button></a>
-                <form action="logout.php" method="POST">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
                     <input class="btn btn-outline-danger py-2" type="submit" value="Log Out">
                 </form>
             </div>

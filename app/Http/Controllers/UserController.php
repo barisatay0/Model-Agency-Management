@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -30,17 +32,24 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect('/')->with('success', 'Registration completed successfully.');
+        return redirect('/');
     }
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
+        $remember = $request->filled('remember');
 
-        if (auth()->attempt($credentials)) {
-            return redirect('/')->with('success', 'Login completed successfully.');
+        if (Auth::attempt($credentials, $remember)) {
+            $user = Auth::user();
+            return redirect('/');
         } else {
-            return redirect()->back()->withErrors(['login' => 'Login failed. Please check your username and password.']);
+            return redirect()->back()->withErrors(['login' => 'Login failed, please check your username and password again.']);
         }
     }
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/Login');
+    }
 }
