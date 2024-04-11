@@ -13,7 +13,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $ip = $request->ip();
-
         $validatedData = $request->validate([
             'username' => 'required|min:4',
             'password' => 'required|min:4',

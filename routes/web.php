@@ -47,6 +47,14 @@ Route::get('/Pack', function () {
         return redirect('/Login');
     }
 });
+Route::get('/List', function () {
+    if (Auth::check()) {
+        return view('/list');
+    } else {
+        return redirect('/Login');
+    }
+});
 Route::post('/register', 'App\Http\Controllers\UserController@store')->name('register');
 Route::post('/userlogin', 'App\Http\Controllers\UserController@login')->name('userlogin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+Route::post('/modeladd', 'App\Http\Controllers\ModelController@store')->name('modeladd');

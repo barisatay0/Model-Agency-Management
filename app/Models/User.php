@@ -18,11 +18,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', // username alanını ekledim
+        'username',
         'password',
-        'role', // role alanını ekledim
-        'date', // date alanını ekledim
-        'ipaddress', // ipaddress alanını ekledim
+        'role',
+        'date',
+        'ipaddress',
     ];
 
     /**
@@ -46,8 +46,5 @@ class User extends Authenticatable
      * @param  string  $value
      * @return void
      */
-
-
-    // Diğer model kodlarınız
 
 }

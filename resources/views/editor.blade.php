@@ -16,10 +16,22 @@
         <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" alt="Logo"></a>
     </nav>
     <div class="mt-1 text-center">
-<button class="btn btn-outline-dark w-25 py-2" href="{{ url('/') }}">Model List</button>
-<button class="btn btn-outline-dark w-25 py-2" href="{{ url('/') }}">Data</button>
+        <a class="text-black " style="text-decoration: none" href="{{ url('/List') }}"><button
+                class="btn btn-outline-dark w-25 py-2">Models</button></a>
+        <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
+                class="btn btn-outline-dark w-25 py-2">Data</button></a>
     </div>
-    <form>
+    @if ($errors->any())
+        <div class="alert alert-danger mt-2">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    <form action="{{ route('modeladd') }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <section class="vh-100 mt-1">
             <div class="container h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -35,7 +47,8 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input class="form-control form-control-md" id="formFileLg" type="file" />
+                                        <input name="profilephoto" class="form-control form-control-md" id="formFileLg"
+                                            type="file" required />
                                         <div class="small text-muted mt-2"></div>
 
                                     </div>
@@ -51,7 +64,8 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="name" type="text" class="form-control form-control-md"
+                                            required />
 
                                     </div>
                                 </div>
@@ -66,7 +80,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="height" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -81,7 +95,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="chest-bust" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -96,7 +110,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="waist" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -111,7 +125,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="hips" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -126,7 +140,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="shoes" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -141,7 +155,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="eyes" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -156,7 +170,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input type="text" class="form-control form-control-md" />
+                                        <input name="nation" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -172,15 +186,15 @@
                                     <div class="col-md-9 pe-5">
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1">
+                                            <input name="men" class="form-check-input" type="radio"
+                                                name="flexRadioDefault" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Men
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" checked>
+                                            <input name="women" class="form-check-input" type="radio"
+                                                name="flexRadioDefault" id="flexRadioDefault2" checked>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Women
                                             </label>
@@ -199,7 +213,8 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input class="form-control form-control-md" id="formFileLg" type="file" />
+                                        <input name="digital" class="form-control form-control-md" id="formFileLg"
+                                            type="file" multiple />
                                         <div class="small text-muted mt-2"></div>
 
                                     </div>
@@ -215,7 +230,8 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input class="form-control form-control-md" id="formFileLg" type="file" />
+                                        <input name="book" class="form-control form-control-md" id="formFileLg"
+                                            type="file" multiple />
                                         <div class="small text-muted mt-2"></div>
 
                                     </div>
@@ -231,18 +247,20 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input class="form-control form-control-md" id="formFileLg" type="file" />
+                                        <input name="video" class="form-control form-control-md" id="formFileLg"
+                                            type="file" />
                                         <div class="small text-muted mt-2"></div>
 
                                     </div>
                                 </div>
 
                                 <hr class="mx-n3">
+                                <div class="px-5 py-4">
+                                    <button type="submit" class="btn btn-outline-dark w-100 btn-md">Add
+                                        Model</button>
+                                </div>
     </form>
-    <div class="px-5 py-4">
-        <button type="submit" class="btn btn-outline-dark w-100 btn-md">Add
-            Model</button>
-    </div>
+
 
     </div>
     </div>
