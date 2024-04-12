@@ -10,8 +10,13 @@ use Illuminate\Http\Request;
 
 class ModelController extends Controller
 {
+
     public function addModel(Request $request)
     {
+        $modelName = $request->input('name');
+        if (models::where('name', $modelName)->exists()) {
+            return back()->withErrors(['name' => 'This model name already exists']);
+        }
         $validatedData = $request->validate([
             'profilephoto' => 'required|image|mimes:jpeg,png,jpg,gif,heic|max:50048',
             'book' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
@@ -46,8 +51,56 @@ class ModelController extends Controller
         $model->nation = $request->input('nation');
         $model->instagram = $request->input('instagram');
         $model->gender = $request->input('gender');
-
         $model->save();
+
+        $modelName = $request->input('name');
+        $model = models::where('name', $modelName)->first();
+
+        if (!$model) {
+            return back()->withErrors(['name' => 'Model not found']);
+        }
+
+        $modelId = $model->modelid;
+
+
+
+        if ($request->hasfile('book')) {
+            foreach ($request->allFiles('book') as $book) {
+                $bookPath = $book->storePublicly('Books');
+                $photo = new photos;
+                $photo->modelid = $modelId;
+                $photo->photopath = $bookPath;
+                $photo->photocategory = 'Book';
+                $photo->photoorder =
+                    $photo->save();
+            }
+        }
+
+        if ($request->hasfile('digital')) {
+            $counter = 1;
+            foreach ($request->allFiles('digital') as $digital) {
+                $digitalPath = $digital->storePublicly('Digitals');
+                $photo = new photos;
+                $photo->modelid = $modelId;
+                $photo->photopath = $digitalPath;
+                $photo->photocategory = 'Digital';
+                $photo->photoorder = $counter;
+                $photo->save();
+                $counter++;
+            }
+        }
+
+        if ($request->hasfile('video')) {
+            foreach ($request->allFiles('video') as $videoFile) {
+                $videoPath = $videoFile->storePublicly('Videos');
+                $videoModel = new video;
+                $videoModel->modelid = $modelId;
+                $videoModel->videopath = $videoPath;
+                $videoModel->save();
+            }
+        }
+
+
         return redirect('Editor');
 
 
