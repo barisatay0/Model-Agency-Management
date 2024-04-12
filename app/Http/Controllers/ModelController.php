@@ -37,7 +37,7 @@ class ModelController extends Controller
             'video.max' => 'The video file must not be greater than :max 900 MB.',
         ]);
         $profilephoto = $request->file('profilephoto');
-        $profilephotopath = $profilephoto->storePublicly('Photos');
+        $profilephotopath = $profilephoto->storePublicly('public/Photos');
 
         $model = new models;
         $model->profilephoto = $profilephotopath;
@@ -65,21 +65,23 @@ class ModelController extends Controller
 
 
         if ($request->hasfile('book')) {
+            $counter = 1;
             foreach ($request->allFiles('book') as $book) {
-                $bookPath = $book->storePublicly('Books');
+                $bookPath = $book->storePublicly('public/Books');
                 $photo = new photos;
                 $photo->modelid = $modelId;
                 $photo->photopath = $bookPath;
                 $photo->photocategory = 'Book';
-                $photo->photoorder =
-                    $photo->save();
+                $photo->photoorder = $counter;
+                $photo->save();
+                $counter++;
             }
         }
 
         if ($request->hasfile('digital')) {
             $counter = 1;
             foreach ($request->allFiles('digital') as $digital) {
-                $digitalPath = $digital->storePublicly('Digitals');
+                $digitalPath = $digital->storePublicly('public/Digitals');
                 $photo = new photos;
                 $photo->modelid = $modelId;
                 $photo->photopath = $digitalPath;
@@ -91,12 +93,16 @@ class ModelController extends Controller
         }
 
         if ($request->hasfile('video')) {
+            $counter = 1;
             foreach ($request->allFiles('video') as $videoFile) {
-                $videoPath = $videoFile->storePublicly('Videos');
+                $videoPath = $videoFile->storePublicly('public/Videos');
                 $videoModel = new video;
                 $videoModel->modelid = $modelId;
                 $videoModel->videopath = $videoPath;
+                $videoModel->videoorder = $counter;
                 $videoModel->save();
+                $counter++;
+
             }
         }
 
@@ -104,5 +110,11 @@ class ModelController extends Controller
         return redirect('Editor');
 
 
+
+    }
+    public function models()
+    {
+        $models = models::all();
+        return view('welcome', ['models' => $models]);
     }
 }

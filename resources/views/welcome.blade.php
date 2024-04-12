@@ -267,42 +267,54 @@
             class="fa-solid fa-check-double" style="color: #000000;"></i></button>
     <div class="container mt-3" style="padding-left: 12rem; margin-right: 4rem;">
         <div class="row g-0">
-            <div class="col-sm-3 mb-3 name=">
-                <div class="card" style="width: 17rem;" data-id="2">
-                    <li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">MAR</li>
-                    <div class="card-body">
-                        <a href="model.php?id="><img src="{{ asset('Data\Photos\005-copy.jpg') }}"
-                                style="height:22rem" class="card-img-top" alt="..."></a>
-                    </div>
-                    <div class="card-body">
-                        <div class="dropup-center dropup">
-                            <button class="btn btn-outline-dark dropdown-toggle w-100" type="button"
-                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                Features
-                            </button>
-                            <ul class="dropdown-menu w-100 text-center border border-black"
-                                aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="">HEIGHT:12</a></li>
-                                <li><a class="dropdown-item" href="">CHEST:13</a></li>
-                                <li><a class="dropdown-item" href="">WAIST:14</a></li>
-                                <li><a class="dropdown-item" href="">HIPS:15</a></li>
-                                <li><a class="dropdown-item" href="">SHOES:16</a></li>
-                                <li><a class="dropdown-item" href="">EYES:18</a></li>
-                                <li><a class="dropdown-item" href="">GENDER:12</a></li>
-                                <li><a class="dropdown-item" href="">NATİON:TURK</a></li>
-                                <li><a class="dropdown-item" href="">JANUARY 8 - FEBRUARY 9</a></li>
-                            </ul>
+            @foreach ($models as $model)
+                <div class="col-sm-3 mb-3">
+                    <div class="card" style="width: 17rem;" data-id="{{ $model->modelid }}">
+                        <li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">
+                            {{ $model->name }}</li>
+                        <div class="card-body">
+                            <a href="#"><img src="{{ asset($model->profilephoto) }}" style="height:22rem"
+                                    class="card-img-top" alt="..."></a>
                         </div>
-                        <div class=" btn-group-toggle mt-1" data-toggle="buttons">
-                            <label class="btn btn-outline-dark w-100">
-                                <input id="" class="myCheckbox" type="checkbox" autocomplete="off">
-                            </label>
+                        <div class="card-body">
+                            <div class="dropup-center dropup">
+                                <button class="btn btn-outline-dark dropdown-toggle w-100" type="button"
+                                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Features
+                                </button>
+                                <ul class="dropdown-menu w-100 text-center border border-black"
+                                    aria-labelledby="dropdownMenuButton">
+                                    <li><a class="dropdown-item" href="">HEIGHT:
+                                            {{ strtoupper($model->height) }}</a></li>
+                                    <li><a class="dropdown-item" href="">CHEST:
+                                            {{ strtoupper($model->chest_bust) }}</a></li>
+                                    <li><a class="dropdown-item" href="">WAIST:
+                                            {{ strtoupper($model->waist) }}</a></li>
+                                    <li><a class="dropdown-item" href="">HIPS:
+                                            {{ strtoupper($model->hips) }}</a></li>
+                                    <li><a class="dropdown-item" href="">SHOES:
+                                            {{ strtoupper($model->shoes) }}</a></li>
+                                    <li><a class="dropdown-item" href="">EYES:
+                                            {{ strtoupper($model->eyes) }}</a></li>
+                                    <li><a class="dropdown-item" href="">GENDER:
+                                            {{ strtoupper($model->gender) }}</a></li>
+                                    <li><a class="dropdown-item" href="">NATION:
+                                            {{ strtoupper($model->nation) }}</a></li>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class=" btn-group-toggle mt-1" data-toggle="buttons">
+                                <label class="btn btn-outline-dark w-100">
+                                    <input id="" class="myCheckbox" type="checkbox" autocomplete="off">
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
+
 </body>
 
 </html>
@@ -320,7 +332,6 @@
             if (e.target.checked) {
                 const dataId = e.target.closest(".card").getAttribute("data-id");
                 const cardName = e.target.closest(".card").querySelector(".list-group-item").textContent.trim();
-                // Kontrol ekleniyor
                 if (!selectedCheckboxIDs.includes(dataId)) {
                     const button = document.createElement("button");
                     button.innerText = cardName;
