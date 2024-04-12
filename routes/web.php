@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ModelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +55,7 @@ Route::get('/List', function () {
         return redirect('/Login');
     }
 });
-Route::post('/register', 'App\Http\Controllers\UserController@store')->name('register');
-Route::post('/userlogin', 'App\Http\Controllers\UserController@login')->name('userlogin');
+Route::post('/register', [UserController::class, 'store'])->name('register');
+Route::post('/userlogin', [UserController::class, 'login'])->name('userlogin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-Route::post('/modeladd', 'App\Http\Controllers\ModelController@store')->name('modeladd');
+Route::post('/modeladd', [ModelController::class, 'addModel'])->name('modeladd');

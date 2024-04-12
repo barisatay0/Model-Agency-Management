@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\models;
+use App\Models\photos;
+use App\Models\video;
 use Illuminate\Http\Request;
 
 
 class ModelController extends Controller
 {
-    public function store(Request $request)
+    public function addModel(Request $request)
     {
         $validatedData = $request->validate([
             'profilephoto' => 'required|image|mimes:jpeg,png,jpg,gif,heic|max:50048',
@@ -28,6 +31,25 @@ class ModelController extends Controller
             'video.mimetypes' => 'The video file must be in MP4, WebM, MPEG, QuickTime, AVI, or FLV format.',
             'video.max' => 'The video file must not be greater than :max 900 MB.',
         ]);
+        $profilephoto = $request->file('profilephoto');
+        $profilephotopath = $profilephoto->storePublicly('Photos');
+
+        $model = new models;
+        $model->profilephoto = $profilephotopath;
+        $model->name = $request->input('name');
+        $model->height = $request->input('height');
+        $model->chest_bust = $request->input('chest_bust');
+        $model->waist = $request->input('waist');
+        $model->hips = $request->input('hips');
+        $model->shoes = $request->input('shoes');
+        $model->eyes = $request->input('eyes');
+        $model->nation = $request->input('nation');
+        $model->instagram = $request->input('instagram');
+        $model->gender = $request->input('gender');
+
+        $model->save();
+        return redirect('Editor');
+
 
     }
 }

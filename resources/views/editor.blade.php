@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input name="chest-bust" type="text" class="form-control form-control-md" />
+                                        <input name="chest_bust" type="text" class="form-control form-control-md" />
 
                                     </div>
                                 </div>
@@ -180,21 +180,36 @@
                                 <div class="row align-items-center pt-4 pb-3">
                                     <div class="col-md-3 ps-5">
 
+                                        <h6 class="mb-0">İnstagram</h6>
+
+                                    </div>
+                                    <div class="col-md-9 pe-5">
+
+                                        <input name="instagram" type="text"
+                                            class="form-control form-control-md" />
+
+                                    </div>
+                                </div>
+                                <hr class="mx-n3">
+
+                                <div class="row align-items-center pt-4 pb-3">
+                                    <div class="col-md-3 ps-5">
+
                                         <h6 class="mb-0">Model Gender</h6>
 
                                     </div>
                                     <div class="col-md-9 pe-5">
 
                                         <div class="form-check">
-                                            <input name="men" class="form-check-input" type="radio"
-                                                name="flexRadioDefault" id="flexRadioDefault1">
+                                            <input name="gender" class="form-check-input" type="radio"
+                                                value="men" id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Men
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input name="women" class="form-check-input" type="radio"
-                                                name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                            <input name="gender" class="form-check-input" type="radio"
+                                                value="women" id="flexRadioDefault2" checked>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 Women
                                             </label>
