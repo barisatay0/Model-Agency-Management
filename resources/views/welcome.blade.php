@@ -38,6 +38,20 @@
             display: none;
         }
 
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination .page-item {
+            margin: 0 5px;
+        }
+
+        .pagination .btn {
+            width: 350px;
+        }
+
 
         .card img {
             object-fit: cover;
@@ -73,6 +87,10 @@
         @media(max-width:576px) {
             .small_btn_res {
                 display: block;
+            }
+
+            .pagination .btn {
+                width: 100%;
             }
 
             #toggleSidebarButton {
@@ -231,7 +249,7 @@
     </nav>
     <div class="sidebar-content">
         <div class="fixed-top p-3 text-bg-light border" style="width: 280px; height: 100%;">
-            <a href="https://pack.reepmodel.com"
+            <a href="{{ url('/') }}"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <img src="{{ asset('images/Logo.png') }}" alt="">
             </a>
@@ -338,15 +356,15 @@
                             </li>
                         @else
                             <li class="page-item">
-                                <a class=" btn btn-outline-dark" href="{{ $models->previousPageUrl() }}"
+                                <a class=" btn btn-dark" href="{{ $models->previousPageUrl() }}"
                                     rel="prev">Previous</a>
                             </li>
                         @endif
 
                         @if ($models->hasMorePages())
                             <li class="page-item">
-                                <a class="mx-1 btn btn-outline-dark" href="{{ $models->nextPageUrl() }}"
-                                    rel="next">Next Page</a>
+                                <a class="mx-1 btn btn-dark" href="{{ $models->nextPageUrl() }}" rel="next">Next
+                                    Page</a>
                             </li>
                         @else
                             <li class="page-item disabled">
