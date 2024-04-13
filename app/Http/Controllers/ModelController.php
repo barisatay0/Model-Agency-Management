@@ -114,7 +114,26 @@ class ModelController extends Controller
     }
     public function models()
     {
-        $models = models::all();
+        $models = models::paginate(12);
         return view('welcome', ['models' => $models]);
     }
+
+    public function toggleSelection(Request $request)
+    {
+        $modelId = $request->input('modelid');
+        $newSelected = $request->input('selected');
+
+        $model = Models::where('modelid', $modelId)->first(); // models::find() yerine Models::where() kullanıyoruz
+
+        if ($model) {
+            $model->selected = $newSelected;
+            $model->save();
+
+            return response()->json(['success' => true, 'message' => 'Selected status updated successfully']);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Model not found'], 404);
+        }
+
+    }
+
 }

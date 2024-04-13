@@ -59,4 +59,5 @@ Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/userlogin', [UserController::class, 'login'])->name('userlogin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/modeladd', [ModelController::class, 'addModel'])->name('modeladd');
-Route::get('/',[ModelController::class,'models']);
+Route::get('/', [ModelController::class, 'models']);
+Route::post('/toggleSelection', [ModelController::class, 'toggleSelection']);

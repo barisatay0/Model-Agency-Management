@@ -12,6 +12,8 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
     <style>
         ::-webkit-scrollbar {
             width: 10px;
@@ -189,16 +191,6 @@
         }
     </style>
 </head>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Sayfası</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
-</head>
 
 <body>
     <nav class="navbar navbar-expand bg-body-tertiary border-bottom" style="padding:1.3rem;">
@@ -286,8 +278,14 @@
                                     aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="">HEIGHT:
                                             {{ strtoupper($model->height) }}</a></li>
-                                    <li><a class="dropdown-item" href="">CHEST:
-                                            {{ strtoupper($model->chest_bust) }}</a></li>
+                                    <li><a class="dropdown-item" href="">
+                                            @if ($model->gender == 'men')
+                                                CHEST:
+                                            @elseif($model->gender == 'women')
+                                                BUST:
+                                            @endif
+                                            {{ strtoupper($model->chest_bust) }}
+                                        </a></li>
                                     <li><a class="dropdown-item" href="">WAIST:
                                             {{ strtoupper($model->waist) }}</a></li>
                                     <li><a class="dropdown-item" href="">HIPS:
@@ -305,186 +303,72 @@
                             </div>
                             <div class=" btn-group-toggle mt-1" data-toggle="buttons">
                                 <label class="btn btn-outline-dark w-100">
-                                    <input id="" class="myCheckbox" type="checkbox" autocomplete="off">
+                                    <input type="checkbox" class="myCheckbox"
+                                        onchange="toggleSelection({{ $model->modelid }})"
+                                        {{ $model->selected ? 'checked' : '' }}>
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
+            <div class="w-100">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        @if ($models->onFirstPage())
+                            <li class="page-item disabled">
+                                <span
+                                    class="page-link btn btn-outline-dark text-black border border-black">Previous</span>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <a class=" btn btn-outline-dark" href="{{ $models->previousPageUrl() }}"
+                                    rel="prev">Previous</a>
+                            </li>
+                        @endif
+
+                        @if ($models->hasMorePages())
+                            <li class="page-item">
+                                <a class="mx-1 btn btn-outline-dark" href="{{ $models->nextPageUrl() }}"
+                                    rel="next">Next Page</a>
+                            </li>
+                        @else
+                            <li class="page-item disabled">
+                                <span class="page-link mx-1 text-black border border-black btn">Next Page</span>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
+
         </div>
     </div>
-
 </body>
-
-</html>
-
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const addedButtons = document.getElementById("addedButtons");
-        const selectAllButton = document.getElementById("selectAllButton");
-        const deleteAllButton = document.getElementById("deleteAllButton");
-        const selectAllButton2 = document.getElementById("selectAllButton_2");
-        const deleteAllButton2 = document.getElementById("deleteAllButton_2");
-        const selectedCheckboxIDs = [];
+    function toggleSelection(modelId) {
+        var checkbox = document.querySelector('[data-id="' + modelId + '"] .myCheckbox');
+        if (checkbox) {
+            var newSelected = checkbox.checked ? 1 : 0;
 
-        function handleCheckboxChange(e) {
-            if (e.target.checked) {
-                const dataId = e.target.closest(".card").getAttribute("data-id");
-                const cardName = e.target.closest(".card").querySelector(".list-group-item").textContent.trim();
-                if (!selectedCheckboxIDs.includes(dataId)) {
-                    const button = document.createElement("button");
-                    button.innerText = cardName;
-                    button.id = `${dataId}`;
-                    button.classList.add("btn", "btn-dark", "text-capitalize", "mx-1", "mb-2");
-                    selectedCheckboxIDs.push(dataId);
-                    console.log(selectedCheckboxIDs)
-                    button.addEventListener("click", function() {
-                        button.remove();
-
-                        e.target.checked = false;
-                        const index = selectedCheckboxIDs.indexOf(dataId);
-                        if (index !== -1) {
-                            selectedCheckboxIDs.splice(index, 1);
-                        }
-                    });
-
-                    addedButtons.appendChild(button);
+            $.ajax({
+                type: 'POST',
+                url: '/toggleSelection',
+                data: {
+                    modelid: modelId,
+                    selected: newSelected,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
                 }
-            } else {
-                const dataId = e.target.closest(".card").getAttribute("data-id");
-                const buttonToRemove = document.getElementById(`${dataId}`);
-                if (buttonToRemove) {
-                    buttonToRemove.remove();
-                }
-                const index = selectedCheckboxIDs.indexOf(dataId);
-                if (index !== -1) {
-                    selectedCheckboxIDs.splice(index, 1);
-                }
-            }
+            });
         }
-
-
-        const checkboxes = document.querySelectorAll(".myCheckbox");
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener("change", handleCheckboxChange);
-        });
-
-        selectAllButton.addEventListener("click", function() {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-                const event = new Event("change");
-                checkbox.dispatchEvent(event);
-            });
-        });
-
-        deleteAllButton.addEventListener("click", function() {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-                const event = new Event("change");
-                checkbox.dispatchEvent(event);
-            });
-            addedButtons.innerHTML = "";
-        });
-
-        selectAllButton2.addEventListener("click", function() {
-            checkboxes.forEach(function(checkbox) {
-                if (!checkbox.checked) {
-                    checkbox.checked = true;
-                    const event = new Event("change");
-                    checkbox.dispatchEvent(event);
-                }
-            });
-        });
-
-        deleteAllButton2.addEventListener("click", function() {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-                const event = new Event("change");
-                checkbox.dispatchEvent(event);
-            });
-            addedButtons.innerHTML = "";
-        });
-
-        document.getElementById("saveSelectionBtn").addEventListener("click", function() {
-            var selectedCheckboxIDs = [];
-            var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
-            checkboxes.forEach(function(checkbox) {
-                selectedCheckboxIDs.push(checkbox.id);
-            });
-            var queryParams = selectedCheckboxIDs.map(function(id) {
-                return 'id[]=' + id;
-            });
-            var queryString = queryParams.join('&');
-
-            var url = "https://pack.reepmodel.com/pack.php?" + queryString;
-            var inputElement = document.getElementById("linker");
-            inputElement.removeAttribute("disabled");
-            inputElement.removeAttribute("readonly");
-            inputElement.value = "https://pack.reepmodel.com/pack.php?" +
-                queryString;
-            inputElement.setAttribute("disabled", true);
-            inputElement.setAttribute("readonly", true);
-
-        });
-
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const searchInput = document.getElementById("searchInput");
-        const cardsContainer = document.querySelector(".row");
-        const cards = Array.from(document.querySelectorAll(".col-sm-3"));
-        let debounceTimeout;
-
-        searchInput.addEventListener("input", function() {
-            clearTimeout(debounceTimeout);
-
-            debounceTimeout = setTimeout(function() {
-                const searchTerm = searchInput.value
-                    .toLowerCase();
-                cards.sort(function(a, b) {
-                    const nameA = a.querySelector(".list-group-item").textContent
-                        .toLowerCase();
-                    const nameB = b.querySelector(".list-group-item").textContent
-                        .toLowerCase();
-
-                    if (nameA.startsWith(searchTerm) && !nameB.startsWith(searchTerm)) {
-                        return -
-                            1;
-                    } else if (!nameA.startsWith(searchTerm) && nameB.startsWith(
-                            searchTerm)) {
-                        return 1;
-                    } else {
-                        return nameA.localeCompare(
-                            nameB);
-                    }
-                });
-                cardsContainer.innerHTML = "";
-                cards.forEach(function(card) {
-                    if (card.querySelector(".list-group-item").textContent.toLowerCase()
-                        .includes(searchTerm)) {
-                        cardsContainer.appendChild(
-                            card);
-                    }
-                });
-                let delay = 0;
-                cards.forEach(function(card) {
-                    if (card.classList.contains("hidden")) {
-                        setTimeout(function() {
-                            card.style.transform =
-                                "translateX(-100%)";
-                        }, delay);
-                        delay += 50;
-                    } else {
-                        card.style.transform =
-                            "translateX(0)";
-                    }
-                });
-            }, 300);
-        });
-    });
-
+    }
+</script>
+<script>
     const toggleSidebarButton = document.getElementById("toggleSidebarButton");
     const sidebarContent = document.querySelector(".sidebar-content");
 
