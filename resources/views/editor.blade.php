@@ -15,7 +15,7 @@
     <nav class="navbar d-flex justify-content-center p-2 bg-light border-bottom">
         <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" alt="Logo"></a>
     </nav>
-    <div class="mt-1 text-center">
+    <div class="mt-2 text-center mb-2">
         <a class="text-black " style="text-decoration: none" href="{{ url('/List') }}"><button
                 class="btn btn-outline-dark w-25 py-2">Models</button></a>
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button

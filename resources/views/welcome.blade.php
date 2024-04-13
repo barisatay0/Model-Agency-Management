@@ -258,13 +258,21 @@
     </div>
     <button id="toggleSidebarButton" class="btn btn-outline-dark px-3 small_btn_res"><i class="fa-solid fa-bars"
             style="color: #000000;"></i></button>
-    <a href="editor.php"><button id="addBtn2" style="padding-left:0.9rem"
+    <a href="Editor"><button id="addBtn2" style="padding-left:0.9rem"
             class="btn btn-outline-dark small_btn_res"><i class="fa-solid fa-user-plus"
                 style="color: #000000;"></i></button></a>
-    <button id="deleteAllButton_2" class="btn btn-outline-dark px-3 small_btn_res"><i class="fa-solid fa-trash"
-            style="color: #000000;"></i></button>
-    <button id="selectAllButton_2" class="btn btn-outline-dark px-3 small_btn_res"><i
-            class="fa-solid fa-check-double" style="color: #000000;"></i></button>
+    <form method="POST" action="{{ route('SelectDeleteAll') }}">
+        @csrf
+        <input type="hidden" name="SelectAndDeleteButton" value="0">
+        <button type="submit" id="deleteAllButton_2" class="btn btn-outline-dark px-3 small_btn_res"><i
+                class="fa-solid fa-trash" style="color: #000000;"></i></button>
+    </form>
+    <form method="POST" action="{{ route('SelectDeleteAll') }}">
+        @csrf
+        <input type="hidden" name="SelectAndDeleteButton" value="1">
+        <button type="submit" id="selectAllButton_2" class="btn btn-outline-dark px-3 small_btn_res"><i
+                class="fa-solid fa-check-double" style="color: #000000;"></i></button>
+    </form>
     <div class="container mt-3" style="padding-left: 12rem; margin-right: 4rem;">
         <div class="row g-0">
             @foreach ($models as $model)
@@ -374,6 +382,38 @@
                 }
             });
         }
+    }
+
+    $(document).ready(function() {
+        function updateModels() {
+            $.ajax({
+                type: 'GET',
+                url: '/selectedModels',
+                success: function(response) {
+                    $('#addedButtons').empty();
+                    response.forEach(function(model) {
+                        addSidebarButton(model.modelid, model.name);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        updateModels();
+
+        $('.myCheckbox').change(function() {
+            var modelId = $(this).data('model-id');
+            toggleSelection(modelId);
+            updateModels();
+        });
+    });
+
+    function addSidebarButton(modelid, name) {
+        var buttonHtml = '<button type="button" class="btn btn-dark text-capitalize mx-1 mb-2" id="' + modelid +
+            '">' + name + '</button>';
+        $('#addedButtons').append(buttonHtml);
     }
 </script>
 <script>

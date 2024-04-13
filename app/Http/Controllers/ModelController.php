@@ -123,15 +123,15 @@ class ModelController extends Controller
         $modelId = $request->input('modelid');
         $newSelected = $request->input('selected');
 
-        $model = Models::where('modelid', $modelId)->first(); // models::find() yerine Models::where() kullanıyoruz
+        $model = Models::where('modelid', $modelId)->first();
 
         if ($model) {
             $model->selected = $newSelected;
             $model->save();
 
-            return response()->json(['success' => true, 'message' => 'Selected status updated successfully']);
+            return response()->json(['success' => true, 'message' => 'New Model Added']);
         } else {
-            return response()->json(['success' => false, 'message' => 'Model not found'], 404);
+            return response()->json(['success' => false, 'message' => 'Model not found or something is wrong'], 404);
         }
 
     }
@@ -148,5 +148,10 @@ class ModelController extends Controller
         return redirect('/');
     }
 
+    public function getSelectedModels()
+    {
+        $selectedModels = models::where('selected', 1)->get(['modelid', 'name']);
 
+        return response()->json($selectedModels);
+    }
 }
