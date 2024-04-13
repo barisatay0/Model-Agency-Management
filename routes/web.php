@@ -61,3 +61,4 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/modeladd', [ModelController::class, 'addModel'])->name('modeladd');
 Route::get('/', [ModelController::class, 'models']);
 Route::post('/toggleSelection', [ModelController::class, 'toggleSelection']);
+Route::post('/SelectDeleteAll', [ModelController::class, 'SelectDeleteAll'])->name('SelectDeleteAll');

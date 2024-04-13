@@ -135,5 +135,18 @@ class ModelController extends Controller
         }
 
     }
+    public function SelectDeleteAll(Request $request)
+    {
+        $value = $request->input('SelectAndDeleteButton');
+        $models = models::all();
+
+        $models->each(function ($model) use ($value) {
+            $model->selected = $value;
+            $model->save();
+        });
+
+        return redirect('/');
+    }
+
 
 }

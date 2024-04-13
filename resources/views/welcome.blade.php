@@ -203,10 +203,18 @@
                 <button type="button" id="menbutton" class="btn btn-dark mx-2 menbutton" style="width:7%;">
                     <a class="text-light" href="men" style="text-decoration:none;">Men</a>
                 </button>
-                <button type="button" id="deleteAllButton"
-                    class="btn btn-outline-dark px-5 mx-2 py-2 deleteAllBtn">Delete All</button>
-                <button type="button" id="selectAllButton"
-                    class="btn btn-outline-dark px-5 mx-2 py-2 selectAllBtn">Select All</button>
+                <form method="POST" action="{{ route('SelectDeleteAll') }}">
+                    @csrf
+                    <input type="hidden" name="SelectAndDeleteButton" value="0">
+                    <button type="submit" id="deleteAllButton"
+                        class="btn btn-outline-dark px-5 mx-2 py-2 deleteAllBtn">Delete All</button>
+                </form>
+                <form method="POST" action="{{ route('SelectDeleteAll') }}">
+                    @csrf
+                    <input type="hidden" name="SelectAndDeleteButton" value="1">
+                    <button type="submit" id="selectAllButton"
+                        class="btn btn-outline-dark px-5 mx-2 py-2 selectAllBtn">Select All</button>
+                </form>
                 <form class="d-flex" role="search">
                     <input class="form-control mx-2 py-2 border-black" type="search" id="searchInput"
                         placeholder="Search" aria-label="Search">
