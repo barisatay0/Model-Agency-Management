@@ -63,3 +63,4 @@ Route::get('/', [ModelController::class, 'models']);
 Route::post('/toggleSelection', [ModelController::class, 'toggleSelection']);
 Route::post('/SelectDeleteAll', [ModelController::class, 'SelectDeleteAll'])->name('SelectDeleteAll');
 Route::get('/selectedModels', [ModelController::class, 'getSelectedModels']);
+Route::post('/saveSelection', [ModelController::class, 'saveSelection']);

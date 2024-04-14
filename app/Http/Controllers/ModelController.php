@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Crypt;
 use App\Models\models;
 use App\Models\photos;
 use App\Models\video;
@@ -153,5 +154,14 @@ class ModelController extends Controller
         $selectedModels = models::where('selected', 1)->get(['modelid', 'name']);
 
         return response()->json($selectedModels);
+    }
+    public function saveSelection(Request $request)
+    {
+        $selectedModels = $request->input('selectedModels');
+
+        $dataToEncrypt = implode(',', $selectedModels);
+        $encryptedData = Crypt::encrypt($dataToEncrypt);
+        $exampleLink = 'https://example.com?models=' . urlencode($encryptedData);
+        return response()->json(['encryptedData' => $exampleLink]);
     }
 }

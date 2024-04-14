@@ -467,6 +467,28 @@
         document.execCommand("copy");
         document.body.removeChild(tempTextarea);
     });
+    $('#saveSelectionBtn').click(function() {
+        var selectedModels = [];
+        $('.myCheckbox:checked').each(function() {
+            selectedModels.push($(this).closest('.card').data('id'));
+        });
+
+        // Ajax isteği
+        $.ajax({
+            type: 'POST',
+            url: '/saveSelection', // Uygun rotayı kullanıyoruz
+            data: {
+                selectedModels: selectedModels,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                $('#linker').val(response.encryptedData); // Gelen şifrelenmiş veriyi alıyoruz
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
