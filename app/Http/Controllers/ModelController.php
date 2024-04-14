@@ -115,7 +115,7 @@ class ModelController extends Controller
     }
     public function models()
     {
-        $models = models::paginate(12);
+        $models = models::paginate(8);
         return view('welcome', ['models' => $models]);
     }
 

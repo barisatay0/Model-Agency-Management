@@ -211,16 +211,19 @@
 </head>
 
 <body>
+    <!-- Navbar and Contents -->
     <nav class="navbar navbar-expand bg-body-tertiary border-bottom" style="padding:1.3rem;">
         <div class="w-25" id="nav_space_res"></div>
         <div class="container-fluid" style="width:95% ;">
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <!-- Men And Women Buttons -->
                 <button type="button" id="womenbutton" class="btn btn-dark mx-2 womenbutton" style="width:7%;">
                     <a class="text-light" href="women" style="text-decoration:none;">Women</a>
                 </button>
                 <button type="button" id="menbutton" class="btn btn-dark mx-2 menbutton" style="width:7%;">
                     <a class="text-light" href="men" style="text-decoration:none;">Men</a>
                 </button>
+                <!-- Select And Delete Buttons  -->
                 <form method="POST" action="{{ route('SelectDeleteAll') }}">
                     @csrf
                     <input type="hidden" name="SelectAndDeleteButton" value="0">
@@ -233,10 +236,12 @@
                     <button type="submit" id="selectAllButton"
                         class="btn btn-outline-dark px-5 mx-2 py-2 selectAllBtn">Select All</button>
                 </form>
+                <!-- Search Bar -->
                 <form class="d-flex" role="search">
                     <input class="form-control mx-2 py-2 border-black" type="search" id="searchInput"
                         placeholder="Search" aria-label="Search">
                 </form>
+                <!-- Signup , Logout , Model Editor Buttons -->
                 <a href="Editor"><button type="button" class="btn btn-dark mx-2 py-2 addBtn_res" id="addBtn_res"><i
                             class="fa-solid fa-plus mx-2" style="color: #fff;"></i>Model Editor</button></a>
                 <a href="Signup"><button type="button" class="btn btn-outline-primary mx-2 py-2">SignUp</button></a>
@@ -247,6 +252,7 @@
             </div>
         </div>
     </nav>
+    <!-- Sidebar Content -->
     <div class="sidebar-content">
         <div class="fixed-top p-3 text-bg-light border" style="width: 280px; height: 100%;">
             <a href="{{ url('/') }}"
@@ -259,6 +265,7 @@
                 </div>
             </div>
             <hr>
+            <!-- Save Selection And Copy Button -->
             <div class="leftbuttons" style="margin-top:-1rem;">
                 <div class="btn-group w-100 " role="group" aria-label="Basic outlined example">
                     <button type="button" id="saveSelectionBtn" class="btn btn-outline-dark w-100 mb-2">Save
@@ -274,11 +281,15 @@
             </div>
         </div>
     </div>
+
+    <!-- Responsive Buttons -->
     <button id="toggleSidebarButton" class="btn btn-outline-dark px-3 small_btn_res"><i class="fa-solid fa-bars"
             style="color: #000000;"></i></button>
     <a href="Editor"><button id="addBtn2" style="padding-left:0.9rem"
             class="btn btn-outline-dark small_btn_res"><i class="fa-solid fa-user-plus"
                 style="color: #000000;"></i></button></a>
+
+    <!-- Select And Delete All Buttons Responsive -->
     <form method="POST" action="{{ route('SelectDeleteAll') }}">
         @csrf
         <input type="hidden" name="SelectAndDeleteButton" value="0">
@@ -291,23 +302,30 @@
         <button type="submit" id="selectAllButton_2" class="btn btn-outline-dark px-3 small_btn_res"><i
                 class="fa-solid fa-check-double" style="color: #000000;"></i></button>
     </form>
+
+    <!-- Container For Model Cards -->
     <div class="container mt-3" style="padding-left: 12rem; margin-right: 4rem;">
         <div class="row g-0">
             @foreach ($models as $model)
                 <div class="col-sm-3 mb-3">
+                    <!-- Model Id -->
                     <div class="card" style="width: 17rem;" data-id="{{ $model->modelid }}">
+                        <!-- Model Name -->
                         <li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">
                             {{ $model->name }}</li>
                         <div class="card-body">
+                            <!-- Model Profile Photo -->
                             <a href="#"><img src="{{ asset($model->profilephoto) }}" style="height:22rem"
                                     class="card-img-top" alt="..."></a>
                         </div>
                         <div class="card-body">
+                            <!-- Drop Up Button For Features -->
                             <div class="dropup-center dropup">
                                 <button class="btn btn-outline-dark dropdown-toggle w-100" type="button"
                                     id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                     Features
                                 </button>
+                                <!-- Model Features In List Items -->
                                 <ul class="dropdown-menu w-100 text-center border border-black"
                                     aria-labelledby="dropdownMenuButton">
                                     <li><a class="dropdown-item" href="">HEIGHT:
@@ -347,6 +365,7 @@
                 </div>
             @endforeach
             <div class="w-100">
+                <!-- Pagination System From Laravel -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
                         @if ($models->onFirstPage())
@@ -379,6 +398,7 @@
     </div>
 </body>
 <script>
+    //Checkbox Controls
     function toggleSelection(modelId) {
         var checkbox = document.querySelector('[data-id="' + modelId + '"] .myCheckbox');
         if (checkbox) {
@@ -401,7 +421,7 @@
             });
         }
     }
-
+    //Sidebar Model Buttons
     $(document).ready(function() {
         function updateModels() {
             $.ajax({
@@ -435,6 +455,7 @@
     }
 </script>
 <script>
+    //For Responsive
     const toggleSidebarButton = document.getElementById("toggleSidebarButton");
     const sidebarContent = document.querySelector(".sidebar-content");
 
@@ -454,7 +475,7 @@
     if (window.innerWidth < 576) {
         sidebarContent.classList.add("hidden");
     }
-
+    //Sidebar Copy Button 
     document.getElementById("copyButton").addEventListener("click", function() {
         var input = document.getElementById("linker");
         var valueToCopy = input.value;
@@ -467,22 +488,22 @@
         document.execCommand("copy");
         document.body.removeChild(tempTextarea);
     });
+    //Save Selection Button
     $('#saveSelectionBtn').click(function() {
         var selectedModels = [];
         $('.myCheckbox:checked').each(function() {
             selectedModels.push($(this).closest('.card').data('id'));
         });
 
-        // Ajax isteği
         $.ajax({
             type: 'POST',
-            url: '/saveSelection', // Uygun rotayı kullanıyoruz
+            url: '/saveSelection',
             data: {
                 selectedModels: selectedModels,
                 _token: '{{ csrf_token() }}'
             },
             success: function(response) {
-                $('#linker').val(response.encryptedData); // Gelen şifrelenmiş veriyi alıyoruz
+                $('#linker').val(response.encryptedData);
             },
             error: function(xhr, status, error) {
                 console.error(error);
