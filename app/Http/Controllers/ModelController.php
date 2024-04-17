@@ -67,7 +67,7 @@ class ModelController extends Controller
 
         if ($request->hasfile('book')) {
             $counter = 1;
-            foreach ($request->allFiles('book') as $book) {
+            foreach ($request->allFiles() as $book) {
                 $bookPath = $book->storePublicly('public/Books');
                 $photo = new photos;
                 $photo->modelid = $modelId;
@@ -81,7 +81,7 @@ class ModelController extends Controller
 
         if ($request->hasfile('digital')) {
             $counter = 1;
-            foreach ($request->allFiles('digital') as $digital) {
+            foreach ($request->allFiles() as $digital) {
                 $digitalPath = $digital->storePublicly('public/Digitals');
                 $photo = new photos;
                 $photo->modelid = $modelId;
@@ -95,7 +95,7 @@ class ModelController extends Controller
 
         if ($request->hasfile('video')) {
             $counter = 1;
-            foreach ($request->allFiles('video') as $videoFile) {
+            foreach ($request->allFiles() as $videoFile) {
                 $videoPath = $videoFile->storePublicly('public/Videos');
                 $videoModel = new video;
                 $videoModel->modelid = $modelId;
