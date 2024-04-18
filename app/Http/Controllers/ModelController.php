@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Maestroerror\HeicToJpg;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\models;
 use App\Models\photos;
@@ -69,26 +70,59 @@ class ModelController extends Controller
             $counter = 1;
             foreach ($request->allFiles() as $book) {
                 $bookPath = $book->storePublicly('public/Books');
-                $photo = new photos;
-                $photo->modelid = $modelId;
-                $photo->photopath = $bookPath;
-                $photo->photocategory = 'Book';
-                $photo->photoorder = $counter;
-                $photo->save();
+                $extension = $book->getClientOriginalExtension();
+                if ($extension == 'heic') {
+                    $jpgContent = HeicToJpg::convert($bookPath)->get();
+
+                    $jpgPath = 'public/Books/' . pathinfo($bookPath, PATHINFO_FILENAME) . '.jpg';
+                    file_put_contents($jpgPath, $jpgContent);
+
+                    $photo = new photos;
+                    $photo->modelid = $modelId;
+                    $photo->photopath = $jpgPath;
+                    $photo->photocategory = 'Book';
+                    $photo->photoorder = $counter;
+                    $photo->save();
+                } else {
+                    $photo = new photos;
+                    $photo->modelid = $modelId;
+                    $photo->photopath = $bookPath;
+                    $photo->photocategory = 'Book';
+                    $photo->photoorder = $counter;
+                    $photo->save();
+                }
+
                 $counter++;
             }
         }
+
         /* Digital */
         if ($request->hasfile('digital')) {
             $counter = 1;
             foreach ($request->allFiles() as $digital) {
                 $digitalPath = $digital->storePublicly('public/Digitals');
-                $photo = new photos;
-                $photo->modelid = $modelId;
-                $photo->photopath = $digitalPath;
-                $photo->photocategory = 'Digital';
-                $photo->photoorder = $counter;
-                $photo->save();
+
+                $extension = $digital->getClientOriginalExtension();
+                if ($extension == 'heic') {
+                    $jpgContent = HeicToJpg::convert($digitalPath)->get();
+                    $jpgPath = 'public/Digitals/' . pathinfo($digitalPath, PATHINFO_FILENAME) . '.jpg';
+                    file_put_contents($jpgPath, $jpgContent);
+
+                    $photo = new photos;
+                    $photo->modelid = $modelId;
+                    $photo->photopath = $jpgPath;
+                    $photo->photocategory = 'Digital';
+                    $photo->photoorder = $counter;
+                    $photo->save();
+                } else {
+                    $photo = new photos;
+                    $photo->modelid = $modelId;
+                    $photo->photopath = $digitalPath;
+                    $photo->photocategory = 'Digital';
+                    $photo->photoorder = $counter;
+                    $photo->save();
+                }
+
                 $counter++;
             }
         }
