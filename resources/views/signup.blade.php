@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
         <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" alt=""></a>
     </nav>
@@ -25,6 +26,7 @@
                         Sign Up
                     </div>
                     <div class="card-body">
+                        <!-- Register Form -->
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="mb-3">

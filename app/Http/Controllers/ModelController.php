@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ModelController extends Controller
 {
-
+    /* Add Model */
     public function addModel(Request $request)
     {
         $modelName = $request->input('name');
@@ -64,7 +64,7 @@ class ModelController extends Controller
         $modelId = $model->modelid;
 
 
-
+        /* Book */
         if ($request->hasfile('book')) {
             $counter = 1;
             foreach ($request->allFiles() as $book) {
@@ -78,7 +78,7 @@ class ModelController extends Controller
                 $counter++;
             }
         }
-
+        /* Digital */
         if ($request->hasfile('digital')) {
             $counter = 1;
             foreach ($request->allFiles() as $digital) {
@@ -92,7 +92,7 @@ class ModelController extends Controller
                 $counter++;
             }
         }
-
+        /* Video */
         if ($request->hasfile('video')) {
             $counter = 1;
             foreach ($request->allFiles() as $videoFile) {
@@ -113,12 +113,13 @@ class ModelController extends Controller
 
 
     }
+    /* Get Models For Welcome */
     public function models()
     {
         $models = models::paginate(8);
         return view('welcome', ['models' => $models]);
     }
-
+    /* When Checkbox is Checked "selected" Column Is Turn To 1 Or 0 */
     public function toggleSelection(Request $request)
     {
         $modelId = $request->input('modelid');
@@ -136,6 +137,7 @@ class ModelController extends Controller
         }
 
     }
+    /* All Model Selected Column Is Turn 1 or 0 */
     public function SelectDeleteAll(Request $request)
     {
         $value = $request->input('SelectAndDeleteButton');
@@ -148,13 +150,14 @@ class ModelController extends Controller
 
         return redirect('/');
     }
-
+    /* Get Selected Models For Checkbox */
     public function getSelectedModels()
     {
         $selectedModels = models::where('selected', 1)->get(['modelid', 'name']);
 
         return response()->json($selectedModels);
     }
+    /* Make Link With Selected Models */
     public function saveSelection(Request $request)
     {
         $selectedModels = $request->input('selectedModels');

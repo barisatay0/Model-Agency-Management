@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-
 class UserController extends Controller
 {
+    /* Register */
     public function store(Request $request)
     {
         $ip = $request->ip();
@@ -33,6 +33,7 @@ class UserController extends Controller
 
         return redirect('/');
     }
+    /* Login */
     public function login(Request $request)
     {
         $credentials = $request->only('username', 'password');
@@ -45,7 +46,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors(['login' => 'Login failed, please check your username and password again.']);
         }
     }
-
+    /* Logout */
     public function logout(Request $request)
     {
         Auth::logout();

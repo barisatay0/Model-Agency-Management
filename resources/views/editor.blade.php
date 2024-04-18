@@ -29,6 +29,7 @@
                 @endforeach
             </ul>
         </div>
+        <!-- Model Add Form -->
     @endif
     <form action="{{ route('modeladd') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -275,11 +276,8 @@
                                         Model</button>
                                 </div>
     </form>
-
-
     </div>
     </div>
-
     </div>
     </div>
     </div>
