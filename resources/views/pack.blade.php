@@ -63,12 +63,10 @@
 
             .book_first_res {
                 flex-direction: column;
-                /* Stack elements vertically */
             }
 
             .book_first_res .w-50 {
                 width: 100%;
-                /* Take up full width on smaller screens */
             }
 
             .videos_res {
