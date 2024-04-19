@@ -383,11 +383,11 @@
                         @if ($models->hasMorePages())
                             <li class="page-item">
                                 <a class="mx-1 btn btn-dark" href="{{ $models->nextPageUrl() }}" rel="next">Next
-                                    Page</a>
+                                    </a>
                             </li>
                         @else
                             <li class="page-item disabled">
-                                <span class="page-link mx-1 text-black border border-black btn">Next Page</span>
+                                <span class="page-link mx-1 text-black border border-black btn">Next</span>
                             </li>
                         @endif
                     </ul>

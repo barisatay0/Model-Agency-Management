@@ -157,12 +157,12 @@ class ModelController extends Controller
 
     public function listmodels(Request $request)
     {
-        $models = models::paginate(10);
+        $models = models::paginate(9);
 
-        if ($request->ajax()) {
-            return response()->json($models);
-        }
-        return view('list', ['models' => $models]);
+    if ($request->ajax()) {
+        return response()->json($models); // Verileri JSON formatında döndür
+    }
+    return view('list', ['models' => $models]);
     }
 
 

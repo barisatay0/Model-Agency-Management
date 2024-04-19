@@ -33,9 +33,11 @@
                 <!-- Model -->
             </div>
         </div>
+        <div class="text-center"><button id="moreButton" class="btn btn-outline-dark w-50 mt-3">Daha Fazla
+                Göster</button></div>
 </body>
 <script>
-    var nextPage = 0; // İlk başta 2. sayfayı yükle
+    var nextPage = 0;
 
     function loadModels() {
         $.ajax({
@@ -45,40 +47,38 @@
                 page: nextPage
             },
             success: function(response) {
+                console.log(response);
                 if (response.next_page_url) {
-                    nextPage++; // Sonraki sayfa numarasını güncelleyin
+                    nextPage++;
                 } else {
-                    $(window).off('scroll'); // Tüm veriler yüklendiğinde kaydırmayı durdur
+                    $('#moreButton')
+                        .hide();
                 }
-                // Yeni verileri sayfaya ekleyin
                 response.data.forEach(function(model) {
                     var card = `
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="${model.profilephoto}" alt="Logo">
-                        <div class="card-body">
-                            <p class="card-text">${model.name}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <button type="button" class="btn btn-sm btn-outline-warning w-100">Edit</button>
-                                <button type="button" class="btn btn-sm btn-outline-danger w-100 mx-1">Delete</button>
+                    <div class="col">
+                        <div class="card shadow">
+                            <img src="${model.profilephoto}" class="card-img-top" alt="Logo">
+                            <div class="card-body">
+                                <p class="card-text">${model.name}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <button type="button" class="btn btn-sm btn-outline-warning w-100">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger w-100 mx-1">Delete</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                `;
+                    `;
                     $('#veri-listesi').append(card);
                 });
             }
         });
     }
 
-    $(window).scroll(function() {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            loadModels();
-        }
+    $('#moreButton').click(function() {
+        loadModels();
     });
 
-    // Sayfa yüklendiğinde ilk verileri yükle
     $(document).ready(function() {
         loadModels();
     });
