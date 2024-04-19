@@ -60,6 +60,7 @@ Route::post('/userlogin', [UserController::class, 'login'])->name('userlogin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/modeladd', [ModelController::class, 'addModel'])->name('modeladd');
 Route::get('/', [ModelController::class, 'models']);
+Route::get('/list', [ModelController::class, 'listmodels']);
 Route::post('/toggleSelection', [ModelController::class, 'toggleSelection']);
 Route::post('/SelectDeleteAll', [ModelController::class, 'SelectDeleteAll'])->name('SelectDeleteAll');
 Route::get('/selectedModels', [ModelController::class, 'getSelectedModels']);

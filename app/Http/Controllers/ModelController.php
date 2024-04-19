@@ -147,12 +147,25 @@ class ModelController extends Controller
 
 
     }
-    /* Get Models For Welcome */
+    /* Get Models For Pages */
     public function models()
     {
         $models = models::paginate(8);
+
         return view('welcome', ['models' => $models]);
     }
+
+    public function listmodels(Request $request)
+    {
+        $models = models::paginate(10);
+
+        if ($request->ajax()) {
+            return response()->json($models);
+        }
+        return view('list', ['models' => $models]);
+    }
+
+
     /* When Checkbox is Checked "selected" Column Is Turn To 1 Or 0 */
     public function toggleSelection(Request $request)
     {
