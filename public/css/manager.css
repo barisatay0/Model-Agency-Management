@@ -1,0 +1,192 @@
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: #E9E9E9;
+    border-left: 1px solid #BBBBBB;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #555555;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #333333;
+}
+
+.hidden {
+    display: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .btn {
+    width: 350px;
+}
+
+
+.card img {
+    object-fit: cover;
+}
+
+.myCheckbox {
+    margin: 0 auto;
+    transform: scale(1.5);
+    accent-color: #212529;
+}
+
+.myCheckbox:hover {
+    cursor: pointer
+}
+
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card.hidden {
+    transform: translateX(-100%);
+}
+
+#toggleSidebarButton {
+
+    display: none;
+}
+
+.small_btn_res {
+    display: none;
+}
+
+@media(max-width:576px) {
+    .small_btn_res {
+        display: block;
+    }
+
+    .pagination .btn {
+        width: 100%;
+    }
+
+    #toggleSidebarButton {
+
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 9999;
+        display: block;
+    }
+
+    #womenbutton,
+    #menbutton {
+        display: none;
+    }
+
+    #hideSidebarButton {
+        display: grid;
+    }
+
+    .card {
+        padding: auto !important;
+        margin: auto !important;
+    }
+
+    .container {
+        margin: 0 !important;
+        padding: 0 !important;
+        margin-top: 1rem !important;
+    }
+
+    .sidebar_res {
+        height: 65vh !important;
+    }
+
+    .navbar {
+        width: 100%;
+    }
+
+    #deleteAllButton {
+        padding: 0 !important;
+        display: none;
+    }
+
+    #selectAllButton {
+        display: none;
+    }
+
+    .container-fluid {
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    #addBtn_res {
+        display: none;
+    }
+
+    #addBtn2 {
+        position: fixed;
+        bottom: 60px;
+        right: 10px;
+        z-index: 9998;
+    }
+
+    #deleteAllButton_2 {
+        position: fixed;
+        bottom: 110px;
+        right: 10px;
+        z-index: 9997;
+    }
+
+    #selectAllButton_2 {
+        position: fixed;
+        bottom: 160px;
+        right: 10px;
+        z-index: 9996;
+    }
+
+    #nav_space_res {
+        display: none;
+    }
+
+    .container-fluid {
+        width: 100% !important;
+    }
+}
+
+@media (max-height: 768px) {
+    .leftbuttons {
+        margin-top: -4rem;
+    }
+
+    @media (max-height: 711px) {
+        .leftbuttons {
+            margin-top: -3rem;
+        }
+
+        @media (max-height: 680px) {
+            .leftbuttons {
+                margin-top: -5rem;
+            }
+
+            @media (max-height: 620px) {
+                .leftbuttons {
+                    margin-top: -7rem;
+                }
+
+                @media (max-height: 590px) {
+                    .leftbuttons {
+                        margin-top: -9rem;
+                    }
+                }
+            }
+        }
+    }
+}

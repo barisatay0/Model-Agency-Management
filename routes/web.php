@@ -17,7 +17,7 @@ use App\Http\Controllers\ModelController;
 
 Route::get('/', function () {
     if (Auth::check()) {
-        return view('/welcome');
+        return view('/manager');
     } else {
         return redirect('/Login');
     }
@@ -51,6 +51,13 @@ Route::get('/Pack', function () {
 Route::get('/List', function () {
     if (Auth::check()) {
         return view('/list');
+    } else {
+        return redirect('/Login');
+    }
+});
+Route::get('/Model', function () {
+    if (Auth::check()) {
+        return view('/model');
     } else {
         return redirect('/Login');
     }

@@ -14,200 +14,7 @@
     <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-    <style>
-        ::-webkit-scrollbar {
-            width: 10px;
-            background-color: #E9E9E9;
-            border-left: 1px solid #BBBBBB;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-color: #555555;
-        }
-
-        .dropdown-toggle::after {
-            display: none !important;
-        }
-
-
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #333333;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .pagination .page-item {
-            margin: 0 5px;
-        }
-
-        .pagination .btn {
-            width: 350px;
-        }
-
-
-        .card img {
-            object-fit: cover;
-        }
-
-        .myCheckbox {
-            margin: 0 auto;
-            transform: scale(1.5);
-            accent-color: #212529;
-        }
-
-        .myCheckbox:hover {
-            cursor: pointer
-        }
-
-        .card {
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .card.hidden {
-            transform: translateX(-100%);
-        }
-
-        #toggleSidebarButton {
-
-            display: none;
-        }
-
-        .small_btn_res {
-            display: none;
-        }
-
-        @media(max-width:576px) {
-            .small_btn_res {
-                display: block;
-            }
-
-            .pagination .btn {
-                width: 100%;
-            }
-
-            #toggleSidebarButton {
-
-                position: fixed;
-                bottom: 10px;
-                right: 10px;
-                z-index: 9999;
-                display: block;
-            }
-
-            #womenbutton,
-            #menbutton {
-                display: none;
-            }
-
-            #hideSidebarButton {
-                display: grid;
-            }
-
-            .card {
-                padding: auto !important;
-                margin: auto !important;
-            }
-
-            .container {
-                margin: 0 !important;
-                padding: 0 !important;
-                margin-top: 1rem !important;
-            }
-
-            .sidebar_res {
-                height: 65vh !important;
-            }
-
-            .navbar {
-                width: 100%;
-            }
-
-            #deleteAllButton {
-                padding: 0 !important;
-                display: none;
-            }
-
-            #selectAllButton {
-                display: none;
-            }
-
-            .container-fluid {
-                width: 100%;
-                margin: 0 !important;
-            }
-
-            #addBtn_res {
-                display: none;
-            }
-
-            #addBtn2 {
-                position: fixed;
-                bottom: 60px;
-                right: 10px;
-                z-index: 9998;
-            }
-
-            #deleteAllButton_2 {
-                position: fixed;
-                bottom: 110px;
-                right: 10px;
-                z-index: 9997;
-            }
-
-            #selectAllButton_2 {
-                position: fixed;
-                bottom: 160px;
-                right: 10px;
-                z-index: 9996;
-            }
-
-            #nav_space_res {
-                display: none;
-            }
-
-            .container-fluid {
-                width: 100% !important;
-            }
-        }
-
-        @media (max-height: 768px) {
-            .leftbuttons {
-                margin-top: -4rem;
-            }
-
-            @media (max-height: 711px) {
-                .leftbuttons {
-                    margin-top: -3rem;
-                }
-
-                @media (max-height: 680px) {
-                    .leftbuttons {
-                        margin-top: -5rem;
-                    }
-
-                    @media (max-height: 620px) {
-                        .leftbuttons {
-                            margin-top: -7rem;
-                        }
-
-                        @media (max-height: 590px) {
-                            .leftbuttons {
-                                margin-top: -9rem;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/manager.css') }}">
 </head>
 
 <body>
@@ -383,7 +190,7 @@
                         @if ($models->hasMorePages())
                             <li class="page-item">
                                 <a class="mx-1 btn btn-dark" href="{{ $models->nextPageUrl() }}" rel="next">Next
-                                    </a>
+                                </a>
                             </li>
                         @else
                             <li class="page-item disabled">
@@ -397,13 +204,20 @@
         </div>
     </div>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
+</script>
+<script src="{{ asset('js/manager.js') }}"></script>
 <script>
     //Checkbox Controls
     function toggleSelection(modelId) {
         var checkbox = document.querySelector('[data-id="' + modelId + '"] .myCheckbox');
         if (checkbox) {
             var newSelected = checkbox.checked ? 1 : 0;
-
             $.ajax({
                 type: 'POST',
                 url: '/toggleSelection',
@@ -419,6 +233,7 @@
                     console.error(error);
                 }
             });
+
         }
     }
     //Sidebar Model Buttons
@@ -453,69 +268,48 @@
             '">' + name + '</button>';
         $('#addedButtons').append(buttonHtml);
     }
-</script>
-<script>
-    //For Responsive
-    const toggleSidebarButton = document.getElementById("toggleSidebarButton");
-    const sidebarContent = document.querySelector(".sidebar-content");
+    // Local Storage For Stability
+    function checkCacheAndUpdateModels() {
+        var cachedModels = localStorage.getItem('cachedModels');
 
-    function toggleSidebar() {
-        sidebarContent.classList.toggle("hidden");
-    }
-
-    toggleSidebarButton.addEventListener("click", toggleSidebar);
-    window.addEventListener("resize", function() {
-        if (window.innerWidth < 576) {
-            sidebarContent.classList.add("hidden");
+        if (cachedModels) {
+            var models = JSON.parse(cachedModels);
+            updateSidebar(models);
         } else {
-            sidebarContent.classList.remove("hidden");
+            fetchModelsFromServer();
         }
-    });
-
-    if (window.innerWidth < 576) {
-        sidebarContent.classList.add("hidden");
     }
-    //Sidebar Copy Button 
-    document.getElementById("copyButton").addEventListener("click", function() {
-        var input = document.getElementById("linker");
-        var valueToCopy = input.value;
-        var tempTextarea = document.createElement("textarea");
-        tempTextarea.style.position = "absolute";
-        tempTextarea.style.left = "-9999px";
-        tempTextarea.value = valueToCopy;
-        document.body.appendChild(tempTextarea);
-        tempTextarea.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempTextarea);
-    });
-    //Save Selection Button
-    $('#saveSelectionBtn').click(function() {
-        var selectedModels = [];
-        $('.myCheckbox:checked').each(function() {
-            selectedModels.push($(this).closest('.card').data('id'));
-        });
 
+    function fetchModelsFromServer() {
         $.ajax({
-            type: 'POST',
-            url: '/saveSelection',
-            data: {
-                selectedModels: selectedModels,
-                _token: '{{ csrf_token() }}'
-            },
+            type: 'GET',
+            url: '/selectedModels',
             success: function(response) {
-                $('#linker').val(response.encryptedData);
+                localStorage.setItem('cachedModels', JSON.stringify(response));
+                updateSidebar(response);
             },
             error: function(xhr, status, error) {
                 console.error(error);
             }
         });
+    }
+
+    function updateSidebar(models) {
+        $('#addedButtons').empty();
+        models.forEach(function(model) {
+            addSidebarButton(model.modelid, model.name);
+        });
+    }
+
+    $(document).ready(function() {
+        checkCacheAndUpdateModels();
     });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
-    integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
+
+    $('.myCheckbox').change(function() {
+        var modelId = $(this).data('model-id');
+        toggleSelection(modelId);
+        fetchModelsFromServer();
+    });
 </script>
 </body>
 

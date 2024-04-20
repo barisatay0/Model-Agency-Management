@@ -152,17 +152,17 @@ class ModelController extends Controller
     {
         $models = models::paginate(8);
 
-        return view('welcome', ['models' => $models]);
+        return view('manager', ['models' => $models]);
     }
 
     public function listmodels(Request $request)
     {
         $models = models::paginate(9);
 
-    if ($request->ajax()) {
-        return response()->json($models); // Verileri JSON formatında döndür
-    }
-    return view('list', ['models' => $models]);
+        if ($request->ajax()) {
+            return response()->json($models);
+        }
+        return view('list', ['models' => $models]);
     }
 
 
@@ -208,7 +208,6 @@ class ModelController extends Controller
     public function saveSelection(Request $request)
     {
         $selectedModels = $request->input('selectedModels');
-
         $dataToEncrypt = implode(',', $selectedModels);
         $encryptedData = Crypt::encrypt($dataToEncrypt);
         $exampleLink = 'https://example.com?models=' . urlencode($encryptedData);

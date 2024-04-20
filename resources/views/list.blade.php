@@ -35,27 +35,35 @@
         </div>
         <div class="text-center"><button id="moreButton" class="btn btn-outline-dark w-50 mt-3">Daha Fazla
                 Göster</button></div>
+    </div>
 </body>
 <script>
-    var nextPage = 0;
+    var cachedData = [];
+    var nextPage = 1;
+    $('#moreButton').click(function() {
+        nextPage++;
+        loadModels();
+    });
 
     function loadModels() {
-        $.ajax({
-            url: '/list',
-            type: 'GET',
-            data: {
-                page: nextPage
-            },
-            success: function(response) {
-                console.log(response);
-                if (response.next_page_url) {
-                    nextPage++;
-                } else {
-                    $('#moreButton')
-                        .hide();
-                }
-                response.data.forEach(function(model) {
-                    var card = `
+        if (cachedData.length > 0 && cachedData[nextPage]) {
+            displayCachedData(nextPage);
+        } else {
+            $.ajax({
+                url: '/list',
+                type: 'GET',
+                data: {
+                    page: nextPage
+                },
+                success: function(response) {
+                    if (response.next_page_url) {
+                        nextPage++;
+                    } else {
+                        $('#moreButton').hide();
+                    }
+                    var currentPageData = [];
+                    response.data.forEach(function(model) {
+                        var card = `
                     <div class="col">
                         <div class="card shadow">
                             <img src="${model.profilephoto}" class="card-img-top" alt="Logo">
@@ -68,16 +76,26 @@
                             </div>
                         </div>
                     </div>
-                    `;
-                    $('#veri-listesi').append(card);
-                });
-            }
-        });
+                `;
+                        $('#veri-listesi').append(card);
+                        currentPageData.push(card);
+                    });
+                    cachedData[nextPage] = currentPageData;
+                }
+            });
+        }
     }
 
-    $('#moreButton').click(function() {
-        loadModels();
-    });
+
+    function displayCachedData(page) {
+        $('#veri-listesi').empty();
+
+        if (cachedData[page]) {
+            cachedData[page].forEach(function(card) {
+                $('#veri-listesi').append(card);
+            });
+        }
+    }
 
     $(document).ready(function() {
         loadModels();
