@@ -73,3 +73,4 @@ Route::post('/SelectDeleteAll', [ModelController::class, 'SelectDeleteAll'])->na
 Route::get('/selectedModels', [ModelController::class, 'getSelectedModels']);
 Route::post('/saveSelection', [ModelController::class, 'saveSelection']);
 Route::get('/Model/{name}', [ModelController::class, 'modelpage']);
+Route::post('/deletemodel', [ModelController::class, 'deletemodel'])->name('deletemodel');

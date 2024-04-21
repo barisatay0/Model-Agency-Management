@@ -9,5 +9,5 @@ class photos extends Model
 {
     use HasFactory;
     protected $table = 'photos';
-
+    protected $primaryKey = 'modelid';
 }

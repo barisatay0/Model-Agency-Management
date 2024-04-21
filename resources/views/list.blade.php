@@ -59,10 +59,11 @@
                         <div class="card shadow"">
                             <img src="${model.profilephoto}" class="card-img-top" alt="Logo">
                             <div class="card-body">
-                                <p class="card-text">${model.name}</p>
+                                <p class="card-text text-center">${model.name}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a class="w-100" href="http://localhost:8000/Model/${model.name}"><button type="button" class="btn btn-sm btn-outline-warning w-100">Edit</button></a>
-                                    <form class="w-100">
+                                    <form action="{{ route('deletemodel') }}" method="POST" class="w-100">
+                                        @csrf
                                         <input name="modelname" type="hidden" value="${model.name}">
                                         <input type="submit" class="btn btn-sm btn-outline-danger w-100 mx-1" value="Delete">
                                     </form>

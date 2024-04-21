@@ -9,4 +9,5 @@ class video extends Model
 {
     use HasFactory;
     protected $table = 'videos';
+    protected $primaryKey = 'modelid';
 }
