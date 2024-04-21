@@ -229,7 +229,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input name="digital" class="form-control form-control-md" id="formFileLg"
+                                        <input id="digital" name="digital[]" class="form-control form-control-md" id="formFileLg"
                                             type="file" multiple />
                                         <div class="small text-muted mt-2"></div>
 
@@ -246,7 +246,7 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input name="book" class="form-control form-control-md" id="formFileLg"
+                                        <input id="book" name="book[]" class="form-control form-control-md" id="formFileLg"
                                             type="file" multiple />
                                         <div class="small text-muted mt-2"></div>
 
@@ -263,8 +263,8 @@
                                     </div>
                                     <div class="col-md-9 pe-5">
 
-                                        <input name="video" class="form-control form-control-md" id="formFileLg"
-                                            type="file" />
+                                        <input id="video" name="video[]" class="form-control form-control-md" id="formFileLg"
+                                            type="file" multiple />
                                         <div class="small text-muted mt-2"></div>
 
                                     </div>

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Maestroerror\HeicToJpg;
 use Illuminate\Support\Facades\Crypt;
-use App\Models\models;
-use App\Models\photos;
-use App\Models\video;
+use App\Models\Models;
+use App\Models\Photos;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 
@@ -16,32 +16,33 @@ class ModelController extends Controller
     public function addModel(Request $request)
     {
         $modelName = $request->input('name');
-        if (models::where('name', $modelName)->exists()) {
+        if (Models::where('name', $modelName)->exists()) {
             return back()->withErrors(['name' => 'This model name already exists']);
         }
         $validatedData = $request->validate([
             'profilephoto' => 'required|image|mimes:jpeg,png,jpg,gif,heic|max:50048',
-            'book' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
-            'digital' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
-            'video' => 'nullable|mimetypes:video/mp4,video/webm,video/mpeg,video/quicktime,video/x-msvideo,video/x-flv|max:900048',
+            'book.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
+            'digital.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
+            'video.*' => 'nullable|mimetypes:video/mp4,video/webm,video/mpeg,video/quicktime,video/x-msvideo,video/x-flv|max:900048',
         ], [
             'profilephoto.required' => 'The profile photo is required.',
             'profilephoto.image' => 'The uploaded file must be an image.',
             'profilephoto.mimes' => 'The image file must be in JPEG, PNG, JPG, GIF, or HEIC format.',
             'profilephoto.max' => 'The image file must not be greater than :max 50 MB.',
-            'book.image' => 'The uploaded file must be an image.',
-            'book.mimes' => 'The image file must be in JPEG, PNG, JPG, GIF, or HEIC format.',
-            'book.max' => 'The image file must not be greater than :max 150 MB.',
-            'digital.image' => 'The uploaded file must be an image.',
-            'digital.mimes' => 'The image file must be in JPEG, PNG, JPG, GIF, or HEIC format.',
-            'digital.max' => 'The image file must not be greater than :max 150 MB.',
-            'video.mimetypes' => 'The video file must be in MP4, WebM, MPEG, QuickTime, AVI, or FLV format.',
-            'video.max' => 'The video file must not be greater than :max 900 MB.',
+            'book.*.image' => 'The uploaded file must be an image.',
+            'book.*.mimes' => 'The image file must be in JPEG, PNG, JPG, GIF, or HEIC format.',
+            'book.*.max' => 'The image file must not be greater than :max 150 MB.',
+            'digital.*.image' => 'The uploaded file must be an image.',
+            'digital.*.mimes' => 'The image file must be in JPEG, PNG, JPG, GIF, or HEIC format.',
+            'digital.*.max' => 'The image file must not be greater than :max 150 MB.',
+            'video.*.mimetypes' => 'The video file must be in MP4, WebM, MPEG, QuickTime, AVI, or FLV format.',
+            'video.*.max' => 'The video file must not be greater than :max 900 MB.',
         ]);
+
         $profilephoto = $request->file('profilephoto');
         $profilephotopath = $profilephoto->storePublicly('public/Photos');
 
-        $model = new models;
+        $model = new Models;
         $model->profilephoto = $profilephotopath;
         $model->name = $request->input('name');
         $model->height = $request->input('height');
@@ -56,7 +57,7 @@ class ModelController extends Controller
         $model->save();
 
         $modelName = $request->input('name');
-        $model = models::where('name', $modelName)->first();
+        $model = Models::where('name', $modelName)->first();
 
         if (!$model) {
             return back()->withErrors(['name' => 'Model not found']);
@@ -66,9 +67,10 @@ class ModelController extends Controller
 
 
         /* Book */
-        if ($request->hasfile('book')) {
-            $counter = 1;
-            foreach ($request->allFiles() as $book) {
+        $bookFiles = $request->file('book');
+        if ($bookFiles !== null) {
+            $bookcounter = 1;
+            foreach ($bookFiles as $book) {
                 $bookPath = $book->storePublicly('public/Books');
                 $extension = $book->getClientOriginalExtension();
                 if ($extension == 'heic') {
@@ -77,29 +79,29 @@ class ModelController extends Controller
                     $jpgPath = 'public/Books/' . pathinfo($bookPath, PATHINFO_FILENAME) . '.jpg';
                     file_put_contents($jpgPath, $jpgContent);
 
-                    $photo = new photos;
-                    $photo->modelid = $modelId;
-                    $photo->photopath = $jpgPath;
-                    $photo->photocategory = 'Book';
-                    $photo->photoorder = $counter;
-                    $photo->save();
+                    $bookphoto = new photos;
+                    $bookphoto->modelid = $modelId;
+                    $bookphoto->photopath = $jpgPath;
+                    $bookphoto->photocategory = 'Book';
+                    $bookphoto->photoorder = $bookcounter;
+                    $bookphoto->save();
                 } else {
-                    $photo = new photos;
-                    $photo->modelid = $modelId;
-                    $photo->photopath = $bookPath;
-                    $photo->photocategory = 'Book';
-                    $photo->photoorder = $counter;
-                    $photo->save();
+                    $bookphoto = new photos;
+                    $bookphoto->modelid = $modelId;
+                    $bookphoto->photopath = $bookPath;
+                    $bookphoto->photocategory = 'Book';
+                    $bookphoto->photoorder = $bookcounter;
+                    $bookphoto->save();
                 }
 
-                $counter++;
+                $bookcounter++;
             }
         }
-
         /* Digital */
-        if ($request->hasfile('digital')) {
-            $counter = 1;
-            foreach ($request->allFiles() as $digital) {
+        $digitalFiles = $request->file('digital');
+        if ($digitalFiles !== null) {
+            $digitalcounter = 1;
+            foreach ($digitalFiles as $digital) {
                 $digitalPath = $digital->storePublicly('public/Digitals');
 
                 $extension = $digital->getClientOriginalExtension();
@@ -108,35 +110,37 @@ class ModelController extends Controller
                     $jpgPath = 'public/Digitals/' . pathinfo($digitalPath, PATHINFO_FILENAME) . '.jpg';
                     file_put_contents($jpgPath, $jpgContent);
 
-                    $photo = new photos;
-                    $photo->modelid = $modelId;
-                    $photo->photopath = $jpgPath;
-                    $photo->photocategory = 'Digital';
-                    $photo->photoorder = $counter;
-                    $photo->save();
+                    $digitalphoto = new photos;
+                    $digitalphoto->modelid = $modelId;
+                    $digitalphoto->photopath = $jpgPath;
+                    $digitalphoto->photocategory = 'Digital';
+                    $digitalphoto->photoorder = $digitalcounter;
+                    $digitalphoto->save();
                 } else {
-                    $photo = new photos;
-                    $photo->modelid = $modelId;
-                    $photo->photopath = $digitalPath;
-                    $photo->photocategory = 'Digital';
-                    $photo->photoorder = $counter;
-                    $photo->save();
+                    $digitalphoto = new photos;
+                    $digitalphoto->modelid = $modelId;
+                    $digitalphoto->photopath = $digitalPath;
+                    $digitalphoto->photocategory = 'Digital';
+                    $digitalphoto->photoorder = $digitalcounter;
+                    $digitalphoto->save();
                 }
 
-                $counter++;
+                $digitalcounter++;
             }
         }
+
         /* Video */
-        if ($request->hasfile('video')) {
-            $counter = 1;
-            foreach ($request->allFiles() as $videoFile) {
+        $videoFiles = $request->file('video');
+        if ($videoFiles !== null) {
+            $videocounter = 1;
+            foreach ($request->file('video') as $videoFile) {
                 $videoPath = $videoFile->storePublicly('public/Videos');
-                $videoModel = new video;
+                $videoModel = new Video;
                 $videoModel->modelid = $modelId;
                 $videoModel->videopath = $videoPath;
-                $videoModel->videoorder = $counter;
+                $videoModel->videoorder = $videocounter;
                 $videoModel->save();
-                $counter++;
+                $videocounter++;
 
             }
         }
@@ -150,14 +154,26 @@ class ModelController extends Controller
     /* Get Models For Pages */
     public function models()
     {
-        $models = models::paginate(8);
+        $models = Models::paginate(8);
 
         return view('manager', ['models' => $models]);
+    }
+    public function modelpage($name)
+    {
+        $model = Models::where('name', $name)->first();
+
+        if (!$model) {
+            abort(404);
+        }
+        $bookPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Book')->orderBy('photoorder')->get();
+        $digitalPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Digital')->orderBy('photoorder')->get();
+        $videos = Video::where('modelid', $model->modelid)->get();
+        return view('Model', compact('model', 'bookPhotos', 'digitalPhotos', 'videos'));
     }
 
     public function listmodels(Request $request)
     {
-        $models = models::paginate(9);
+        $models = Models::paginate(9);
 
         if ($request->ajax()) {
             return response()->json($models);
@@ -188,7 +204,7 @@ class ModelController extends Controller
     public function SelectDeleteAll(Request $request)
     {
         $value = $request->input('SelectAndDeleteButton');
-        $models = models::all();
+        $models = Models::all();
 
         $models->each(function ($model) use ($value) {
             $model->selected = $value;
@@ -200,7 +216,7 @@ class ModelController extends Controller
     /* Get Selected Models For Checkbox */
     public function getSelectedModels()
     {
-        $selectedModels = models::where('selected', 1)->get(['modelid', 'name']);
+        $selectedModels = Models::where('selected', 1)->get(['modelid', 'name']);
 
         return response()->json($selectedModels);
     }

@@ -20,97 +20,179 @@
     <nav class="navbar d-flex justify-content-center p-2 bg-light border-bottom">
         <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" alt="Logo"></a>
     </nav>
-    <div class="w-50 text-center container mt-1">
-        <table class="table table-white table-hover text-center">
-            <tr>
+    <div class=" text-center container mt-2">
+        <div class="table-responsive">
+            <form>
 
-                <th scope="col"><label>Name</label><input class="form-control border-black text-center"
-                        type="text" value="modelname"></th>
-                <th scope="col"><label>İnstagram</label><input class="form-control border-black text-center"
-                        type="text" value="instagram"></th>
-            </tr>
-            <tbody>
-                <tr>
-                    <th scope="col"><label>Height</label><input class="form-control border-black text-center"
-                            type="text" value="height"></th>
-                    <th scope="col"><label>Chest Or Bust</label><input class="form-control border-black text-center"
-                            type="text" value="chest_bust"></th>
-                </tr>
-                <tr>
-                    <th scope="col"><label>Waist</label><input class="form-control border-black text-center"
-                            type="text" value="waist"></th>
-                    <th scope="col"><label>Hips</label><input class="form-control border-black text-center"
-                            type="text" value="hips"></th>
-                </tr>
-                <tr>
-                    <th scope="col"><label>Shoes</label><input class="form-control border-black text-center"
-                            type="text" value="shoes"></th>
-                    <th scope="col"><label>Eyes</label><input class="form-control border-black text-center"
-                            type="text" value="eyes"></th>
-                </tr>
-                <tr>
-                    <th scope="col">
-                        <label>Nation</label>
-                        <input class="form-control border-black text-center" type="text" value="nation">
-                    </th>
-                    <th scope="col">
-                        <label>Gender</label>
-                        <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input  bg-black border border-black" type="radio" name="gender"
-                                id="women">
-                            <label class="form-check-label" for="gender">Men</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input  bg-black border border-black" type="radio" name="gender"
-                                id="men" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">Women</label>
-                        </div>
-                    </th>
+                <table class="table table-white table-hover text-center border border-black shadow-lg">
+                    <tr>
 
-                </tr>
-                <tr>
-                    <th scope="col">
-                        <label>Busy</label>
-                        <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input  bg-black border border-black" type="radio" name="busy"
-                                id="0">
-                            <label class="form-check-label" for="busy">Busy</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input bg-black border border-black" type="radio" name="busy"
-                                id="1" checked>
-                            <label class="form-check-label" for="busy">Free</label>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <label>Active</label>
-                        <br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input  bg-black border border-black" type="radio" name="active"
-                                id="1">
-                            <label class="form-check-label" for="active">Active</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input  bg-black border border-black" type="radio"
-                                name="active" id="0" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">Un Active</label>
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="col"><label>Start</label><input class="form-control border-black text-center"
-                            type="date" data-toggle="tooltip" data-placement="top"
-                            title="Model Availability Starting"></th>
-                    <th scope="col"><label>End</label><input class="form-control border-black text-center"
-                            type="date" data-toggle="tooltip" data-placement="top"
-                            title="Model Availability Ending"></th>
-                </tr>
-            </tbody>
-        </table>
+                        <th scope="col"><label>Name</label><input
+                                class="form-control border-black text-center bg-black text-white" type="text"
+                                value="{{ $model->name }}"></th>
+                        <th scope="col"><label>İnstagram</label><input
+                                class="form-control border-black text-center bg-black text-white" type="text"
+                                value="{{ $model->instagram }}"></th>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <th scope="col"><label>Height</label><input
+                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    value="{{ $model->height }}"></th>
+                            <th scope="col"><label>
+                                    @if ($model->gender == 'men')
+                                        CHEST:
+                                    @elseif($model->gender == 'women')
+                                        BUST:
+                                    @endif
+                                </label><input class="form-control border-black text-center bg-black text-white"
+                                    type="text" value="{{ $model->chect_bust }}"></th>
+                        </tr>
+                        <tr>
+                            <th scope="col"><label>Waist</label><input
+                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    value="{{ $model->waist }}"></th>
+                            <th scope="col"><label>Hips</label><input
+                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    value="{{ $model->hips }}"></th>
+                        </tr>
+                        <tr>
+                            <th scope="col"><label>Shoes</label><input
+                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    value="{{ $model->shoes }}"></th>
+                            <th scope="col"><label>Eyes</label><input
+                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    value="{{ $model->eyes }}"></th>
+                        </tr>
+                        <tr>
+                            <th scope="col">
+                                <label>Nation</label>
+                                <input class="form-control border-black text-center bg-black text-white" type="text"
+                                    value="{{ $model->nation }}">
+                            </th>
+                            <th scope="col">
+                                <label>Gender</label>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input bg-black border border-black" type="radio"
+                                        name="gender" id="women" {{ $model->gender == 'men' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="gender">Men</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input bg-black border border-black" type="radio"
+                                        name="gender" id="men" {{ $model->gender == 'women' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexRadioDefault2">Women</label>
+                                </div>
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <th scope="col">
+                                <label>Availability</label>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input  bg-black border border-black" type="radio"
+                                        name="busy" id="0" {{ $model->busy == '0' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="busy">Busy</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input bg-black border border-black" type="radio"
+                                        name="busy" id="1" {{ $model->busy == '1' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="busy">Free</label>
+                                </div>
+                            </th>
+                            <th scope="col">
+                                <label>Model</label>
+                                <br>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input  bg-black border border-black" type="radio"
+                                        name="active" id="1" {{ $model->active == '1' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="active">Active</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input  bg-black border border-black" type="radio"
+                                        name="active" id="0" {{ $model->active == '0' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="flexRadioDefault2">Not Active</label>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col"><label>Start</label><input
+                                    class="form-control border-black text-center bg-black text-white" type="date"
+                                    data-toggle="tooltip" data-placement="top" title="Model Availability Starting">
+                            </th>
+                            <th scope="col"><label>End</label><input
+                                    class="form-control border-black text-center bg-black text-white" type="date"
+                                    data-toggle="tooltip" data-placement="top" title="Model Availability Ending">
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="submit" class="btn btn-outline-success bg-black border border-black w-100 mb-2"
+                    value="Save Features">
+            </form>
+        </div>
     </div>
-    <div></div>
+    <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
+        <h1 class="text-black">BOOK</h1>
+    </div>
+    <h5 class="text-center mt-1">ADD PHOTO TO BOOK</h5>
+    <div class="input-group d-flex justify-content-center mt-2">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <input type="file" class="form-control">
+            <button class="btn btn-outline-success w-100 mt-2" type="submit">Add</button>
+        </form>
+    </div>
+    @foreach ($bookPhotos->chunk(4) as $chunk)
+        <div class="row g-0 mt-3">
+            @foreach ($chunk as $bookPhoto)
+                <div class="col-sm-3 px-4 mb-3">
+                    <div class="card border shadow-lg mx-auto" style="height:26rem">
+                        <img src="{{ asset($bookPhoto->photopath) }}" style="height:26rem" class="card-img-top"
+                            alt="...">
+
+
+                    </div>
+                    <form class="" method="POST" action="">
+                        <button type="submit" class="btn btn-outline-danger mt-2 w-100"
+                            name="Delete Photo">Delete</button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+
+    <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
+        <h1 class="text-black">DİGİTAL</h1>
+    </div>
+    <h5 class="text-center mt-1">ADD PHOTO TO DİGİTAL</h5>
+    <div class="input-group d-flex justify-content-center mt-2">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <input type="file" class="form-control">
+            <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
+        </form>
+    </div>
+    @foreach ($digitalPhotos->chunk(4) as $chunk)
+        <div class="row g-0 mt-3">
+            @foreach ($chunk as $digitalPhoto)
+                <div class="col-sm-3 px-4 mb-3">
+                    <div class="card border shadow-lg mx-auto" style="height:26rem">
+                        <img src="{{ asset($digitalPhoto->photopath) }}" style="height:26rem" class="card-img-top"
+                            alt="...">
+
+
+                    </div>
+                    <form class="" method="POST" action="">
+                        <button type="submit" class="btn btn-outline-danger mt-2 w-100"
+                            name="Delete Photo">Delete</button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+
+
+
 </body>
 <script>
     $(function() {

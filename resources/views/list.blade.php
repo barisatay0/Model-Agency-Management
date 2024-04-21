@@ -33,8 +33,7 @@
                 <!-- Model -->
             </div>
         </div>
-        <div class="text-center"><button id="moreButton" class="btn btn-outline-dark w-50 mt-3">Daha Fazla
-                Göster</button></div>
+        <div class="text-center"><button id="moreButton" class="btn btn-outline-dark w-50 mt-3">Show More</button></div>
 </body>
 <script>
     var nextPage = 1;
@@ -62,8 +61,11 @@
                             <div class="card-body">
                                 <p class="card-text">${model.name}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <button type="button" class="btn btn-sm btn-outline-warning w-100">Edit</button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger w-100 mx-1">Delete</button>
+                                    <a class="w-100" href="http://localhost:8000/Model/${model.name}"><button type="button" class="btn btn-sm btn-outline-warning w-100">Edit</button></a>
+                                    <form class="w-100">
+                                        <input name="modelname" type="hidden" value="${model.name}">
+                                        <input type="submit" class="btn btn-sm btn-outline-danger w-100 mx-1" value="Delete">
+                                    </form>
                                 </div>
                             </div>
                         </div>

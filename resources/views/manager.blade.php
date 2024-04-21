@@ -122,7 +122,7 @@
                             {{ $model->name }}</li>
                         <div class="card-body">
                             <!-- Model Profile Photo -->
-                            <a href="#"><img src="{{ asset($model->profilephoto) }}" style="height:22rem"
+                            <a href="http://localhost:8000/Model/{{$model->name}}"><img src="{{ asset($model->profilephoto) }}" style="height:22rem"
                                     class="card-img-top" alt="..."></a>
                         </div>
                         <div class="card-body">
