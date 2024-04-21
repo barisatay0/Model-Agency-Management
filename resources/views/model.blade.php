@@ -23,7 +23,6 @@
     <div class=" text-center container mt-2">
         <div class="table-responsive">
             <form>
-
                 <table class="table table-white table-hover text-center border border-black shadow-lg">
                     <tr>
 
@@ -185,6 +184,34 @@
                     <form class="" method="POST" action="">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
+    @endforeach
+    <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
+        <h1 class="text-black">VİDEO</h1>
+    </div>
+    <h5 class="text-center mt-1">ADD VİDEO</h5>
+    <div class="input-group d-flex justify-content-center mt-2">
+        <form method="POST" action="" enctype="multipart/form-data">
+            <input type="file" class="form-control">
+            <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
+        </form>
+    </div>
+    @foreach ($videos->chunk(4) as $chunk)
+        <div class="row g-0 mt-3">
+            @foreach ($chunk as $video)
+                <div class="col-sm-3 px-4 mb-3">
+                    <div class="card border shadow-lg mx-auto" style="height:26rem">
+                        <video width="100%" height="100%" controls>
+                            <source src="{{ asset($video->videopath) }}" type="video/mp4">
+                            Your browser does not support the video format
+                        </video>
+                    </div>
+                    <form class="" method="POST" action="">
+                        <button type="submit" class="btn btn-outline-danger mt-2 w-100"
+                            name="Delete Video">Delete</button>
                     </form>
                 </div>
             @endforeach
