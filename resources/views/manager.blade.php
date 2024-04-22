@@ -49,8 +49,9 @@
                         placeholder="Search" aria-label="Search">
                 </form>
                 <!-- Signup , Logout , Model Editor Buttons -->
-                <a href="Editor"><button type="button" class="btn bg-black text-white mx-2 py-2 addBtn_res" id="addBtn_res"><i
-                            class="fa-solid fa-plus mx-2" style="color: #fff;"></i>Model Editor</button></a>
+                <a href="Editor"><button type="button" class="btn bg-black text-white mx-2 py-2 addBtn_res"
+                        id="addBtn_res"><i class="fa-solid fa-plus mx-2" style="color: #fff;"></i>Model
+                        Editor</button></a>
                 <a href="Signup"><button type="button" class="btn btn-outline-primary mx-2 py-2">SignUp</button></a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
@@ -75,15 +76,16 @@
             <!-- Save Selection And Copy Button -->
             <div class="leftbuttons" style="margin-top:-1rem;">
                 <div class="btn-group w-100 " role="group" aria-label="Basic outlined example">
-                    <button type="button" id="saveSelectionBtn" class="btn btn-outline-secondary border border-black bg-black w-100 mb-2">Save
+                    <button type="button" id="saveSelectionBtn"
+                        class="btn btn-outline-secondary border border-black bg-black w-100 mb-2">Save
                         Selection</button>
                 </div>
                 <div class="btn-group w-100" role="group" aria-label="Basic outlined example">
                     <input class="form-control bg-black text-white py-2 border-0" type="text" id="linker"
                         value="Link Will Be Here!" aria-label="Disabled input example" disabled readonly
                         style="border-top-right-radius:0; border-bottom-right-radius: 0; cursor: text;">
-                    <button id="copyButton" type="button" class="btn bg-black text-white w-25"><i class="fa-regular fa-copy"
-                            style="color: #fff;"></i></button>
+                    <button id="copyButton" type="button" class="btn bg-black text-white w-25"><i
+                            class="fa-regular fa-copy" style="color: #fff;"></i></button>
                 </div>
             </div>
         </div>
@@ -157,8 +159,8 @@
                                     <li><a class="dropdown-item" href="">GENDER:
                                             {{ strtoupper($model->gender) }}</a></li>
                                     @if ($model->nation)
-                                        <li><a class="dropdown-item"
-                                                href="">NATİON: {{ strtoupper($model->nation) }}</a></li>
+                                        <li><a class="dropdown-item" href="">NATİON:
+                                                {{ strtoupper($model->nation) }}</a></li>
                                     @endif
 
                                 </ul>
@@ -267,7 +269,8 @@
     });
 
     function addSidebarButton(modelid, name) {
-        var buttonHtml = '<button type="button" class="btn bg-black text-white text-capitalize mx-1 mb-2" id="' + modelid +
+        var buttonHtml = '<button type="button" class="btn bg-black text-white text-capitalize mx-1 mb-2" id="' +
+            modelid +
             '">' + name + '</button>';
         $('#addedButtons').append(buttonHtml);
     }
