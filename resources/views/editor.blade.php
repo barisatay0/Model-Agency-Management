@@ -38,14 +38,14 @@
             <div class="container">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div class="col-xl-9">
-                        <div class="table-responsive">
-                            <table class="table table-black rounded-5">
+                        <div>
+                            <table class="table table-black">
                                 <tbody>
                                     <tr>
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Profile Photo</h6>
                                             <input name="profilephoto"
-                                                class="form-control form-control-md border border-black" id="formFileLg"
+                                                class="form-control form-control-m" id="formFileLg"
                                                 type="file" required />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
@@ -143,7 +143,7 @@
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Digital</h6>
                                             <input id="digital" name="digital[]"
-                                                class="form-control form-control-md border border-black"
+                                                class="form-control form-control-md"
                                                 id="formFileLg" type="file" multiple />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
@@ -152,14 +152,14 @@
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Book</h6>
                                             <input id="book" name="book[]"
-                                                class="form-control form-control-md border border-black"
+                                                class="form-control form-control-md"
                                                 id="formFileLg" type="file" multiple />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Videos</h6>
                                             <input id="video" name="video[]"
-                                                class="form-control form-control-md border border-black"
+                                                class="form-control form-control-md"
                                                 id="formFileLg" type="file" multiple />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
