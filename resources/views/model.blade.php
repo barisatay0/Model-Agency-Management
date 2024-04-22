@@ -14,6 +14,7 @@
     <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
 </head>
 
 <body>

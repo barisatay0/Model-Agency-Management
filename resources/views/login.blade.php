@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
         <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
     </head>
 
     <body>
@@ -40,7 +41,7 @@
                                     <input type="checkbox" class="form-check-input" id="remember" name="remember">
                                     <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
-                                <button type="submit" class="btn btn-outline-light border border-black text-black w-100">Log in</button>
+                                <button type="submit" class="btn btn-outline-black w-100">Log in</button>
                             </form>
 
                             <br>

@@ -1,0 +1,37 @@
+.btn-outline-black {
+    color: #000;
+    border-color: #000;
+}
+
+.btn-outline-black:hover {
+    color: #fff;
+    background-color: #000;
+}
+
+.btn-outline-white {
+    color: #fff;
+    background-color: #000;
+}
+
+.btn-outline-white:hover {
+    color: #000;
+    border-color: #000;
+}
+
+.table-black {
+    color: #fff;
+    background-color: #000;
+}
+
+.table-black td {
+    border-color: #fff;
+    background-color: #000;
+}
+
+.table-black label,
+.table-black h6,
+.table-black span,
+.table-black h1 {
+    text-decoration-color: #fff;
+    color: #fff;
+}

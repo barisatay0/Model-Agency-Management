@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-
+        <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
 </head>
 
 <body>
@@ -24,9 +24,9 @@
                 class="form-control w-50 border border-dark mx-auto">
         </form>
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
-                class="btn bg-black text-white w-25 py-1">Manager</button></a>
+                class="btn btn-outline-black w-25 py-1">Manager</button></a>
         <a class="text-black " style="text-decoration: none" href="{{ url('/Editor') }}"><button
-                class="btn bg-black text-white w-25 py-1">Editor</button></a>
+                class="btn btn-outline-black w-25 py-1">Editor</button></a>
     </div>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -34,7 +34,7 @@
                 <!-- Model -->
             </div>
         </div>
-        <div class="text-center"><button id="moreButton" class="btn btn-outline-dark w-50 mt-3">Show More</button></div>
+        <div class="text-center"><button id="moreButton" class="btn btn-outline-black w-50 mt-3">Show More</button></div>
 </body>
 <script>
     var nextPage = 1;
