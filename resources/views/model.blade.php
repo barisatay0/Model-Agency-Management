@@ -25,101 +25,101 @@
             <form>
                 <table class="table table-white table-hover text-center border border-black shadow-lg">
                     <tr>
-                        <th scope="col"><label>Name</label><input
+                        <th scope="col"><label for="modelname">Name</label><input
                                 class="form-control border-black text-center bg-black text-white" type="text"
-                                value="{{ $model->name }}"></th>
-                        <th scope="col"><label>İnstagram</label><input
+                              id="modelname"  value="{{ $model->name }}" name="modelname"></th>
+                        <th scope="col"><label for="instagram">İnstagram</label><input
                                 class="form-control border-black text-center bg-black text-white" type="text"
-                                value="{{ $model->instagram }}"></th>
+                               name="instagram" value="{{ $model->instagram }}" id="instagram"></th>
                     </tr>
                     <tbody>
                         <tr>
-                            <th scope="col"><label>Height</label><input
+                            <th scope="col"><label for="height">Height</label><input
                                     class="form-control border-black text-center bg-black text-white" type="text"
-                                    value="{{ $model->height }}"></th>
-                            <th scope="col"><label>
+                                    value="{{ $model->height }}" name="modelheight" id="height"></th>
+                            <th scope="col"><label for="chest_bust">
                                     @if ($model->gender == 'men')
                                         CHEST:
                                     @elseif($model->gender == 'women')
                                         BUST:
                                     @endif
                                 </label><input class="form-control border-black text-center bg-black text-white"
-                                    type="text" value="{{ $model->chect_bust }}"></th>
+                                    type="text" id="chest_bust" value="{{ $model->chect_bust }}" name="modelchest_bust"></th>
                         </tr>
                         <tr>
-                            <th scope="col"><label>Waist</label><input
+                            <th scope="col"><label for="waist">Waist</label><input
                                     class="form-control border-black text-center bg-black text-white" type="text"
-                                    value="{{ $model->waist }}"></th>
-                            <th scope="col"><label>Hips</label><input
+                                    value="{{ $model->waist }}" name="modelwaist" id="waist"></th>
+                            <th scope="col"><label for="hips">Hips</label><input
                                     class="form-control border-black text-center bg-black text-white" type="text"
-                                    value="{{ $model->hips }}"></th>
+                                    value="{{ $model->hips }}" name="modelhips" id="hips"></th>
                         </tr>
                         <tr>
-                            <th scope="col"><label>Shoes</label><input
+                            <th scope="col"><label for="shoes">Shoes</label><input
                                     class="form-control border-black text-center bg-black text-white" type="text"
-                                    value="{{ $model->shoes }}"></th>
-                            <th scope="col"><label>Eyes</label><input
+                                    value="{{ $model->shoes }}" name="modelshoes" id="shoes"></th>
+                            <th scope="col"><label for="eyes">Eyes</label><input
                                     class="form-control border-black text-center bg-black text-white" type="text"
-                                    value="{{ $model->eyes }}"></th>
+                                    value="{{ $model->eyes }}" name="modeleyes" id="eyes"></th>
                         </tr>
                         <tr>
                             <th scope="col">
-                                <label>Nation</label>
+                                <label for="nation">Nation</label>
                                 <input class="form-control border-black text-center bg-black text-white" type="text"
-                                    value="{{ $model->nation }}">
+                                    value="{{ $model->nation }}" name="modelnation" id="nation">
                             </th>
                             <th scope="col">
-                                <label>Gender</label>
+                                <span>Gender</span>
                                 <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input bg-black border border-black" type="radio"
                                         name="gender" id="women" {{ $model->gender == 'men' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="gender">Men</label>
+                                    <label class="form-check-label" for="men">Men</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input bg-black border border-black" type="radio"
                                         name="gender" id="men" {{ $model->gender == 'women' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="flexRadioDefault2">Women</label>
+                                    <label class="form-check-label" for="women">Women</label>
                                 </div>
                             </th>
 
                         </tr>
                         <tr>
                             <th scope="col">
-                                <label>Availability</label>
+                                <span>Availability</span>
                                 <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input  bg-black border border-black" type="radio"
-                                        name="busy" id="0" {{ $model->busy == '0' ? 'checked' : '' }}>
+                                        name="busy" value="0" id="busy" {{ $model->busy == '0' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="busy">Busy</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input bg-black border border-black" type="radio"
-                                        name="busy" id="1" {{ $model->busy == '1' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="busy">Free</label>
+                                        name="busy" value="1" id="free" {{ $model->busy == '1' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="free">Free</label>
                                 </div>
                             </th>
                             <th scope="col">
-                                <label>Model</label>
+                                <span>Model</span>
                                 <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input  bg-black border border-black" type="radio"
-                                        name="active" id="1" {{ $model->active == '1' ? 'checked' : '' }}>
+                                        name="active" value="1" id="active" {{ $model->active == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="active">Active</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input  bg-black border border-black" type="radio"
-                                        name="active" id="0" {{ $model->active == '0' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="flexRadioDefault2">Not Active</label>
+                                        name="active" value="0" id="notactive" {{ $model->active == '0' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="notactive">Not Active</label>
                                 </div>
                             </th>
                         </tr>
                         <tr>
-                            <th scope="col"><label>Start</label><input
+                            <th scope="col"><span>Start</span><input
                                     class="form-control border-black text-center bg-black text-white" type="date"
                                     data-toggle="tooltip" data-placement="top" title="Model Availability Starting">
                             </th>
-                            <th scope="col"><label>End</label><input
+                            <th scope="col"><span>End</span><input
                                     class="form-control border-black text-center bg-black text-white" type="date"
                                     data-toggle="tooltip" data-placement="top" title="Model Availability Ending">
                             </th>
@@ -180,7 +180,8 @@
 
 
                     </div>
-                    <form class="" method="POST" action="">
+                    <form class="" name="{{ $digitalphoto->photopath }}" id="{{ $digitalphoto->photopath }}"
+                        method="POST" action="">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>
                     </form>

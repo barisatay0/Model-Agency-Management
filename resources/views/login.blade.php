@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -19,7 +19,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header text-center"
+                        <div class="card-header bg-black text-white text-center"
                             style="font-family:'Roboto', sans-serif;font-weight: 700;color: #000;">
                             Log In Pack
                         </div>
@@ -29,7 +29,7 @@
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
                                     <input type="text" class="form-control" name="username" id="username"
-                                        placeholder="Enter username..." required>
+                                        placeholder="Enter username..." required autocomplete="name">
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Password</label>
@@ -40,7 +40,7 @@
                                     <input type="checkbox" class="form-check-input" id="remember" name="remember">
                                     <label class="form-check-label" for="remember">Remember me</label>
                                 </div>
-                                <button type="submit" class="btn btn-dark">Log in</button>
+                                <button type="submit" class="btn btn-outline-light border border-black text-black w-100">Log in</button>
                             </form>
 
                             <br>

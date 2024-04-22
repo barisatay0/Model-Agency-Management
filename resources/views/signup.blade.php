@@ -22,7 +22,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header text-center">
+                    <div class="card-header bg-black text-white text-center">
                         Sign Up
                     </div>
                     <div class="card-body">
@@ -30,9 +30,9 @@
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="email" class="form-label">Username</label>
+                                <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" name="username" id="username"
-                                    placeholder="Enter to username..." required>
+                                    placeholder="Enter to username..." autocomplete="name" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
@@ -40,7 +40,7 @@
                                     placeholder="Enter to password..." required>
                             </div>
 
-                            <button type="submit" class="btn btn-outline-dark">Sign Up</button>
+                            <button type="submit" class="btn btn-outline-dark w-100">Sign Up</button>
                             @if ($errors->any())
                                 <div class="alert alert-danger mt-1">
                                     <ul>

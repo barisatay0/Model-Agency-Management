@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -19,17 +20,17 @@
     </nav>
     <div class="mt-2 text-center mb-2">
         <form class="d-flex justify-content-center mb-1">
-            <input type="search" placeholder="Search Model..." aria-label="Search"
+            <input name="search" type="search" placeholder="Search Model..." aria-label="Search"
                 class="form-control w-50 border border-dark mx-auto">
         </form>
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
-                class="btn btn-outline-dark w-25 py-1">Manager</button></a>
+                class="btn bg-black text-white w-25 py-1">Manager</button></a>
         <a class="text-black " style="text-decoration: none" href="{{ url('/Editor') }}"><button
-                class="btn btn-outline-dark w-25 py-1">Editor</button></a>
+                class="btn bg-black text-white w-25 py-1">Editor</button></a>
     </div>
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="veri-listesi">
+            <div class="row row-cols-lg-4 g-4" id="veri-listesi">
                 <!-- Model -->
             </div>
         </div>
@@ -56,8 +57,8 @@
                 response.data.forEach(function(model) {
                     var card = `
                     <div class="col">
-                        <div class="card shadow"">
-                            <img src="${model.profilephoto}" class="card-img-top" alt="Logo">
+                        <div class="card shadow" style="width:300px;height:550px;">
+                            <img src="${model.profilephoto}" class="card-img-top" alt="Logo" style="height:100%;width:100%;">
                             <div class="card-body">
                                 <p class="card-text text-center">${model.name}</p>
                                 <div class="d-flex justify-content-between align-items-center">

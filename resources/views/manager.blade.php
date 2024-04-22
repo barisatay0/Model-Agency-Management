@@ -26,8 +26,8 @@
                 <!-- Men And Women Buttons -->
                 <form method="POST" action="{{ route('SelectDeleteAll') }}">
                     @csrf
-                    <input type="submit" class="btn btn-dark" name="women" value="women">
-                    <input type="submit" class="btn btn-dark" name="men" value="men">
+                    <input type="submit" class="btn bg-black text-white" name="women" id="women" value="women">
+                    <input type="submit" class="btn bg-black text-white" name="men" id="men" value="men">
                 </form>
 
                 <!-- Select And Delete Buttons  -->
@@ -49,7 +49,7 @@
                         placeholder="Search" aria-label="Search">
                 </form>
                 <!-- Signup , Logout , Model Editor Buttons -->
-                <a href="Editor"><button type="button" class="btn btn-dark mx-2 py-2 addBtn_res" id="addBtn_res"><i
+                <a href="Editor"><button type="button" class="btn bg-black text-white mx-2 py-2 addBtn_res" id="addBtn_res"><i
                             class="fa-solid fa-plus mx-2" style="color: #fff;"></i>Model Editor</button></a>
                 <a href="Signup"><button type="button" class="btn btn-outline-primary mx-2 py-2">SignUp</button></a>
                 <form action="{{ route('logout') }}" method="POST">
@@ -75,14 +75,14 @@
             <!-- Save Selection And Copy Button -->
             <div class="leftbuttons" style="margin-top:-1rem;">
                 <div class="btn-group w-100 " role="group" aria-label="Basic outlined example">
-                    <button type="button" id="saveSelectionBtn" class="btn btn-outline-dark w-100 mb-2">Save
+                    <button type="button" id="saveSelectionBtn" class="btn btn-outline-secondary border border-black bg-black w-100 mb-2">Save
                         Selection</button>
                 </div>
                 <div class="btn-group w-100" role="group" aria-label="Basic outlined example">
-                    <input class="form-control bg-dark text-white py-2 border-0" type="text" id="linker"
+                    <input class="form-control bg-black text-white py-2 border-0" type="text" id="linker"
                         value="Link Will Be Here!" aria-label="Disabled input example" disabled readonly
                         style="border-top-right-radius:0; border-bottom-right-radius: 0; cursor: text;">
-                    <button id="copyButton" type="button" class="btn btn-dark w-25"><i class="fa-regular fa-copy"
+                    <button id="copyButton" type="button" class="btn bg-black text-white w-25"><i class="fa-regular fa-copy"
                             style="color: #fff;"></i></button>
                 </div>
             </div>
@@ -118,7 +118,7 @@
                     <!-- Model Id -->
                     <div class="card" style="width: 17rem;" data-id="{{ $model->modelid }}">
                         <!-- Model Name -->
-                        <li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">
+                        <li class="list-group-item text-center p-2 text-uppercase bg-black text-white">
                             {{ $model->name }}</li>
                         <div class="card-body">
                             <!-- Model Profile Photo -->
@@ -157,15 +157,15 @@
                                     <li><a class="dropdown-item" href="">GENDER:
                                             {{ strtoupper($model->gender) }}</a></li>
                                     @if ($model->nation)
-                                        <li><a class="dropdown-item" href="">NATİON:
-                                                {{ strtoupper($model->nation) }}</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="">NATİON: {{ strtoupper($model->nation) }}</a></li>
                                     @endif
 
                                 </ul>
                             </div>
                             <div class=" btn-group-toggle mt-1" data-toggle="buttons">
                                 <label class="btn btn-outline-dark w-100">
-                                    <input type="checkbox" class="myCheckbox"
+                                    <input id="{{ $model->modelid }}" type="checkbox" class="myCheckbox"
                                         onchange="toggleSelection({{ $model->modelid }})"
                                         {{ $model->selected ? 'checked' : '' }}>
                                 </label>
@@ -267,7 +267,7 @@
     });
 
     function addSidebarButton(modelid, name) {
-        var buttonHtml = '<button type="button" class="btn btn-dark text-capitalize mx-1 mb-2" id="' + modelid +
+        var buttonHtml = '<button type="button" class="btn bg-black text-white text-capitalize mx-1 mb-2" id="' + modelid +
             '">' + name + '</button>';
         $('#addedButtons').append(buttonHtml);
     }
