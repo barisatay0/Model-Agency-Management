@@ -208,37 +208,4 @@ class ModelController extends Controller
             return redirect()->back()->with('error', 'Model not found');
         }
     }
-
-    /* Get Models For Pages */
-    public function models()
-    {
-        $models = Models::paginate(8);
-
-        return view('manager', ['models' => $models]);
-    }
-    public function modelpage($name)
-    {
-        $model = Models::where('name', $name)->first();
-
-        if (!$model) {
-            abort(404);
-        }
-        $bookPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Book')->orderBy('photoorder')->get();
-        $digitalPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Digital')->orderBy('photoorder')->get();
-        $videos = Video::where('modelid', $model->modelid)->get();
-        return view('Model', compact('model', 'bookPhotos', 'digitalPhotos', 'videos'));
-    }
-
-    public function listmodels(Request $request)
-    {
-        $models = Models::paginate(9);
-
-        if ($request->ajax()) {
-            return response()->json($models);
-        }
-        return view('list', ['models' => $models]);
-    }
-
-
-
 }
