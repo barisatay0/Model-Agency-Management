@@ -20,6 +20,7 @@ class ModelController extends Controller
             return back()->withErrors(['name' => 'This model name already exists']);
         }
         $validatedData = $request->validate([
+            /* File Controls */
             'profilephoto' => 'required|image|mimes:jpeg,png,jpg,gif,heic|max:50048',
             'book.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
             'digital.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',

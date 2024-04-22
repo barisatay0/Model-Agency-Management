@@ -24,12 +24,12 @@
         <div class="container-fluid" style="width:95% ;">
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <!-- Men And Women Buttons -->
-                <button type="button" id="womenbutton" class="btn btn-dark mx-2 womenbutton" style="width:7%;">
-                    <a class="text-light" href="women" style="text-decoration:none;">Women</a>
-                </button>
-                <button type="button" id="menbutton" class="btn btn-dark mx-2 menbutton" style="width:7%;">
-                    <a class="text-light" href="men" style="text-decoration:none;">Men</a>
-                </button>
+                <form method="POST" action="{{ route('SelectDeleteAll') }}">
+                    @csrf
+                    <input type="submit" class="btn btn-dark" name="women" value="women">
+                    <input type="submit" class="btn btn-dark" name="men" value="men">
+                </form>
+
                 <!-- Select And Delete Buttons  -->
                 <form method="POST" action="{{ route('SelectDeleteAll') }}">
                     @csrf
@@ -122,7 +122,8 @@
                             {{ $model->name }}</li>
                         <div class="card-body">
                             <!-- Model Profile Photo -->
-                            <a href="http://localhost:8000/Model/{{$model->name}}"><img src="{{ asset($model->profilephoto) }}" style="height:22rem"
+                            <a href="http://localhost:8000/Model/{{ $model->name }}"><img
+                                    src="{{ asset($model->profilephoto) }}" style="height:22rem"
                                     class="card-img-top" alt="..."></a>
                         </div>
                         <div class="card-body">
@@ -155,9 +156,11 @@
                                             {{ strtoupper($model->eyes) }}</a></li>
                                     <li><a class="dropdown-item" href="">GENDER:
                                             {{ strtoupper($model->gender) }}</a></li>
-                                    <li><a class="dropdown-item" href="">NATION:
-                                            {{ strtoupper($model->nation) }}</a></li>
-                                    </li>
+                                    @if ($model->nation)
+                                        <li><a class="dropdown-item" href="">NATİON:
+                                                {{ strtoupper($model->nation) }}</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                             <div class=" btn-group-toggle mt-1" data-toggle="buttons">

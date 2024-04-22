@@ -25,7 +25,6 @@
             <form>
                 <table class="table table-white table-hover text-center border border-black shadow-lg">
                     <tr>
-
                         <th scope="col"><label>Name</label><input
                                 class="form-control border-black text-center bg-black text-white" type="text"
                                 value="{{ $model->name }}"></th>
