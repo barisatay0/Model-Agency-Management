@@ -31,11 +31,14 @@
                         Other Things
                     </button>
                     <ul class="dropdown-menu text-center w-100">
-                        <li><a class="dropdown-item btn btn-outline-black">Model List</a></li>
-                        <form method="POST" action="{{ route('SelectDeleteAll') }}">
+                        <li><a href="List" class="dropdown-item btn btn-outline-black">Model List</a></li>
+                        <form method="POST" action="{{ route('women') }}">
                             @csrf
                             <li><input type="submit" class="btn btn-outline-black dropdown-item" name="women"
                                     id="women" value="Women"></li>
+                        </form>
+                        <form method="POST" action="{{ route('men') }}">
+                            @csrf
                             <li><input type="submit" class="btn btn-outline-black dropdown-item" name="men"
                                     id="men" value="Men"></li>
                         </form>

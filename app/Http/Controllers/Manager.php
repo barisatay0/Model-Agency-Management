@@ -55,4 +55,16 @@ class Manager extends Controller
         $exampleLink = 'https://example.com?models=' . urlencode($encryptedData);
         return response()->json(['encryptedData' => $exampleLink]);
     }//
+    public function men(Request $request)
+    {
+        Models::where('gender', 'men')->update(['selected' => 1]);
+        Models::where('gender', '!=', 'men')->update(['selected' => 0]);
+        return redirect('/');
+    }
+    public function women(Request $request)
+    {
+        Models::where('gender', 'women')->update(['selected' => 1]);
+        Models::where('gender', '!=', 'women')->update(['selected' => 0]);
+        return redirect('/');
+    }
 }

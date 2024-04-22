@@ -76,4 +76,6 @@ Route::post('/saveSelection', [Manager::class, 'saveSelection']);
 Route::get('/Model/{name}', [ModelController::class, 'modelpage']);
 Route::post('/deletemodel', [ModelController::class, 'deletemodel'])->name('deletemodel');
 Route::post('/modelupdate', [ModelController::class, 'modelupdate'])->name('modelupdate');
+Route::post('/men', [Manager::class, 'men'])->name('men');
+Route::post('/women', [Manager::class, 'women'])->name('women');
 
