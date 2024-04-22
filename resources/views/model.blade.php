@@ -14,7 +14,7 @@
     <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
 </head>
 
 <body>
@@ -23,15 +23,16 @@
     </nav>
     <div class=" text-center container mt-2">
         <div class="table-responsive">
-            <form>
+            <form method="POST" action="{{ route('modelupdate') }}">
+                @csrf
                 <table class="table table-white table-hover text-center border border-black shadow-lg">
                     <tr>
                         <th scope="col"><label for="modelname">Name</label><input
                                 class="form-control border-black text-center bg-black text-white" type="text"
-                              id="modelname"  value="{{ $model->name }}" name="modelname"></th>
+                                id="modelname" value="{{ $model->name }}" name="modelname"></th>
                         <th scope="col"><label for="instagram">İnstagram</label><input
                                 class="form-control border-black text-center bg-black text-white" type="text"
-                               name="instagram" value="{{ $model->instagram }}" id="instagram"></th>
+                                name="instagram" value="{{ $model->instagram }}" id="instagram"></th>
                     </tr>
                     <tbody>
                         <tr>
@@ -45,7 +46,8 @@
                                         BUST:
                                     @endif
                                 </label><input class="form-control border-black text-center bg-black text-white"
-                                    type="text" id="chest_bust" value="{{ $model->chect_bust }}" name="modelchest_bust"></th>
+                                    type="text" id="chest_bust" value="{{ $model->chest_bust }}"
+                                    name="modelchest_bust"></th>
                         </tr>
                         <tr>
                             <th scope="col"><label for="waist">Waist</label><input
@@ -74,13 +76,15 @@
                                 <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input bg-black border border-black" type="radio"
-                                        name="gender" id="women" {{ $model->gender == 'men' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="men">Men</label>
+                                        value="women" name="gender" id="women"
+                                        {{ $model->gender == 'women' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="women">Women</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input bg-black border border-black" type="radio"
-                                        name="gender" id="men" {{ $model->gender == 'women' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="women">Women</label>
+                                        value="men" name="gender" id="men"
+                                        {{ $model->gender == 'men' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="men">Men</label>
                                 </div>
                             </th>
 
@@ -90,14 +94,16 @@
                                 <span>Availability</span>
                                 <br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input  bg-black border border-black" type="radio"
-                                        name="busy" value="0" id="busy" {{ $model->busy == '0' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="busy">Busy</label>
+                                    <input class="form-check-input bg-black border border-black" type="radio"
+                                        name="busy" value="1" id="free"
+                                        {{ $model->busy == '1' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="free">Free</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input bg-black border border-black" type="radio"
-                                        name="busy" value="1" id="free" {{ $model->busy == '1' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="free">Free</label>
+                                    <input class="form-check-input  bg-black border border-black" type="radio"
+                                        name="busy" value="0" id="busy"
+                                        {{ $model->busy == '0' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="busy">Busy</label>
                                 </div>
                             </th>
                             <th scope="col">
@@ -105,12 +111,14 @@
                                 <br>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input  bg-black border border-black" type="radio"
-                                        name="active" value="1" id="active" {{ $model->active == '1' ? 'checked' : '' }}>
+                                        name="active" value="1" id="active"
+                                        {{ $model->active == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="active">Active</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input  bg-black border border-black" type="radio"
-                                        name="active" value="0" id="notactive" {{ $model->active == '0' ? 'checked' : '' }}>
+                                        name="active" value="0" id="notactive"
+                                        {{ $model->active == '0' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="notactive">Not Active</label>
                                 </div>
                             </th>
@@ -118,17 +126,18 @@
                         <tr>
                             <th scope="col"><span>Start</span><input
                                     class="form-control border-black text-center bg-black text-white" type="date"
-                                    data-toggle="tooltip" data-placement="top" title="Model Availability Starting">
+                                    data-toggle="tooltip" data-placement="top" title="Model Availability Starting"
+                                    name="fdto" value="{{ $model->fdto }}">
                             </th>
                             <th scope="col"><span>End</span><input
                                     class="form-control border-black text-center bg-black text-white" type="date"
-                                    data-toggle="tooltip" data-placement="top" title="Model Availability Ending">
+                                    data-toggle="tooltip" data-placement="top" title="Model Availability Ending"
+                                    name="fdtt" value="{{ $model->fdtt }}">
                             </th>
                         </tr>
                     </tbody>
                 </table>
-                <input type="submit" class="btn btn-outline-success bg-black border border-black w-100 mb-2"
-                    value="Save Features">
+                <input type="submit" class="btn btn-outline-black w-100 mb-2" value="Save Features">
             </form>
         </div>
     </div>
@@ -139,7 +148,7 @@
     <div class="input-group d-flex justify-content-center mt-2">
         <form method="POST" action="" enctype="multipart/form-data">
             <input type="file" class="form-control">
-            <button class="btn btn-outline-success w-100 mt-2" type="submit">Add</button>
+            <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
     @foreach ($bookPhotos->chunk(4) as $chunk)
@@ -147,10 +156,8 @@
             @foreach ($chunk as $bookPhoto)
                 <div class="col-sm-3 px-4 mb-3">
                     <div class="card border shadow-lg mx-auto" style="height:26rem">
-                        <img src="{{ asset($bookPhoto->photopath) }}" style="height:26rem" class="card-img-top"
-                            alt="...">
-
-
+                        <img src="{{ asset($bookPhoto->photopath) }}" id="{{ $bookPhoto->photoorder }}"
+                            style="height:26rem" class="card-img-top" alt="...">
                     </div>
                     <form class="" method="POST" action="">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"

@@ -25,12 +25,22 @@
         <div class="container-fluid" style="width:95% ;">
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
                 <!-- Men And Women Buttons -->
-                <form method="POST" action="{{ route('SelectDeleteAll') }}">
-                    @csrf
-                    <input type="submit" class="btn bg-black text-white" name="women" id="women" value="women">
-                    <input type="submit" class="btn bg-black text-white" name="men" id="men" value="men">
-                </form>
-
+                <div class="dropdown-center" name="dropdownmenu" id="dropdownmenu">
+                    <button class="btn bg-black text-white dropdown-toggle px-5 mx-2 py-2" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Other Things
+                    </button>
+                    <ul class="dropdown-menu text-center w-100">
+                        <li><a class="dropdown-item btn btn-outline-black">Model List</a></li>
+                        <form method="POST" action="{{ route('SelectDeleteAll') }}">
+                            @csrf
+                            <li><input type="submit" class="btn btn-outline-black dropdown-item" name="women"
+                                    id="women" value="Women"></li>
+                            <li><input type="submit" class="btn btn-outline-black dropdown-item" name="men"
+                                    id="men" value="Men"></li>
+                        </form>
+                    </ul>
+                </div>
                 <!-- Select And Delete Buttons  -->
                 <form method="POST" action="{{ route('SelectDeleteAll') }}">
                     @csrf
@@ -77,8 +87,7 @@
             <!-- Save Selection And Copy Button -->
             <div class="leftbuttons" style="margin-top:-1rem;">
                 <div class="btn-group w-100 " role="group" aria-label="Basic outlined example">
-                    <button type="button" id="saveSelectionBtn"
-                        class="btn btn-outline-black w-100 mb-2">Save
+                    <button type="button" id="saveSelectionBtn" class="btn btn-outline-black w-100 mb-2">Save
                         Selection</button>
                 </div>
                 <div class="btn-group w-100" role="group" aria-label="Basic outlined example">
@@ -117,91 +126,97 @@
     <div class="container mt-3" style="padding-left: 12rem; margin-right: 4rem;">
         <div class="row g-0">
             @foreach ($models as $model)
-                <div class="col-sm-3 mb-3">
-                    <!-- Model Id -->
-                    <div class="card" style="width: 17rem;" data-id="{{ $model->modelid }}">
-                        <!-- Model Name -->
-                        <li class="list-group-item text-center p-2 text-uppercase bg-black text-white">
-                            {{ $model->name }}</li>
-                        <div class="card-body">
-                            <!-- Model Profile Photo -->
-                            <a href="http://localhost:8000/Model/{{ $model->name }}"><img
-                                    src="{{ asset($model->profilephoto) }}" style="height:22rem"
-                                    class="card-img-top" alt="..."></a>
-                        </div>
-                        <div class="card-body">
-                            <!-- Drop Up Button For Features -->
-                            <div class="dropup-center dropup">
-                                <button class="btn btn-outline-dark dropdown-toggle w-100" type="button"
-                                    id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Features
-                                </button>
-                                <!-- Model Features In List Items -->
-                                <ul class="dropdown-menu w-100 text-center border border-black"
-                                    aria-labelledby="dropdownMenuButton">
-                                    <li><a class="dropdown-item" href="">HEIGHT:
-                                            {{ strtoupper($model->height) }}</a></li>
-                                    <li><a class="dropdown-item" href="">
-                                            @if ($model->gender == 'men')
-                                                CHEST:
-                                            @elseif($model->gender == 'women')
-                                                BUST:
-                                            @endif
-                                            {{ strtoupper($model->chest_bust) }}
-                                        </a></li>
-                                    <li><a class="dropdown-item" href="">WAIST:
-                                            {{ strtoupper($model->waist) }}</a></li>
-                                    <li><a class="dropdown-item" href="">HIPS:
-                                            {{ strtoupper($model->hips) }}</a></li>
-                                    <li><a class="dropdown-item" href="">SHOES:
-                                            {{ strtoupper($model->shoes) }}</a></li>
-                                    <li><a class="dropdown-item" href="">EYES:
-                                            {{ strtoupper($model->eyes) }}</a></li>
-                                    <li><a class="dropdown-item" href="">GENDER:
-                                            {{ strtoupper($model->gender) }}</a></li>
-                                    @if ($model->nation)
-                                        <li><a class="dropdown-item" href="">NATİON:
-                                                {{ strtoupper($model->nation) }}</a></li>
-                                    @endif
-
-                                </ul>
+                @if ($model->active == 1)
+                    <div class="col-sm-3 mb-3">
+                        <!-- Model Id -->
+                        <div class="card" style="width: 17rem;" data-id="{{ $model->modelid }}">
+                            <!-- Model Name -->
+                            <li class="list-group-item text-center p-2 text-uppercase bg-black text-white">
+                                {{ $model->name }}</li>
+                            <div class="card-body">
+                                <!-- Model Profile Photo -->
+                                <a href="http://localhost:8000/Model/{{ $model->name }}"><img
+                                        src="{{ asset($model->profilephoto) }}" style="height:22rem"
+                                        class="card-img-top" alt="..."></a>
                             </div>
-                            <div class=" btn-group-toggle mt-1" data-toggle="buttons">
-                                <label class="btn btn-outline-dark w-100">
-                                    <input id="{{ $model->modelid }}" type="checkbox" class="myCheckbox"
-                                        onchange="toggleSelection({{ $model->modelid }})"
-                                        {{ $model->selected ? 'checked' : '' }}>
-                                </label>
+                            <div class="card-body">
+                                <!-- Drop Up Button For Features -->
+                                <div class="dropup-center dropup">
+                                    <button class="btn btn-outline-black dropdown-toggle w-100" type="button"
+                                        id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Features
+                                    </button>
+                                    <!-- Model Features In List Items -->
+                                    <ul class="dropdown-menu w-100 text-center border border-black"
+                                        aria-labelledby="dropdownMenuButton">
+                                        <li><a class="dropdown-item" href="">HEIGHT:
+                                                {{ strtoupper($model->height) }}</a></li>
+                                        <li><a class="dropdown-item" href="">
+                                                @if ($model->gender == 'men')
+                                                    CHEST:
+                                                @elseif($model->gender == 'women')
+                                                    BUST:
+                                                @endif
+                                                {{ strtoupper($model->chest_bust) }}
+                                            </a></li>
+                                        <li><a class="dropdown-item" href="">WAIST:
+                                                {{ strtoupper($model->waist) }}</a></li>
+                                        <li><a class="dropdown-item" href="">HIPS:
+                                                {{ strtoupper($model->hips) }}</a></li>
+                                        <li><a class="dropdown-item" href="">SHOES:
+                                                {{ strtoupper($model->shoes) }}</a></li>
+                                        <li><a class="dropdown-item" href="">EYES:
+                                                {{ strtoupper($model->eyes) }}</a></li>
+                                        <li><a class="dropdown-item" href="">GENDER:
+                                                {{ strtoupper($model->gender) }}</a></li>
+                                        @if ($model->nation)
+                                            <li><a class="dropdown-item" href="">NATİON:
+                                                    {{ strtoupper($model->nation) }}</a></li>
+                                        @endif
+
+                                    </ul>
+                                </div>
+                                <div class=" btn-group-toggle mt-1" data-toggle="buttons">
+                                    <label class="btn btn-outline-black w-100">
+                                        <input id="{{ $model->modelid }}" type="checkbox" class="myCheckbox"
+                                            onchange="toggleSelection({{ $model->modelid }})"
+                                            {{ $model->selected ? 'checked' : '' }}>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
             @endforeach
             <div class="w-100">
                 <!-- Pagination System From Laravel -->
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        @if ($models->onFirstPage())
-                            <li class="page-item disabled">
-                                <span
-                                    class="page-link btn btn-outline-dark text-black border border-black">Previous</span>
-                            </li>
-                        @else
-                            <li class="page-item">
-                                <a class=" btn btn-outline-black" href="{{ $models->previousPageUrl() }}"
-                                    rel="prev">Previous</a>
-                            </li>
-                        @endif
+                        @if (count($models) > 0)
+                            @if ($models->onFirstPage())
+                                <li class="page-item disabled">
+                                    <span
+                                        class="page-link btn btn-outline-dark text-black border border-black">Previous</span>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class=" btn btn-outline-black" href="{{ $models->previousPageUrl() }}"
+                                        rel="prev">Previous</a>
+                                </li>
+                            @endif
 
-                        @if ($models->hasMorePages())
-                            <li class="page-item">
-                                <a class="mx-1 btn btn-outline-black" href="{{ $models->nextPageUrl() }}" rel="next">Next
-                                </a>
-                            </li>
-                        @else
-                            <li class="page-item disabled">
-                                <span class="page-link mx-1 text-black border border-black btn">Next</span>
-                            </li>
+
+                            @if ($models->hasMorePages())
+                                <li class="page-item">
+                                    <a class="mx-1 btn btn-outline-black" href="{{ $models->nextPageUrl() }}"
+                                        rel="next">Next
+                                    </a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <span class="page-link mx-1 text-black border border-black btn">Next</span>
+                                </li>
+                            @endif
                         @endif
                     </ul>
                 </nav>

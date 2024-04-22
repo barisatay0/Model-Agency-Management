@@ -86,7 +86,8 @@
     }
 
     #women,
-    #men {
+    #men,
+    #dropdownmenu {
         display: none;
     }
 

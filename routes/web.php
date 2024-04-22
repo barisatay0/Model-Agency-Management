@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\Manager;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,9 +69,11 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::post('/modeladd', [ModelController::class, 'addModel'])->name('modeladd');
 Route::get('/', [ModelController::class, 'models']);
 Route::get('/list', [ModelController::class, 'listmodels']);
-Route::post('/toggleSelection', [ModelController::class, 'toggleSelection']);
-Route::post('/SelectDeleteAll', [ModelController::class, 'SelectDeleteAll'])->name('SelectDeleteAll');
-Route::get('/selectedModels', [ModelController::class, 'getSelectedModels']);
-Route::post('/saveSelection', [ModelController::class, 'saveSelection']);
+Route::post('/toggleSelection', [Manager::class, 'toggleSelection']);
+Route::post('/SelectDeleteAll', [Manager::class, 'SelectDeleteAll'])->name('SelectDeleteAll');
+Route::get('/selectedModels', [Manager::class, 'getSelectedModels']);
+Route::post('/saveSelection', [Manager::class, 'saveSelection']);
 Route::get('/Model/{name}', [ModelController::class, 'modelpage']);
 Route::post('/deletemodel', [ModelController::class, 'deletemodel'])->name('deletemodel');
+Route::post('/modelupdate', [ModelController::class, 'modelupdate'])->name('modelupdate');
+
