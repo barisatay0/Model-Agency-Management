@@ -55,6 +55,9 @@ class ModelController extends Controller
         $model->nation = $request->input('nation');
         $model->instagram = $request->input('instagram');
         $model->gender = $request->input('gender');
+        $model->active = '1';
+        $model->busy = '1';
+        $model->selected = '0';
         $model->save();
 
         $modelName = $request->input('name');
