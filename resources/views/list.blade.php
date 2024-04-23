@@ -24,9 +24,9 @@
                 class="form-control w-50 border border-dark mx-auto">
         </form>
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
-                class="btn btn-outline-black w-25 py-1">Manager</button></a>
+                class="btn btn-dark w-25 py-1">Manager</button></a>
         <a class="text-black " style="text-decoration: none" href="{{ url('/Editor') }}"><button
-                class="btn btn-outline-black w-25 py-1">Editor</button></a>
+                class="btn btn-dark w-25 py-1">Editor</button></a>
     </div>
     <div class="album py-5 bg-light">
         <div class="container">
@@ -34,7 +34,7 @@
                 <!-- Model -->
             </div>
         </div>
-        <div class="text-center"><button id="moreButton" class="btn btn-outline-black w-50 mt-3">Show More</button></div>
+        <div class="text-center"><button id="moreButton" class="btn btn-dark w-50 mt-3">Show More</button></div>
 </body>
 <script>
     var nextPage = 1;
@@ -56,7 +56,7 @@
                 }
                 response.data.forEach(function(model) {
                     var card = `
-                    <div class="col">
+                    <div class="col mx-5">
                         <div class="card shadow" style="width:300px;height:550px;">
                             <img src="${model.profilephoto}" class="card-img-top" alt="Logo" style="height:100%;width:100%;">
                             <div class="card-body">

@@ -28,16 +28,16 @@
                 <table class="table table-white table-hover text-center border border-black shadow-lg">
                     <tr>
                         <th scope="col"><label for="modelname">Name</label><input
-                                class="form-control border-black text-center bg-black text-white" type="text"
+                                class="form-control border-dark text-center bg-dark text-white" type="text"
                                 id="modelname" value="{{ $model->name }}" name="modelname"></th>
                         <th scope="col"><label for="instagram">İnstagram</label><input
-                                class="form-control border-black text-center bg-black text-white" type="text"
+                                class="form-control border-dark text-center bg-dark text-white" type="text"
                                 name="instagram" value="{{ $model->instagram }}" id="instagram"></th>
                     </tr>
                     <tbody>
                         <tr>
                             <th scope="col"><label for="height">Height</label><input
-                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    class="form-control border-dark text-center bg-dark text-white" type="text"
                                     value="{{ $model->height }}" name="modelheight" id="height"></th>
                             <th scope="col"><label for="chest_bust">
                                     @if ($model->gender == 'men')
@@ -45,43 +45,43 @@
                                     @elseif($model->gender == 'women')
                                         BUST:
                                     @endif
-                                </label><input class="form-control border-black text-center bg-black text-white"
+                                </label><input class="form-control border-dark text-center bg-dark text-white"
                                     type="text" id="chest_bust" value="{{ $model->chest_bust }}"
                                     name="modelchest_bust"></th>
                         </tr>
                         <tr>
                             <th scope="col"><label for="waist">Waist</label><input
-                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    class="form-control border-dark text-center bg-dark text-white" type="text"
                                     value="{{ $model->waist }}" name="modelwaist" id="waist"></th>
                             <th scope="col"><label for="hips">Hips</label><input
-                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    class="form-control border-dark text-center bg-dark text-white" type="text"
                                     value="{{ $model->hips }}" name="modelhips" id="hips"></th>
                         </tr>
                         <tr>
                             <th scope="col"><label for="shoes">Shoes</label><input
-                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    class="form-control border-dark text-center bg-dark text-white" type="text"
                                     value="{{ $model->shoes }}" name="modelshoes" id="shoes"></th>
                             <th scope="col"><label for="eyes">Eyes</label><input
-                                    class="form-control border-black text-center bg-black text-white" type="text"
+                                    class="form-control border-dark text-center bg-dark text-white" type="text"
                                     value="{{ $model->eyes }}" name="modeleyes" id="eyes"></th>
                         </tr>
                         <tr>
                             <th scope="col">
                                 <label for="nation">Nation</label>
-                                <input class="form-control border-black text-center bg-black text-white" type="text"
+                                <input class="form-control border-dark text-center bg-dark text-white" type="text"
                                     value="{{ $model->nation }}" name="modelnation" id="nation">
                             </th>
                             <th scope="col">
                                 <span>Gender</span>
                                 <br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input bg-black border border-black" type="radio"
+                                    <input class="form-check-input bg-dark border border-dark" type="radio"
                                         value="women" name="gender" id="women"
                                         {{ $model->gender == 'women' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="women">Women</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input bg-black border border-black" type="radio"
+                                    <input class="form-check-input bg-dark border border-dark" type="radio"
                                         value="men" name="gender" id="men"
                                         {{ $model->gender == 'men' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="men">Men</label>
@@ -94,13 +94,13 @@
                                 <span>Availability</span>
                                 <br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input bg-black border border-black" type="radio"
+                                    <input class="form-check-input bg-dark border border-dark" type="radio"
                                         name="busy" value="1" id="free"
                                         {{ $model->busy == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="free">Free</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input  bg-black border border-black" type="radio"
+                                    <input class="form-check-input  bg-dark border border-dark" type="radio"
                                         name="busy" value="0" id="busy"
                                         {{ $model->busy == '0' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="busy">Busy</label>
@@ -110,13 +110,13 @@
                                 <span>Model</span>
                                 <br>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input  bg-black border border-black" type="radio"
+                                    <input class="form-check-input  bg-dark border border-dark" type="radio"
                                         name="active" value="1" id="active"
                                         {{ $model->active == '1' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="active">Active</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input  bg-black border border-black" type="radio"
+                                    <input class="form-check-input  bg-dark border border-dark" type="radio"
                                         name="active" value="0" id="notactive"
                                         {{ $model->active == '0' ? 'checked' : '' }}>
                                     <label class="form-check-label" for="notactive">Not Active</label>
@@ -125,19 +125,19 @@
                         </tr>
                         <tr>
                             <th scope="col"><span>Start</span><input
-                                    class="form-control border-black text-center bg-black text-white" type="date"
+                                    class="form-control border-dark text-center bg-dark text-white" type="date"
                                     data-toggle="tooltip" data-placement="top" title="Model Availability Starting"
                                     name="fdto" value="{{ $model->fdto }}">
                             </th>
                             <th scope="col"><span>End</span><input
-                                    class="form-control border-black text-center bg-black text-white" type="date"
+                                    class="form-control border-dark text-center bg-dark text-white" type="date"
                                     data-toggle="tooltip" data-placement="top" title="Model Availability Ending"
                                     name="fdtt" value="{{ $model->fdtt }}">
                             </th>
                         </tr>
                     </tbody>
                 </table>
-                <input type="submit" class="btn btn-outline-black w-100 mb-2" value="Save Features">
+                <input type="submit" class="btn btn-outline-success w-100 mb-2" value="Save Features">
             </form>
         </div>
     </div>
@@ -188,7 +188,7 @@
 
 
                     </div>
-                    <form class="" name="{{ $digitalphoto->photopath }}" id="{{ $digitalphoto->photopath }}"
+                    <form class="" name="{{ $digitalPhoto->photopath }}" id="{{ $digitalPhoto->photopath }}"
                         method="POST" action="">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>

@@ -1,11 +1,11 @@
-.btn-outline-black {
-    color: #000;
-    border-color: #000;
+.outline-dark {
+    color: #212529;
+    border-color: #212529;
 }
 
-.btn-outline-black:hover {
+.outline-dark:hover {
     color: #fff;
-    background-color: #000;
+    background-color: #212529;
 }
 
 .btn-outline-white {
@@ -16,37 +16,4 @@
 .btn-outline-white:hover {
     color: #000;
     border-color: #000;
-}
-
-.table-black {
-    color: #fff;
-    background-color: #000;
-}
-
-.table-black td {
-    border-color: #fff;
-    background-color: #000;
-}
-
-.table-black label,
-.table-black h6,
-.table-black span,
-.table-black h1 {
-    text-decoration-color: #fff;
-    color: #fff;
-}
-
-input[type=file]::file-selector-button {
-
-    background: black;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background .2s ease-in-out;
-    border-color: #fff;
-}
-
-input[type=file]::file-selector-button:hover {
-    background: white;
-    color: black;
-    border-color: black;
 }

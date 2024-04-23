@@ -24,22 +24,22 @@
         <div class="w-25" id="nav_space_res"></div>
         <div class="container-fluid" style="width:95% ;">
             <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <!-- Men And Women Buttons -->
+                <!-- Dropdown Menu -->
                 <div class="dropdown-center" name="dropdownmenu" id="dropdownmenu">
-                    <button class="btn bg-black text-white dropdown-toggle px-5 mx-2 py-2" type="button"
+                    <button class="btn bg-dark text-white dropdown-toggle px-5 mx-2 py-2" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Other Things
                     </button>
                     <ul class="dropdown-menu text-center w-100">
-                        <li><a href="List" class="dropdown-item btn btn-outline-black">Model List</a></li>
+                        <li><a href="List" class="dropdown-item btn outline-dark">Model List</a></li>
                         <form method="POST" action="{{ route('women') }}">
                             @csrf
-                            <li><input type="submit" class="btn btn-outline-black dropdown-item" name="women"
+                            <li><input type="submit" class="btn outline-dark dropdown-item" name="women"
                                     id="women" value="Women"></li>
                         </form>
                         <form method="POST" action="{{ route('men') }}">
                             @csrf
-                            <li><input type="submit" class="btn btn-outline-black dropdown-item" name="men"
+                            <li><input type="submit" class="btn outline-dark dropdown-item" name="men"
                                     id="men" value="Men"></li>
                         </form>
                     </ul>
@@ -49,13 +49,13 @@
                     @csrf
                     <input type="hidden" name="SelectAndDeleteButton" value="0">
                     <button type="submit" id="deleteAllButton"
-                        class="btn btn-outline-black px-5 mx-2 py-2 deleteAllBtn">Delete All</button>
+                        class="btn btn-outline-dark px-5 mx-2 py-2 deleteAllBtn">Delete All</button>
                 </form>
                 <form method="POST" action="{{ route('SelectDeleteAll') }}">
                     @csrf
                     <input type="hidden" name="SelectAndDeleteButton" value="1">
                     <button type="submit" id="selectAllButton"
-                        class="btn btn-outline-black px-5 mx-2 py-2 selectAllBtn">Select All</button>
+                        class="btn btn-outline-dark px-5 mx-2 py-2 selectAllBtn">Select All</button>
                 </form>
                 <!-- Search Bar -->
                 <form class="d-flex" role="search">
@@ -63,8 +63,8 @@
                         placeholder="Search" aria-label="Search">
                 </form>
                 <!-- Signup , Logout , Model Editor Buttons -->
-                <a href="Editor"><button type="button" class="btn btn-outline-white mx-2 py-2 addBtn_res"
-                        id="addBtn_res"><i class="fa-solid fa-plus mx-2" style="color: #636363;"></i>Model
+                <a href="Editor"><button type="button" class="btn btn-dark mx-2 py-2 addBtn_res" id="addBtn_res"><i
+                            class="fa-solid fa-plus mx-2" style="color: #ffffff;"></i>Model
                         Editor</button></a>
                 <a href="Signup"><button type="button" class="btn btn-outline-primary mx-2 py-2">SignUp</button></a>
                 <form action="{{ route('logout') }}" method="POST">
@@ -90,14 +90,14 @@
             <!-- Save Selection And Copy Button -->
             <div class="leftbuttons" style="margin-top:-1rem;">
                 <div class="btn-group w-100 " role="group" aria-label="Basic outlined example">
-                    <button type="button" id="saveSelectionBtn" class="btn btn-outline-black w-100 mb-2">Save
+                    <button type="button" id="saveSelectionBtn" class="btn btn-outline-dark w-100 mb-2">Save
                         Selection</button>
                 </div>
                 <div class="btn-group w-100" role="group" aria-label="Basic outlined example">
-                    <input class="form-control bg-black text-white py-2 border-0" type="text" id="linker"
+                    <input class="form-control bg-dark text-white py-2 border-0" type="text" id="linker"
                         value="Link Will Be Here!" aria-label="Disabled input example" disabled readonly
                         style="border-top-right-radius:0; border-bottom-right-radius: 0; cursor: text;">
-                    <button id="copyButton" type="button" class="btn bg-black text-white w-25"><i
+                    <button id="copyButton" type="button" class="btn bg-dark text-white w-25"><i
                             class="fa-regular fa-copy" style="color: #fff;"></i></button>
                 </div>
             </div>
@@ -132,9 +132,9 @@
                 @if ($model->active == 1)
                     <div class="col-sm-3 mb-3">
                         <!-- Model Id -->
-                        <div class="card" style="width: 17rem;" data-id="{{ $model->modelid }}">
+                        <div class="card shadow-lg border border-light" style="width: 17rem;" data-id="{{ $model->modelid }}">
                             <!-- Model Name -->
-                            <li class="list-group-item text-center p-2 text-uppercase bg-black text-white">
+                            <li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">
                                 {{ $model->name }}</li>
                             <div class="card-body">
                                 <!-- Model Profile Photo -->
@@ -145,7 +145,7 @@
                             <div class="card-body">
                                 <!-- Drop Up Button For Features -->
                                 <div class="dropup-center dropup">
-                                    <button class="btn btn-outline-black dropdown-toggle w-100" type="button"
+                                    <button class="btn btn-outline-dark dropdown-toggle w-100" type="button"
                                         id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                         Features
                                     </button>
@@ -180,7 +180,7 @@
                                     </ul>
                                 </div>
                                 <div class=" btn-group-toggle mt-1" data-toggle="buttons">
-                                    <label class="btn btn-outline-black w-100">
+                                    <label class="btn btn-outline-dark w-100">
                                         <input id="{{ $model->modelid }}" type="checkbox" class="myCheckbox"
                                             onchange="toggleSelection({{ $model->modelid }})"
                                             {{ $model->selected ? 'checked' : '' }}>
@@ -203,7 +203,7 @@
                                 </li>
                             @else
                                 <li class="page-item">
-                                    <a class=" btn btn-outline-black" href="{{ $models->previousPageUrl() }}"
+                                    <a class=" btn btn-outline-dark" href="{{ $models->previousPageUrl() }}"
                                         rel="prev">Previous</a>
                                 </li>
                             @endif
@@ -211,7 +211,7 @@
 
                             @if ($models->hasMorePages())
                                 <li class="page-item">
-                                    <a class="mx-1 btn btn-outline-black" href="{{ $models->nextPageUrl() }}"
+                                    <a class="mx-1 btn btn-outline-dark" href="{{ $models->nextPageUrl() }}"
                                         rel="next">Next
                                     </a>
                                 </li>
@@ -288,7 +288,7 @@
     });
 
     function addSidebarButton(modelid, name) {
-        var buttonHtml = '<button type="button" class="btn bg-black text-white text-capitalize mx-1 mb-2" id="' +
+        var buttonHtml = '<button type="button" class="btn bg-dark text-white text-capitalize mx-1 mb-2" id="' +
             modelid +
             '">' + name + '</button>';
         $('#addedButtons').append(buttonHtml);
