@@ -44,9 +44,8 @@
                                     <tr>
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Profile Photo</h6>
-                                            <input name="profilephoto"
-                                                class="form-control form-control-m" id="formFileLg"
-                                                type="file" required />
+                                            <input name="profilephoto" class="form-control form-control-m"
+                                                id="formFileLg" type="file" required />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
                                         <td>
@@ -143,23 +142,21 @@
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Digital</h6>
                                             <input id="digital" name="digital[]"
-                                                class="form-control form-control-md"
-                                                id="formFileLg" type="file" multiple />
+                                                class="form-control form-control-md" id="formFileLg" type="file"
+                                                multiple />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Book</h6>
-                                            <input id="book" name="book[]"
-                                                class="form-control form-control-md"
+                                            <input id="book" name="book[]" class="form-control form-control-md"
                                                 id="formFileLg" type="file" multiple />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">Videos</h6>
-                                            <input id="video" name="video[]"
-                                                class="form-control form-control-md"
+                                            <input id="video" name="video[]" class="form-control form-control-md"
                                                 id="formFileLg" type="file" multiple />
                                             <div class="small text-muted mt-2"></div>
                                         </td>
