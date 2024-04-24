@@ -82,4 +82,5 @@ Route::post('/deletemodel', [ListController::class, 'deletemodel'])->name('delet
 Route::post('/modelupdate', [ModelController::class, 'modelupdate'])->name('modelupdate');
 Route::post('/men', [ManagerController::class, 'men'])->name('men');
 Route::post('/women', [ManagerController::class, 'women'])->name('women');
+Route::post('/bookphotodelete', [ModelController::class, 'bookphotodelete'])->name('bookphotodelete');
 

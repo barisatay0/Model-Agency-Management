@@ -159,7 +159,9 @@
                         <img src="{{ asset($bookPhoto->photopath) }}" id="{{ $bookPhoto->photoorder }}"
                             style="height:26rem" class="card-img-top" alt="...">
                     </div>
-                    <form class="" method="POST" action="">
+                    <form method="POST" action="bookphotodelete">
+                        @csrf
+                        <input name="bookphotopath" value="{{ $bookPhoto->photopath }}" type="hidden">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>
                     </form>
@@ -188,8 +190,9 @@
 
 
                     </div>
-                    <form class="" name="{{ $digitalPhoto->photopath }}" id="{{ $digitalPhoto->photopath }}"
-                        method="POST" action="">
+                    <form name="{{ $digitalPhoto->photopath }}" id="{{ $digitalPhoto->photopath }}" method="POST"
+                        action="">
+                        <input name="digitalphotopath" value="{{ $digitalPhoto->photopath }}" type="hidden">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>
                     </form>
@@ -217,7 +220,8 @@
                             Your browser does not support the video format
                         </video>
                     </div>
-                    <form class="" method="POST" action="">
+                    <form method="POST" action="">
+                        <input name="videopath" value="{{ $video->videopath }}" type="hidden">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Video">Delete</button>
                     </form>

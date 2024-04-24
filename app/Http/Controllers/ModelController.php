@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class ModelController extends Controller
 {
     /* Update */
-  
+
     public function modelupdate(Request $request)
     {
         $model = Models::where('name', $request->input('modelname'))->first();
@@ -37,6 +37,15 @@ class ModelController extends Controller
         return redirect()->back();
     }
 
+    public function bookphotodelete(Request $request)
+    {
+        $photo = Photos::where('photopath', $request->input('bookphotopath'))->first();
+        if (!$photo) {
+            return response()->json(['message' => 'Photo not found'], 404);
+        }
+        Storage::delete($photo->photopath);
 
-   
+        $photo->delete();
+        return redirect()->back();
+    }
 }

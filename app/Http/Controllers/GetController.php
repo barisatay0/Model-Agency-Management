@@ -25,7 +25,7 @@ class GetController extends Controller
         }
         $bookPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Book')->orderBy('photoorder')->get();
         $digitalPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Digital')->orderBy('photoorder')->get();
-        $videos = Video::where('modelid', $model->modelid)->get();
+        $videos = Video::where('modelid', $model->modelid)->orderBy('videoorder')->get();
         return view('Model', compact('model', 'bookPhotos', 'digitalPhotos', 'videos'));
     }
 
