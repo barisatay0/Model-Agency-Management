@@ -39,13 +39,22 @@ class ModelController extends Controller
 
     public function bookphotodelete(Request $request)
     {
-        $photo = Photos::where('photopath', $request->input('bookphotopath'))->first();
+
+        $photoId = $request->input('photoid');
+        $photo = Photos::find($photoId);
+
         if (!$photo) {
-            return response()->json(['message' => 'Photo not found'], 404);
+            return redirect()->back()->with('error', 'Photo not found.');
         }
-        Storage::delete($photo->photopath);
+
+        $photoPath = public_path($photo->photopath);
+
+        if (file_exists($photoPath)) {
+            unlink($photoPath);
+        }
 
         $photo->delete();
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Photo deleted successfully.');
     }
 }

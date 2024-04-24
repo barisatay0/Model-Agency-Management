@@ -159,9 +159,9 @@
                         <img src="{{ asset($bookPhoto->photopath) }}" id="{{ $bookPhoto->photoorder }}"
                             style="height:26rem" class="card-img-top" alt="...">
                     </div>
-                    <form method="POST" action="bookphotodelete">
+                    <form method="POST" action="{{ route('bookphotodelete') }}">
                         @csrf
-                        <input name="bookphotopath" value="{{ $bookPhoto->photopath }}" type="hidden">
+                        <input type="hidden" name="photoid" value="{{ $bookPhoto->photoid }}">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>
                     </form>
