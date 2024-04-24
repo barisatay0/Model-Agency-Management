@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\EditorController;
 use App\Http\Controllers\GetController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ModelController;
-use App\Http\Controllers\Manager;
+use App\Http\Controllers\ManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,16 +69,16 @@ Route::get('/Model', function () {
 Route::post('/register', [UserController::class, 'store'])->name('register');
 Route::post('/userlogin', [UserController::class, 'login'])->name('userlogin');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-Route::post('/modeladd', [ModelController::class, 'addModel'])->name('modeladd');
+Route::post('/modeladd', [EditorController::class, 'addModel'])->name('modeladd');
 Route::get('/', [GetController::class, 'models']);
 Route::get('/list', [GetController::class, 'listmodels']);
-Route::post('/toggleSelection', [Manager::class, 'toggleSelection']);
-Route::post('/SelectDeleteAll', [Manager::class, 'SelectDeleteAll'])->name('SelectDeleteAll');
-Route::get('/selectedModels', [Manager::class, 'getSelectedModels']);
-Route::post('/saveSelection', [Manager::class, 'saveSelection']);
+Route::post('/toggleSelection', [ManagerController::class, 'toggleSelection']);
+Route::post('/SelectDeleteAll', [ManagerController::class, 'SelectDeleteAll'])->name('SelectDeleteAll');
+Route::get('/selectedModels', [ManagerController::class, 'getSelectedModels']);
+Route::post('/saveSelection', [ManagerController::class, 'saveSelection']);
 Route::get('/Model/{name}', [GetController::class, 'modelpage']);
 Route::post('/deletemodel', [ModelController::class, 'deletemodel'])->name('deletemodel');
 Route::post('/modelupdate', [ModelController::class, 'modelupdate'])->name('modelupdate');
-Route::post('/men', [Manager::class, 'men'])->name('men');
-Route::post('/women', [Manager::class, 'women'])->name('women');
+Route::post('/men', [ManagerController::class, 'men'])->name('men');
+Route::post('/women', [ManagerController::class, 'women'])->name('women');
 

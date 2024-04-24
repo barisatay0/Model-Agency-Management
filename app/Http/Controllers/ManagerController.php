@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Models;
 use Illuminate\Support\Facades\Crypt;
 
-class Manager extends Controller
+class ManagerController extends Controller
 {
     /* When Checkbox is Checked "selected" Column Is Turn To 1 Or 0 */
     public function toggleSelection(Request $request)
