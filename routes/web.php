@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\GetController;
+use App\Http\Controllers\ListController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -77,7 +78,7 @@ Route::post('/SelectDeleteAll', [ManagerController::class, 'SelectDeleteAll'])->
 Route::get('/selectedModels', [ManagerController::class, 'getSelectedModels']);
 Route::post('/saveSelection', [ManagerController::class, 'saveSelection']);
 Route::get('/Model/{name}', [GetController::class, 'modelpage']);
-Route::post('/deletemodel', [ModelController::class, 'deletemodel'])->name('deletemodel');
+Route::post('/deletemodel', [ListController::class, 'deletemodel'])->name('deletemodel');
 Route::post('/modelupdate', [ModelController::class, 'modelupdate'])->name('modelupdate');
 Route::post('/men', [ManagerController::class, 'men'])->name('men');
 Route::post('/women', [ManagerController::class, 'women'])->name('women');
