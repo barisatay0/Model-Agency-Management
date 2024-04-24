@@ -7,6 +7,8 @@ use App\Models\Photos;
 use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Maestroerror\HeicToJpg;
+
 
 class ModelController extends Controller
 {
@@ -77,4 +79,118 @@ class ModelController extends Controller
 
         return redirect()->back()->with('success', 'Video deleted successfully.');
     }
+    public function addbook(Request $request)
+    {
+        $bookPhotos = $request->file('bookphotos');
+        $modelId = $request->input('modelid');
+        $category = ('Book');
+        if ($bookPhotos) {
+            $maxOrder = Photos::where('modelid', $modelId)
+                ->where('photocategory', 'book')
+                ->max('photoorder');
+
+            $maxOrder = $maxOrder ?? 0;
+
+            foreach ($bookPhotos as $photo) {
+                $bookPath = $photo->storePublicly('public/Books');
+                $extension = $photo->getClientOriginalExtension();
+
+                if ($extension == 'heic') {
+                    $jpgContent = HeicToJpg::convert($bookPath)->get();
+
+                    $jpgPath = 'public/Books/' . pathinfo($bookPath, PATHINFO_FILENAME) . '.jpg';
+                    file_put_contents($jpgPath, $jpgContent);
+
+                    $bookphoto = new photos;
+                    $bookphoto->modelid = $modelId;
+                    $bookphoto->photopath = $jpgPath;
+                    $bookphoto->photocategory = $category;
+                    $bookphoto->photoorder = ++$maxOrder;
+                    $bookphoto->save();
+                } else {
+                    Photos::create([
+                        'modelid' => $modelId,
+                        'photopath' => $bookPath,
+                        'photocategory' => $category,
+                        'photoorder' => ++$maxOrder
+                    ]);
+                }
+            }
+
+
+            return redirect()->back()->with('success', 'Files uploaded successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No files uploaded.');
+    }
+    public function adddigital(Request $request)
+    {
+        $DigitalPhotos = $request->file('digitalphotos');
+        $modelId = $request->input('modelid');
+        $category = ('Digital');
+        if ($DigitalPhotos) {
+            $maxOrder = Photos::where('modelid', $modelId)
+                ->where('photocategory', 'Digital')
+                ->max('photoorder');
+
+            $maxOrder = $maxOrder ?? 0;
+
+            foreach ($DigitalPhotos as $photo) {
+                $bookPath = $photo->storePublicly('public/Digitals');
+                $extension = $photo->getClientOriginalExtension();
+
+                if ($extension == 'heic') {
+                    $jpgContent = HeicToJpg::convert($bookPath)->get();
+
+                    $jpgPath = 'public/Digitals/' . pathinfo($bookPath, PATHINFO_FILENAME) . '.jpg';
+                    file_put_contents($jpgPath, $jpgContent);
+
+                    $bookphoto = new photos;
+                    $bookphoto->modelid = $modelId;
+                    $bookphoto->photopath = $jpgPath;
+                    $bookphoto->photocategory = $category;
+                    $bookphoto->photoorder = ++$maxOrder;
+                    $bookphoto->save();
+                } else {
+                    Photos::create([
+                        'modelid' => $modelId,
+                        'photopath' => $bookPath,
+                        'photocategory' => $category,
+                        'photoorder' => ++$maxOrder
+                    ]);
+                }
+            }
+
+
+            return redirect()->back()->with('success', 'Files uploaded successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No files uploaded.');
+    }
+    public function addvideo(Request $request)
+    {
+        $videos = $request->file('videos');
+        $modelId = $request->input('modelid');
+        if ($videos) {
+            $maxOrder = Video::where('modelid', $modelId)
+                ->max('videoorder');
+
+            $maxOrder = $maxOrder ?? 0;
+            foreach ($videos as $Video) {
+                $Videopath = $Video->storePublicly('public/Videos');
+                Video::create([
+                    'modelid' => $modelId,
+                    'videopath' => $Videopath,
+                    'videoorder' => ++$maxOrder
+                ]);
+
+            }
+
+
+            return redirect()->back()->with('success', 'Files uploaded successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No files uploaded.');
+    }
+
 }

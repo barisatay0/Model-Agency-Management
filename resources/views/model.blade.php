@@ -146,8 +146,10 @@
     </div>
     <h5 class="text-center mt-1">ADD PHOTO TO BOOK</h5>
     <div class="input-group d-flex justify-content-center mt-2">
-        <form method="POST" action="" enctype="multipart/form-data">
-            <input type="file" class="form-control">
+        <form method="POST" action="{{ route('addbook') }}" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="modelid" value="{{ $model->modelid }}">
+            <input type="file" name="bookphotos[]" class="form-control" multiple>
             <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
@@ -175,8 +177,10 @@
     </div>
     <h5 class="text-center mt-1">ADD PHOTO TO DİGİTAL</h5>
     <div class="input-group d-flex justify-content-center mt-2">
-        <form method="POST" action="" enctype="multipart/form-data">
-            <input type="file" class="form-control">
+        <form method="POST" action="{{ route('adddigital') }}" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="modelid" value="{{ $model->modelid }}">
+            <input type="file" name="digitalphotos[]" class="form-control" multiple>
             <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
@@ -205,8 +209,10 @@
     </div>
     <h5 class="text-center mt-1">ADD VİDEO</h5>
     <div class="input-group d-flex justify-content-center mt-2">
-        <form method="POST" action="" enctype="multipart/form-data">
-            <input type="file" class="form-control">
+        <form method="POST" action="{{ route('addvideo') }}" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="modelid" value="{{ $model->modelid }}">
+            <input type="file" name="videos[]" class="form-control" multiple>
             <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
@@ -222,7 +228,7 @@
                     </div>
                     <form method="POST" action="{{ route('videodelete') }}">
                         @csrf
-                        <input type="hidden" name="videpid" value="{{ $video->videoid }}">
+                        <input type="hidden" name="videoid" value="{{ $video->videoid }}">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>
                     </form>

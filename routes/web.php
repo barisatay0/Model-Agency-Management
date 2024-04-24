@@ -84,4 +84,7 @@ Route::post('/men', [ManagerController::class, 'men'])->name('men');
 Route::post('/women', [ManagerController::class, 'women'])->name('women');
 Route::post('/photodelete', [ModelController::class, 'photodelete'])->name('photodelete');
 Route::post('/videodelete', [ModelController::class, 'videodelete'])->name('videodelete');
+Route::post('/addbook', [ModelController::class, 'addbook'])->name('addbook');
+Route::post('/adddigital', [ModelController::class, 'adddigital'])->name('adddigital');
+Route::post('/addvideo', [ModelController::class, 'addvideo'])->name('addvideo');
 

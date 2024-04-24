@@ -10,4 +10,12 @@ class photos extends Model
     use HasFactory;
     protected $table = 'photos';
     protected $primaryKey = 'photoid';
+
+protected $fillable = [
+    'modelid',
+    'photopath',
+    'photocategory',
+    'photoorder',
+];
+
 }
