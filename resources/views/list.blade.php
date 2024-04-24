@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
                 class="btn btn-dark w-25 py-1">Manager</button></a>
         <a class="text-black " style="text-decoration: none" href="{{ url('/Editor') }}"><button
-                class="btn btn-dark w-25 py-1">Editor</button></a>
+                class="btn btn-dark w-25 py-1">Add Model</button></a>
     </div>
     <div class="album py-5 bg-light">
         <div class="container">

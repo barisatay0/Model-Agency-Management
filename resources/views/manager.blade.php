@@ -64,8 +64,7 @@
                 </form>
                 <!-- Signup , Logout , Model Editor Buttons -->
                 <a href="Editor"><button type="button" class="btn btn-dark mx-2 py-2 addBtn_res" id="addBtn_res"><i
-                            class="fa-solid fa-plus mx-2" style="color: #ffffff;"></i>Model
-                        Editor</button></a>
+                            class="fa-solid fa-plus mx-2" style="color: #ffffff;"></i>Add Model</button></a>
                 <a href="Signup"><button type="button" class="btn btn-outline-primary mx-2 py-2">SignUp</button></a>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
@@ -132,7 +131,8 @@
                 @if ($model->active == 1)
                     <div class="col-sm-3 mb-3">
                         <!-- Model Id -->
-                        <div class="card shadow-lg border border-light" style="width: 17rem;" data-id="{{ $model->modelid }}">
+                        <div class="card shadow-lg border border-light" style="width: 17rem;"
+                            data-id="{{ $model->modelid }}">
                             <!-- Model Name -->
                             <li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">
                                 {{ $model->name }}</li>
