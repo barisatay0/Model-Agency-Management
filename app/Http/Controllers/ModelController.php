@@ -19,11 +19,16 @@ class ModelController extends Controller
             return back()->withErrors(['name' => 'This model name already exists']);
         }
         $validatedData = $request->validate([
-            /* File Controls */
+            /* Controls */
             'profilephoto' => 'required|image|mimes:jpeg,png,jpg,gif,heic|max:50048',
             'book.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
             'digital.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,heic|max:150048',
             'video.*' => 'nullable|mimetypes:video/mp4,video/webm,video/mpeg,video/quicktime,video/x-msvideo,video/x-flv|max:900048',
+            'height' => 'nullable|numeric',
+            'chest_bust' => 'nullable|numeric',
+            'waist' => 'nullable|numeric',
+            'hips' => 'nullable|numeric',
+            'shoes' => 'nullable|numeric',
         ], [
             'profilephoto.required' => 'The profile photo is required.',
             'profilephoto.image' => 'The uploaded file must be an image.',
@@ -37,6 +42,11 @@ class ModelController extends Controller
             'digital.*.max' => 'The image file must not be greater than :max 150 MB.',
             'video.*.mimetypes' => 'The video file must be in MP4, WebM, MPEG, QuickTime, AVI, or FLV format.',
             'video.*.max' => 'The video file must not be greater than :max 900 MB.',
+            'height.numeric' => 'Height must be number',
+            'chest_bust.numeric' => 'Chest or bust must be number',
+            'waist.numeric' => 'Waist must be number',
+            'hips.numeric' => 'Hips must be number',
+            'shoes.numeric' => 'Shoes must be number',
         ]);
 
         $profilephoto = $request->file('profilephoto');
