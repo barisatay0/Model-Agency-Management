@@ -37,7 +37,7 @@ class ModelController extends Controller
         return redirect()->back();
     }
 
-    public function bookphotodelete(Request $request)
+    public function photodelete(Request $request)
     {
 
         $photoId = $request->input('photoid');
@@ -56,5 +56,25 @@ class ModelController extends Controller
         $photo->delete();
 
         return redirect()->back()->with('success', 'Photo deleted successfully.');
+    }
+    public function videodelete(Request $request)
+    {
+
+        $videoId = $request->input('videoid');
+        $video = Video::find($videoId);
+
+        if (!$video) {
+            return redirect()->back()->with('error', 'Video not found.');
+        }
+
+        $videoPath = public_path($video->videopath);
+
+        if (file_exists($videoPath)) {
+            unlink($videoPath);
+        }
+
+        $video->delete();
+
+        return redirect()->back()->with('success', 'Video deleted successfully.');
     }
 }

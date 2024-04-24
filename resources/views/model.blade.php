@@ -159,7 +159,7 @@
                         <img src="{{ asset($bookPhoto->photopath) }}" id="{{ $bookPhoto->photoorder }}"
                             style="height:26rem" class="card-img-top" alt="...">
                     </div>
-                    <form method="POST" action="{{ route('bookphotodelete') }}">
+                    <form method="POST" action="{{ route('photodelete') }}">
                         @csrf
                         <input type="hidden" name="photoid" value="{{ $bookPhoto->photoid }}">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
@@ -190,9 +190,9 @@
 
 
                     </div>
-                    <form name="{{ $digitalPhoto->photopath }}" id="{{ $digitalPhoto->photopath }}" method="POST"
-                        action="">
-                        <input name="digitalphotopath" value="{{ $digitalPhoto->photopath }}" type="hidden">
+                    <form method="POST" action="{{ route('photodelete') }}">
+                        @csrf
+                        <input type="hidden" name="photoid" value="{{ $digitalPhoto->photoid }}">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
                             name="Delete Photo">Delete</button>
                     </form>
@@ -220,10 +220,11 @@
                             Your browser does not support the video format
                         </video>
                     </div>
-                    <form method="POST" action="">
-                        <input name="videopath" value="{{ $video->videopath }}" type="hidden">
+                    <form method="POST" action="{{ route('videodelete') }}">
+                        @csrf
+                        <input type="hidden" name="videpid" value="{{ $video->videoid }}">
                         <button type="submit" class="btn btn-outline-danger mt-2 w-100"
-                            name="Delete Video">Delete</button>
+                            name="Delete Photo">Delete</button>
                     </form>
                 </div>
             @endforeach
