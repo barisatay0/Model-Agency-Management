@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Maestroerror\HeicToJpg;
 use App\Models\Models;
 use App\Models\Photos;
 use App\Models\Video;
