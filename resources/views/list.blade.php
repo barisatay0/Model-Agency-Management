@@ -30,7 +30,7 @@
     </div>
     <div class="album py-5 bg-light">
         <div class="container">
-            <div class="row row-cols-lg-4 g-4" id="veri-listesi">
+            <div class="row row-cols-lg-4 g-4" id="Data-list">
                 <!-- Model -->
             </div>
         </div>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     `;
-                    $('#veri-listesi').append(card);
+                    $('#Data-list').append(card);
                 });
             }
         });
