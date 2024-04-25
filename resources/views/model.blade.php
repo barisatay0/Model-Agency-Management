@@ -5,16 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pack Manager</title>
+    <title>{{ $model->name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 </head>
 
 <body>
@@ -154,12 +152,13 @@
         </form>
     </div>
     @foreach ($bookPhotos->chunk(4) as $chunk)
-        <div class="row g-0 mt-3">
+        <div id="cardorder" class="row g-0 mt-3">
             @foreach ($chunk as $bookPhoto)
                 <div class="col-sm-3 px-4 mb-3">
                     <div class="card border shadow-lg mx-auto" style="height:26rem">
                         <img src="{{ asset($bookPhoto->photopath) }}" id="{{ $bookPhoto->photoorder }}"
                             style="height:26rem" class="card-img-top" alt="...">
+                        <input type="hidden" name="bookorder" value="{{ $bookPhoto->photoorder }}">
                     </div>
                     <form method="POST" action="{{ route('photodelete') }}">
                         @csrf
@@ -191,8 +190,7 @@
                     <div class="card border shadow-lg mx-auto" style="height:26rem">
                         <img src="{{ asset($digitalPhoto->photopath) }}" style="height:26rem" class="card-img-top"
                             alt="...">
-
-
+                        <input type="hidden" name="digitalorder" value="{{ $digitalPhoto->photoorder }}">
                     </div>
                     <form method="POST" action="{{ route('photodelete') }}">
                         @csrf
@@ -240,16 +238,24 @@
 
 
 </body>
-<script>
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+    integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
     integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
+</script>
+<script>
+    $(function() {
+        $("#cardorder").sortable({
+            revert: false
+        });
+    });
 </script>
 </body>
 

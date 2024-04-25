@@ -192,5 +192,14 @@ class ModelController extends Controller
 
         return redirect()->back()->with('error', 'No files uploaded.');
     }
+    public function updatePhotoOrder(Request $request, $photoid)
+    {
+        $photo = Photos::findOrFail($photoid);
+        $photo->update([
+            'photoorder' => $request->photoorder
+        ]);
+
+        return response()->json(['success' => true]);
+    }
 
 }
