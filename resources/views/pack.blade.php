@@ -91,7 +91,8 @@
                                     <div class="carousel-item active">
                                         <div class="d-flex book_first_res">
                                             <div class="d-flex justify-content-end book_img_width" style="width:50%;">
-                                                <img src="" height="657" alt="..." id="BookPhotos">
+                                                <img src="{{ asset('images/testmodel.jpg') }}" height="657"
+                                                    alt="..." id="BookPhotos">
                                             </div>
                                             <div class="d-flex m-auto" style="width:50%;">
                                                 <div class="text-center">
