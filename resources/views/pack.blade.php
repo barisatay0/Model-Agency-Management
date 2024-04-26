@@ -31,9 +31,9 @@
                         <div class="card-body bg-white pt-1">
                             <h5 class="card-title text-white text-center text-capitalize">{{ $item['model']->name }}
                             </h5>
-                            <button class="btn border border-black w-100" style="border-radius:0;"
-                                data-bs-toggle="modal" data-bs-target="#modal"
-                                data-card-id="{{ $item['model']->name }}">View Details</button>
+                            <button class="btn border border-black w-100 view-details-button" style="border-radius:0;"
+                                data-bs-toggle="modal" data-bs-target="#modal" data-item="{{ json_encode($item) }}">View
+                                Details</button>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="modal-header py-0">
                     <img id="modal_img" src="{{ asset('images/Logo.png') }}" style="witdh:10rem; height:2rem;">
                     <h5 class="modal-title mx-5 text-center text-capitalize fw-bold fs-3 w-25 modal_title_res"
-                        id="modalLabel"></h5>
+                        id="modal_title_res" aria-labelledby="modalLabel"></h5>
 
                     <ul class="nav nav-tabs mt-4" style="border-bottom:0; width:50%;" id="myTabs" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -91,7 +91,7 @@
                                     <div class="carousel-item active">
                                         <div class="d-flex book_first_res">
                                             <div class="d-flex justify-content-end book_img_width" style="width:50%;">
-                                                <img src="" height="657" alt="...">
+                                                <img src="" height="657" alt="..." id="BookPhotos">
                                             </div>
                                             <div class="d-flex m-auto" style="width:50%;">
                                                 <div class="text-center">
@@ -221,15 +221,15 @@
     integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
 </script>
 <script>
-    // Modal açıldığında çalışacak fonksiyon
-    $('#modal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Modalı açan buton
-        var cardId = button.data('card-id'); // Veri almak için butondan id bilgisini al
+    $(document).ready(function() {
+        console.log("Document is ready.");
+        $('.view-details-button').click(function() {
+            var itemData = $(this).data('item');
 
-        // Burada modal içindeki elementlere verileri yerleştir
-        var modal = $(this);
-        modal.find('.modal-title').text('Model: ' + cardId); // Modal başlığına veriyi ekle
-        // Diğer verileri de yerleştir...
+            console.log(itemData);
+
+            $('#modal_title_res').text(itemData.model.name);
+        });
     });
 </script>
 
