@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\PackController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -88,4 +90,5 @@ Route::post('/addbook', [ModelController::class, 'addbook'])->name('addbook');
 Route::post('/adddigital', [ModelController::class, 'adddigital'])->name('adddigital');
 Route::post('/addvideo', [ModelController::class, 'addvideo'])->name('addvideo');
 Route::post('/photoorderupdate', [ModelController::class, 'photoorderupdate'])->name('photoorderupdate');
+Route::get('/Pack', [PackController::class, 'decryptModels']);
 
