@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $model->name }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
@@ -158,7 +159,11 @@
                     <div class="card border shadow-lg mx-auto" style="height:26rem">
                         <img src="{{ asset($bookPhoto->photopath) }}" id="{{ $bookPhoto->photoorder }}"
                             style="height:26rem" class="card-img-top" alt="...">
-                        <input type="hidden" name="bookorder" value="{{ $bookPhoto->photoorder }}">
+                        <form id="photoOrderForm" method="POST" action="{{ route('photoorderupdate') }}">
+                            @csrf
+                            <input type="hidden" name="bookorder[]" value="{{ $bookPhoto->photoorder }}">
+                            <input type="hidden" name="photoid[]" value="{{ $bookPhoto->photoid }}">
+                        </form>
                     </div>
                     <form method="POST" action="{{ route('photodelete') }}">
                         @csrf
@@ -170,6 +175,10 @@
             @endforeach
         </div>
     @endforeach
+    <div class="text-center"><button id="submitButton" name="bookorderupdate" class="btn btn-outline-success">Save
+            Order</button></div>
+
+
 
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">DİGİTAL</h1>
@@ -202,6 +211,9 @@
             @endforeach
         </div>
     @endforeach
+    @if (isset($digitalPhotos))
+        <div class="text-center"><button class="btn btn-outline-success w-75">Save Digital Order</button></div>
+    @endif
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">VİDEO</h1>
     </div>
@@ -252,11 +264,52 @@
 </script>
 <script>
     $(function() {
-        $("#cardorder").sortable({
-            revert: false
+        $(".row").sortable({
+            revert: false,
+            update: function(event, ui) {
+                $(this).find('.card').each(function(index) {
+                    var photoId = $(this).find('img').attr('id');
+                    var photoOrder = index + 1;
+                    $(this).find('input[name="bookorder[]"]').val(photoOrder);
+                });
+            }
         });
+
+        $("#submitButton").click(function() {
+            var photoOrders = [];
+            $("#cardorder .card").each(function(index) {
+                var photoId = $(this).find('input[name="photoid[]"]')
+                    .val();
+                var photoOrder = index + 1;
+                photoOrders.push({
+                    photoid: photoId,
+                    photoorder: photoOrder
+                });
+            });
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('photoorderupdate') }}',
+                data: {
+                    photoOrders: photoOrders
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+
+
     });
 </script>
+
+
 </body>
 
 </html>

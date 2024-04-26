@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Models;
+use App\Models\photos;
 use Illuminate\Support\Facades\Crypt;
 
 class ManagerController extends Controller
@@ -66,5 +67,21 @@ class ManagerController extends Controller
         Models::where('gender', 'women')->update(['selected' => 1]);
         Models::where('gender', '!=', 'women')->update(['selected' => 0]);
         return redirect('/');
+    }
+    public function photoorderupdate(Request $request)
+    {
+        $photoId = $request->input('photoid');
+        $newPhotoOrder = $request->input('bookorder');
+
+        $photo = Photos::find($photoId);
+
+        if ($photo) {
+            $photo->photoorder = $newPhotoOrder;
+            $photo->save();
+
+            return response()->json(['success' => true, 'message' => 'Photo order updated successfully']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Photo not found'], 404);
     }
 }

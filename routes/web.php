@@ -87,5 +87,5 @@ Route::post('/videodelete', [ModelController::class, 'videodelete'])->name('vide
 Route::post('/addbook', [ModelController::class, 'addbook'])->name('addbook');
 Route::post('/adddigital', [ModelController::class, 'adddigital'])->name('adddigital');
 Route::post('/addvideo', [ModelController::class, 'addvideo'])->name('addvideo');
-Route::put('/updatePhotoOrder/{photoid}', 'ModelController@updatePhotoOrder');
+Route::post('/photoorderupdate', [ModelController::class, 'photoorderupdate'])->name('photoorderupdate');
 
