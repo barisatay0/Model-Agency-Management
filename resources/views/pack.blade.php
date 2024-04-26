@@ -33,7 +33,7 @@
                             </h5>
                             <button class="btn border border-black w-100" style="border-radius:0;"
                                 data-bs-toggle="modal" data-bs-target="#modal"
-                                data-card-id="{{ $item['model']->id }}">View Details</button>
+                                data-card-id="{{ $item['model']->name }}">View Details</button>
                         </div>
                     </div>
                 </div>
@@ -219,6 +219,18 @@
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
     integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
+</script>
+<script>
+    // Modal açıldığında çalışacak fonksiyon
+    $('#modal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Modalı açan buton
+        var cardId = button.data('card-id'); // Veri almak için butondan id bilgisini al
+
+        // Burada modal içindeki elementlere verileri yerleştir
+        var modal = $(this);
+        modal.find('.modal-title').text('Model: ' + cardId); // Modal başlığına veriyi ekle
+        // Diğer verileri de yerleştir...
+    });
 </script>
 
 </html>
