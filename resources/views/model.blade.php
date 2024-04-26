@@ -153,7 +153,7 @@
         </form>
     </div>
     @foreach ($bookPhotos->chunk(4) as $chunk)
-        <div id="cardorder" class="row g-0 mt-3">
+        <div id="bookcardorder" class="row g-0 mt-3">
             @foreach ($chunk as $bookPhoto)
                 <div class="col-sm-3 px-4 mb-3">
                     <div class="card border shadow-lg mx-auto" style="height:26rem">
@@ -175,7 +175,8 @@
             @endforeach
         </div>
     @endforeach
-    <div class="text-center"><button id="submitButton" name="bookorderupdate" class="btn btn-outline-success">Save
+    <div class="text-center"><button id="booksubmitButton" name="bookorderupdate"
+            class="btn btn-outline-success">Save
             Order</button></div>
 
 
@@ -193,13 +194,17 @@
         </form>
     </div>
     @foreach ($digitalPhotos->chunk(4) as $chunk)
-        <div class="row g-0 mt-3">
+        <div id="digitalcardorder" class="row g-0 mt-3">
             @foreach ($chunk as $digitalPhoto)
                 <div class="col-sm-3 px-4 mb-3">
                     <div class="card border shadow-lg mx-auto" style="height:26rem">
-                        <img src="{{ asset($digitalPhoto->photopath) }}" style="height:26rem" class="card-img-top"
-                            alt="...">
-                        <input type="hidden" name="digitalorder" value="{{ $digitalPhoto->photoorder }}">
+                        <img src="{{ asset($digitalPhoto->photopath) }}" id="{{ $digitalPhoto->photoorder }}"
+                            style="height:26rem" class="card-img-top" alt="...">
+                        <form id="photoOrderForm" method="POST" action="{{ route('photoorderupdate') }}">
+                            @csrf
+                            <input type="hidden" name="digitalorder[]" value="{{ $digitalPhoto->photoorder }}">
+                            <input type="hidden" name="photoid[]" value="{{ $digitalPhoto->photoid }}">
+                        </form>
                     </div>
                     <form method="POST" action="{{ route('photodelete') }}">
                         @csrf
@@ -211,9 +216,9 @@
             @endforeach
         </div>
     @endforeach
-    @if (isset($digitalPhotos))
-        <div class="text-center"><button class="btn btn-outline-success w-75">Save Digital Order</button></div>
-    @endif
+    <div class="text-center"><button id="digitalsubmitButton" name="digitalorderupdate"
+            class="btn btn-outline-success">Save
+            Order</button></div>
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">VİDEO</h1>
     </div>
@@ -275,9 +280,9 @@
             }
         });
 
-        $("#submitButton").click(function() {
+        $("#booksubmitButton").click(function() {
             var photoOrders = [];
-            $("#cardorder .card").each(function(index) {
+            $("#bookcardorder .card").each(function(index) {
                 var photoId = $(this).find('input[name="photoid[]"]')
                     .val();
                 var photoOrder = index + 1;
@@ -308,8 +313,51 @@
 
     });
 </script>
+<script>
+    $(function() {
+        $(".row").sortable({
+            revert: false,
+            update: function(event, ui) {
+                $(this).find('.card').each(function(index) {
+                    var photoId = $(this).find('img').attr('id');
+                    var photoOrder = index + 1;
+                    $(this).find('input[name="digitalorder[]"]').val(photoOrder);
+                });
+            }
+        });
+
+        $("#digitalsubmitButton").click(function() {
+            var photoOrders = [];
+            $("#digitalcardorder .card").each(function(index) {
+                var photoId = $(this).find('input[name="photoid[]"]')
+                    .val();
+                var photoOrder = index + 1;
+                photoOrders.push({
+                    photoid: photoId,
+                    photoorder: photoOrder
+                });
+            });
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('photoorderupdate') }}',
+                data: {
+                    photoOrders: photoOrders
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
 
 
-</body>
+
+    });
+</script>
 
 </html>
