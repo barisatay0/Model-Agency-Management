@@ -18,7 +18,7 @@
     </nav>
     <div class="mt-2 text-center mb-2 w-100">
         <a class="text-black px-5" style="text-decoration: none" href="{{ url('/List') }}"><button
-                class="btn btn-dark w-25 py-1">Models</button></a>
+                class="btn btn-dark w-25 py-1">List Models</button></a>
         <a class="text-black px-5" style="text-decoration: none" href="{{ url('/') }}"><button
                 class="btn btn-dark w-25 py-1">Data</button></a>
     </div>

@@ -177,7 +177,7 @@
             </div>
         @endforeach
         <div class="text-center"><button id="booksubmitButton" name="bookorderupdate"
-                class="btn btn-outline-success">Save Order</button></div>
+                class="btn btn-outline-success w-75">Save Order</button></div>
     @endif
 
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
@@ -217,7 +217,7 @@
             </div>
         @endforeach
         <div class="text-center"><button id="digitalsubmitButton" name="digitalorderupdate"
-                class="btn btn-outline-success">Save Order</button></div>
+                class="btn btn-outline-success w-75">Save Order</button></div>
     @endif
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">VİDEO</h1>
