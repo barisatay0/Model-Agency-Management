@@ -302,11 +302,11 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    var result = alert('Order is updated.');
+                    var result = alert('Book is updated.');
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    var result = alert('Order update is failed!');
+                    var result = alert('Book update is failed!');
                 }
             });
         });
@@ -347,11 +347,11 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    var result = alert('Order is updated.');
+                    var result = alert('Digital is updated.');
                 },
                 error: function(xhr, status, error) {
                     console.error(xhr.responseText);
-                    var result = alert('Order update is failed!');
+                    var result = alert('Digital update is failed!');
                 }
             });
         });

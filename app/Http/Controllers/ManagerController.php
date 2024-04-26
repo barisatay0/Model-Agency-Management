@@ -55,7 +55,8 @@ class ManagerController extends Controller
         $encryptedData = Crypt::encrypt($dataToEncrypt);
         $exampleLink = 'https://example.com?models=' . urlencode($encryptedData);
         return response()->json(['encryptedData' => $exampleLink]);
-    }//
+    }
+    /* Select Men And Women */
     public function men(Request $request)
     {
         Models::where('gender', 'men')->update(['selected' => 1]);
@@ -67,21 +68,5 @@ class ManagerController extends Controller
         Models::where('gender', 'women')->update(['selected' => 1]);
         Models::where('gender', '!=', 'women')->update(['selected' => 0]);
         return redirect('/');
-    }
-    public function photoorderupdate(Request $request)
-    {
-        $photoId = $request->input('photoid');
-        $newPhotoOrder = $request->input('bookorder');
-
-        $photo = Photos::find($photoId);
-
-        if ($photo) {
-            $photo->photoorder = $newPhotoOrder;
-            $photo->save();
-
-            return response()->json(['success' => true, 'message' => 'Photo order updated successfully']);
-        }
-
-        return response()->json(['success' => false, 'message' => 'Photo not found'], 404);
     }
 }
