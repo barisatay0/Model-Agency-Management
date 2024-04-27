@@ -335,7 +335,7 @@
                     modelDetailsDiv.append(modelnation);
                 }
                 if (model.fdto && model.fdtt) {
-                    var modelFdt = $('<p class="h5">').html('<strong>Avaible:</strong> ' +
+                    var modelFdt = $('<p class="h5">').html('<strong>Available:</strong> ' +
                         model
                         .fdto + ' <strong class="text-primary">/</strong> ' + model.fdtt);
                     modelDetailsDiv.append(modelFdt);
