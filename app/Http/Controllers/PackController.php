@@ -21,6 +21,10 @@ class PackController extends Controller
 
             $Photos = Photos::where('modelid', $modelId)->get();
 
+            if ($Photos->isEmpty()) {
+                abort(404, 'Photos Not Found.');
+            }
+
             $zip = new ZipArchive;
             $zipFileName = 'photos.zip';
 
@@ -38,8 +42,6 @@ class PackController extends Controller
         } else {
             abort(404, 'Model Not Found.');
         }
-
-
     }
     public function downloadVideos(Request $request)
     {
@@ -49,6 +51,9 @@ class PackController extends Controller
             $modelId = $model->modelid;
 
             $Videos = Video::where('modelid', $modelId)->get();
+            if ($Videos->isEmpty()) {
+                abort(404, 'Video Not Found.');
+            }
 
             $zip = new ZipArchive;
             $zipFileName = 'Videos.zip';

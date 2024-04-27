@@ -33,11 +33,18 @@ class ModelController extends Controller
         $model->gender = $request->input('gender');
         $model->busy = $request->input('busy');
         $model->active = $request->input('active');
-        $model->fdto = $request->input('fdto');
-        $model->fdtt = $request->input('fdtt');
+        if ($request->input('busy') == 0) {
+            $model->fdto = null;
+            $model->fdtt = null;
+        } else {
+            $model->fdto = $request->input('fdto');
+            $model->fdtt = $request->input('fdtt');
+        }
+
         $model->save();
         return redirect()->back();
     }
+
 
     public function photodelete(Request $request)
     {
