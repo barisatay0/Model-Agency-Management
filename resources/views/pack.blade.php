@@ -75,15 +75,19 @@
                                 data-bs-toggle="dropdown" href="#" role="button"
                                 aria-expanded="false">Download</a>
                             <ul class="dropdown-menu w-100 text-center">
-                                <li c><a class="dropdown-item text-center download-button" data-id="">Photos</a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item text-center videodownload-button"
-                                        data-id="">Videos</a></li>
-                            </ul>
+                                <form method="POST" action="{{ route('downloadphotos') }}">
+                                    @csrf
+                                    <input type="hidden" name="modelnameInput" id="modelnameInput" value="">
+                                    <li><button type="submit" class="dropdown-item text-center download-button"
+                                            data-id="">Photos</button></li>
+                                </form>
                         </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-center videodownload-button" data-id="">Videos</a></li>
+                    </ul>
+                    </li>
                     </ul><button type="button" class="btn-close px-3" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -225,7 +229,8 @@
             var itemData = $(this).data('item');
             var carouselInner = $('#carouselExampleControls .carousel-inner');
             carouselInner.empty();
-
+            var modelName = itemData.model.name;
+            $('#modelnameInput').val(modelName);
             $('#carouselExampleControls').append(
                 '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>'
             );

@@ -92,4 +92,4 @@ Route::post('/addvideo', [ModelController::class, 'addvideo'])->name('addvideo')
 Route::post('/photoorderupdate', [ModelController::class, 'photoorderupdate'])->name('photoorderupdate');
 Route::get('/Pack', [PackController::class, 'decryptModels']);
 Route::get('/get-model-data/{id}', [PackController::class, 'getModelData']);
-
+Route::post('/downloadphotos', [PackController::class, 'downloadphotos'])->name('downloadphotos');

@@ -12,6 +12,36 @@ use File;
 
 class PackController extends Controller
 {
+    public function downloadphotos(Request $request)
+    {
+        $model = Models::where('name', $request->input('modelnameInput'))->first();
+
+        if ($model) {
+            $modelId = $model->modelid;
+
+            $Photos = Photos::where('modelid', $modelId)->get(); 
+
+            $zip = new ZipArchive;
+            $zipFileName = 'photos.zip';
+
+            if ($zip->open(public_path($zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+                foreach ($Photos as $photo) {
+                    $zip->addFile(public_path($photo->photopath), basename($photo->photopath));
+                }
+
+                $zip->close();
+
+                return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
+            }
+
+            abort(500, 'Zip dosyası oluşturulamadı.');
+        } else {
+            abort(404, 'Model bulunamadı.');
+        }
+
+
+    }
+
     public function decryptModels(Request $request)
     {
         $encryptedData = $request->input('models');
