@@ -29,7 +29,7 @@
                         <img src="{{ $item['model']->profilephoto }}" id="card-img" class="card-img-top p-2"
                             style="height:435px; cursor:pointer" alt="{{ $item['model']->name }}">
                         <div class="card-body bg-white pt-1">
-                            <h5 class="card-title text-white text-center text-capitalize">{{ $item['model']->name }}
+                            <h5 class="card-title text-dark text-center text-capitalize">{{ $item['model']->name }}
                             </h5>
                             <button class="btn border border-black w-100 view-details-button" style="border-radius:0;"
                                 data-bs-toggle="modal" data-bs-target="#modal" data-item="{{ json_encode($item) }}">View
@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="d-flex m-auto" style="width:50%;">
                                                 <div class="text-center">
-                                                    <div class="measurementElement">
+                                                    <div class="measurementElement" name="modelfeatures">
                                                         <div class="model-name d-block">
                                                             <h1 class="text-capitalize" style="font-size: 4rem;"></h1>
                                                         </div>
@@ -110,6 +110,10 @@
                                                         <div class="shoes d-block"><span class="fw-bold">SHOES:
                                                             </span><span id="model_shoes"></span></div>
                                                         <div class="eyes d-block"><span class="fw-bold">EYES:
+                                                            </span><span id="model_eyes"></span></div>
+                                                        <div class="eyes d-block"><span class="fw-bold">NATION:
+                                                            </span><span id="model_eyes"></span></div>
+                                                        <div class="eyes d-block"><span class="fw-bold">DATE:
                                                             </span><span id="model_eyes"></span></div>
                                                         <div class="d-block pt-2"><a href=""><i
                                                                     class="fa-brands fa-instagram"
@@ -209,7 +213,7 @@
     </div>
     <footer class="bg-light text-center text-lg-start justify-content-end">
         <div class="text-center mt-2 p-4 bg-light border-top">
-            © 2023 Copyright: Reep Model
+            <p>&copy; {{ date('Y') }} Copyright : Reep Model</p>
         </div>
     </footer>
 
@@ -246,6 +250,40 @@
                 carouselItem.append(imgDiv);
                 carouselInner.append(carouselItem);
             });
+            // "Digitals" sekmesine fotoğrafları ekleme
+            var digitalsCarouselInner = $('#carouselExampleCaptions .carousel-inner');
+            digitalsCarouselInner.empty();
+            itemData.digitalPhotos.forEach(function(photo, index) {
+                var carouselItem = $('<div>').addClass('carousel-item');
+                if (index === 0) {
+                    carouselItem.addClass('active');
+                }
+                var imgDiv = $('<div>').addClass('d-flex');
+                var img = $('<img>').attr('src', photo.photopath).attr('height', '657')
+                    .addClass('mx-auto d-block').attr('alt', '...');
+                imgDiv.append(img);
+                carouselItem.append(imgDiv);
+                digitalsCarouselInner.append(carouselItem);
+            });
+
+            // "Videos" sekmesine videoları ekleme
+            var videosCarouselInner = $('#carouselvideos .carousel-inner');
+            videosCarouselInner.empty();
+            itemData.videos.forEach(function(video, index) {
+                var carouselItem = $('<div>').addClass('carousel-item');
+                if (index === 0) {
+                    carouselItem.addClass('active');
+                }
+                var videoDiv = $('<div>').addClass('d-flex');
+                var videoElement = $('<video>').attr('controls', true).attr('height', '400');
+                var sourceElement = $('<source>').attr('src', video.videopath).attr('type',
+                    'video/mp4');
+                videoElement.append(sourceElement);
+                videoDiv.append(videoElement);
+                carouselItem.append(videoDiv);
+                videosCarouselInner.append(carouselItem);
+            });
+
             var model = itemData.model;
             $('#modal_title_res').text(model.name);
             $('#model_height').text(model.height);
