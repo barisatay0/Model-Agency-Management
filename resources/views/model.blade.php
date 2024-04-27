@@ -153,7 +153,7 @@
         </form>
     </div>
     @if ($bookPhotos->isNotEmpty())
-        @foreach ($bookPhotos->chunk(4) as $chunk)
+        @foreach ($bookPhotos->chunk(40) as $chunk)
             <div id="bookcardorder" class="row g-0 mt-3">
                 @foreach ($chunk as $bookPhoto)
                     <div class="col-sm-3 px-4 mb-3">
@@ -193,7 +193,7 @@
         </form>
     </div>
     @if ($digitalPhotos->isNotEmpty())
-        @foreach ($digitalPhotos->chunk(4) as $chunk)
+        @foreach ($digitalPhotos->chunk(40) as $chunk)
             <div id="digitalcardorder" class="row g-0 mt-3">
                 @foreach ($chunk as $digitalPhoto)
                     <div class="col-sm-3 px-4 mb-3">
@@ -231,7 +231,7 @@
             <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
-    @foreach ($videos->chunk(4) as $chunk)
+    @foreach ($videos->chunk(20) as $chunk)
         <div class="row g-0 mt-3">
             @foreach ($chunk as $video)
                 <div class="col-sm-3 px-4 mb-3">
