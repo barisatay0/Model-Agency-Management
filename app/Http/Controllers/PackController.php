@@ -23,7 +23,9 @@ class PackController extends Controller
             $bookPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Book')->orderBy('photoorder')->get();
             $digitalPhotos = Photos::where('modelid', $model->modelid)->where('photocategory', 'Digital')->orderBy('photoorder')->get();
             $videos = Video::where('modelid', $model->modelid)->orderBy('videoorder')->get();
-
+            if ($models->isEmpty()) {
+                abort(404);
+            }
             $packData[] = [
                 'model' => $model,
                 'bookPhotos' => $bookPhotos,
@@ -31,7 +33,6 @@ class PackController extends Controller
                 'videos' => $videos,
             ];
         }
-
         return view('Pack', compact('packData'));
     }
 

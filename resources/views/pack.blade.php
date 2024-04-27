@@ -49,7 +49,7 @@
                     <h5 class="modal-title mx-5 text-center text-capitalize fw-bold fs-3 w-25 modal_title_res"
                         id="modal_title_res" aria-labelledby="modalLabel"></h5>
 
-                    <ul class="nav nav-tabs mt-4" style="border-bottom:0; width:50%;" id="myTabs" role="tablist">
+                    <ul class="nav nav-tabs mt-4" style="border-bottom:0; width:75%;" id="myTabs" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active text-dark px-5" style="border-radius:0;" id="tab1-tab"
                                 data-bs-toggle="tab" href="#tab1" role="tab" aria-controls="tab1"
@@ -65,18 +65,23 @@
                                 data-bs-toggle="tab" href="#tab11" role="tab" aria-controls="tab11"
                                 aria-selected="false">Videos</a>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link text-dark px-5" style="border-radius:0;" id="tab2-tab"
+                                data-bs-toggle="tab" href="#tab2" role="tab" aria-controls="tab2"
+                                aria-selected="false">Features</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark px-5" style="border-radius:0;"
                                 data-bs-toggle="dropdown" href="#" role="button"
                                 aria-expanded="false">Download</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item text-center download-button" data-id="">Photos</a></li>
+                            <ul class="dropdown-menu w-100 text-center">
+                                <li c><a class="dropdown-item text-center download-button" data-id="">Photos</a>
+                                </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li><a class="dropdown-item text-center videodownload-button"
                                         data-id="">Videos</a></li>
-
                             </ul>
                         </li>
                     </ul><button type="button" class="btn-close px-3" data-bs-dismiss="modal"
@@ -96,29 +101,7 @@
                                             <div class="d-flex m-auto" style="width:50%;">
                                                 <div class="text-center">
                                                     <div class="measurementElement" name="modelfeatures">
-                                                        <div class="model-name d-block">
-                                                            <h1 class="text-capitalize" style="font-size: 4rem;"></h1>
-                                                        </div>
-                                                        <div class="height d-block"><span class="fw-bold">HEIGHT:
-                                                            </span><span id="model_height"></span></div>
-                                                        <div class="chest d-block"><span class="fw-bold">CHEST/BUST:
-                                                            </span><span id="model_chest"></span></div>
-                                                        <div class="waist d-block"><span class="fw-bold">WAIST:
-                                                            </span><span id="model_waist"></span></div>
-                                                        <div class="hips d-block"><span class="fw-bold">HIPS:
-                                                            </span><span id="model_hips"></span></div>
-                                                        <div class="shoes d-block"><span class="fw-bold">SHOES:
-                                                            </span><span id="model_shoes"></span></div>
-                                                        <div class="eyes d-block"><span class="fw-bold">EYES:
-                                                            </span><span id="model_eyes"></span></div>
-                                                        <div class="eyes d-block"><span class="fw-bold">NATION:
-                                                            </span><span id="model_eyes"></span></div>
-                                                        <div class="eyes d-block"><span class="fw-bold">DATE:
-                                                            </span><span id="model_eyes"></span></div>
-                                                        <div class="d-block pt-2"><a href=""><i
-                                                                    class="fa-brands fa-instagram"
-                                                                    style="color: #000000; font-size: 2.5rem;"></i></a>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -166,6 +149,17 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                            <div class="container mt-3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="model_photo" class="text-center"></div>
+                                        <div id="model_details" class="text-center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="tab-pane fade videos_res" id="tab11" role="tabpanel"
                             aria-labelledby="tab11-tab">
                             <div id="carouselvideos" class="carousel slide">
@@ -200,14 +194,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
-        <p class="text-danger">Data not found</p>
-    </div>
-
-    <div class="col-md-12">
-        <p class="text-info">No data received.</p>
-    </div>
-
+    @if (empty($packData))
+        <div class="col-md-4 mb-4">
+            <p class="text-danger">Data not found</p>
+        </div>
+    @endif
 
     </div>
     </div>
@@ -250,6 +241,7 @@
                 carouselItem.append(imgDiv);
                 carouselInner.append(carouselItem);
             });
+            // "Digitals" sekmesine fotoğrafları ekleme
             var digitalsCarouselInner = $('#carouselExampleCaptions .carousel-inner');
             digitalsCarouselInner.empty();
             itemData.digitalPhotos.forEach(function(photo, index) {
@@ -265,6 +257,7 @@
                 digitalsCarouselInner.append(carouselItem);
             });
 
+            // "Videos" sekmesine videoları ekleme
             var videosCarouselInner = $('#carouselvideos .carousel-inner');
             videosCarouselInner.empty();
             itemData.videos.forEach(function(video, index) {
@@ -282,6 +275,71 @@
                 videosCarouselInner.append(carouselItem);
             });
 
+            var model = itemData.model;
+            $('#modal_title_res').text(model.name);
+            $('#tab2-tab').on('click', function() {
+                var model = itemData.model;
+                var modelDetailsDiv = $('#model_details');
+                var modelPhotoDiv = $('#model_photo');
+                modelPhotoDiv.empty();
+                modelDetailsDiv.empty();
+
+                if (model.name) {
+                    var modelName = $('<p class="h1">').html(model
+                        .name);
+                    modelDetailsDiv.append(modelName);
+                }
+
+                if (model.height) {
+                    var modelHeight = $('<p class="h5">').html('<strong>Height:</strong> ' +
+                        model.height);
+                    modelDetailsDiv.append(modelHeight);
+                }
+                if (model.chest_bust) {
+                    var chestOrBust;
+                    if (model.gender === 'men') {
+                        chestOrBust = 'Chest:';
+                    } else if (model.gender === 'women') {
+                        chestOrBust = 'Bust:';
+                    } else {
+                        chestOrBust = 'Chest/Bust:';
+                    }
+                    var modelChest = $('<p class="h5">').html('<strong>' + chestOrBust +
+                        '</strong> ' +
+                        model.chest_bust);
+                    modelDetailsDiv.append(modelChest);
+                }
+                if (model.hips) {
+                    var modelhips = $('<p class="h5">').html('<strong>Hips:</strong> ' + model
+                        .hips);
+                    modelDetailsDiv.append(modelhips);
+                }
+                if (model.shoes) {
+                    var modelshoes = $('<p class="h5">').html('<strong>Shoes:</strong> ' + model
+                        .shoes);
+                    modelDetailsDiv.append(modelshoes);
+                }
+                if (model.eyes) {
+                    var modeleyes = $('<p class="h5">').html('<strong>Eyes:</strong> ' + model
+                        .eyes);
+                    modelDetailsDiv.append(modeleyes);
+                }
+                if (model.nation) {
+                    var modelnation = $('<p class="h5">').html('<strong>Nation:</strong> ' +
+                        model
+                        .nation);
+                    modelDetailsDiv.append(modelnation);
+                }
+                if (model.instagram) {
+                    var instagramLink = $('<a>').attr('href', model.instagram);
+                    var instagramIcon = $('<i>').addClass('fab fa-instagram').css({
+                        'color': '#000000',
+                        'font-size': '2.5rem'
+                    });
+                    instagramLink.append(instagramIcon);
+                    modelDetailsDiv.append(instagramLink);
+                }
+            });
 
 
         });
