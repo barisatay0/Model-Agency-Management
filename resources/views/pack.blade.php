@@ -100,9 +100,6 @@
                                             </div>
                                             <div class="d-flex m-auto" style="width:50%;">
                                                 <div class="text-center">
-                                                    <div class="measurementElement" name="modelfeatures">
-
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,9 +150,17 @@
                             <div class="container mt-3">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div id="model_photo" class="text-center"></div>
-                                        <div id="model_details" class="text-center"></div>
+                                        <div class="row">
+                                            <div id="model_photo" class="col-md-6 text-center">
+                                                <img id="model_photo_img" class="w-75 rounded-3" src=""
+                                                    alt="Model Photo" style="max-width: 100%;">
+                                            </div>
+                                            <div id="model_details" class="col-md-6 text-center">
+                                                <!-- Model özellikleri -->
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -280,8 +285,7 @@
             $('#tab2-tab').on('click', function() {
                 var model = itemData.model;
                 var modelDetailsDiv = $('#model_details');
-                var modelPhotoDiv = $('#model_photo');
-                modelPhotoDiv.empty();
+                var modelPhotoImg = $('#model_photo_img');
                 modelDetailsDiv.empty();
 
                 if (model.name) {
@@ -330,6 +334,12 @@
                         .nation);
                     modelDetailsDiv.append(modelnation);
                 }
+                if (model.fdto && model.fdtt) {
+                    var modelFdt = $('<p class="h5">').html('<strong>Avaible:</strong> ' +
+                        model
+                        .fdto + ' <strong class="text-primary">/</strong> ' + model.fdtt);
+                    modelDetailsDiv.append(modelFdt);
+                }
                 if (model.instagram) {
                     var instagramLink = $('<a>').attr('href', model.instagram);
                     var instagramIcon = $('<i>').addClass('fab fa-instagram').css({
@@ -339,9 +349,15 @@
                     instagramLink.append(instagramIcon);
                     modelDetailsDiv.append(instagramLink);
                 }
+                if (model.profilephoto) {
+                    modelPhotoImg.attr('src', model.profilephoto);
+                } else {
+                    // Eğer profil fotoğrafı yoksa, bir varsayılan görsel göstermek için aşağıdaki gibi bir kod ekleyebilirsiniz:
+                    modelPhotoImg.attr('src',
+                        '{{ asset('images/default_profile_photo.jpg') }}'
+                    ); // Varsayılan görselin yolu
+                }
             });
-
-
         });
     });
 </script>
