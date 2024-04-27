@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Crypt;
 use App\Models\Models;
 use App\Models\Photos;
 use App\Models\Video;
+use ZipArchive;
 
 class PackController extends Controller
 {
