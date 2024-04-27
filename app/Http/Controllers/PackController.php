@@ -19,7 +19,7 @@ class PackController extends Controller
         if ($model) {
             $modelId = $model->modelid;
 
-            $Photos = Photos::where('modelid', $modelId)->get(); 
+            $Photos = Photos::where('modelid', $modelId)->get();
 
             $zip = new ZipArchive;
             $zipFileName = 'photos.zip';
@@ -41,7 +41,35 @@ class PackController extends Controller
 
 
     }
+    public function downloadVideos(Request $request)
+    {
+        $model = Models::where('name', $request->input('modelnameInput'))->first();
 
+        if ($model) {
+            $modelId = $model->modelid;
+
+            $Videos = Video::where('modelid', $modelId)->get();
+
+            $zip = new ZipArchive;
+            $zipFileName = 'Videos.zip';
+
+            if ($zip->open(public_path($zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+                foreach ($Videos as $Video) {
+                    $zip->addFile(public_path($Video->videopath), basename($Video->videopath));
+                }
+
+                $zip->close();
+
+                return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
+            }
+
+            abort(500, 'Zip dosyası oluşturulamadı.');
+        } else {
+            abort(404, 'Model bulunamadı.');
+        }
+
+
+    }
     public function decryptModels(Request $request)
     {
         $encryptedData = $request->input('models');

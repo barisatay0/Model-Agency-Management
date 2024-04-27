@@ -87,8 +87,8 @@
                         </li>
                         <form method="POST" action="{{ route('downloadVideos') }}">
                             @csrf
-                            <input type="hidden" name="modelnameInput" id="modelnameInput" value="">
-                            <li><button type="submit" class="dropdown-item text-center download-button"
+                            <input type="hidden" name="modelnameInput" id="modelnameInputVideo" value="">
+                            <li><button type="submit" class="dropdown-item text-center downloadVideo-button"
                                     data-id="">Videos</button></li>
                         </form>
                     </ul>
@@ -236,6 +236,7 @@
             carouselInner.empty();
             var modelName = itemData.model.name;
             $('#modelnameInput').val(modelName);
+            $('#modelnameInputVideo').val(modelName);
             $('#carouselExampleControls').append(
                 '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>'
             );
