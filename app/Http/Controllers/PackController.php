@@ -34,9 +34,9 @@ class PackController extends Controller
                 return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
             }
 
-            abort(500, 'Zip dosyası oluşturulamadı.');
+            abort(500, 'Zip File Couldnt Create');
         } else {
-            abort(404, 'Model bulunamadı.');
+            abort(404, 'Model Not Found.');
         }
 
 
@@ -63,9 +63,9 @@ class PackController extends Controller
                 return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
             }
 
-            abort(500, 'Zip dosyası oluşturulamadı.');
+            abort(500, 'Zip File Couldnt Create');
         } else {
-            abort(404, 'Model bulunamadı.');
+            abort(404, 'Model Not Found.');
         }
 
 
