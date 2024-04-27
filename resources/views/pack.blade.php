@@ -91,8 +91,7 @@
                                     <div class="carousel-item active">
                                         <div class="d-flex book_first_res">
                                             <div class="d-flex justify-content-end book_img_width" style="width:50%;">
-                                                <img src="{{ asset('images/testmodel.jpg') }}" height="657"
-                                                    alt="..." id="BookPhotos">
+                                                <img src="" height="657" alt="..." id="firstBook">
                                             </div>
                                             <div class="d-flex m-auto" style="width:50%;">
                                                 <div class="text-center">
@@ -100,18 +99,18 @@
                                                         <div class="model-name d-block">
                                                             <h1 class="text-capitalize" style="font-size: 4rem;"></h1>
                                                         </div>
-                                                        <div class="height d-block"><span class="fw-bold">HEIGHT
-                                                            </span></div>
-                                                        <div class="chest d-block"><span class="fw-bold">CHEST/BUST
-                                                            </span></div>
-                                                        <div class="waist d-block"><span class="fw-bold">WAIST
-                                                            </span></div>
-                                                        <div class="hips d-block"><span class="fw-bold">HIPS
-                                                            </span></div>
-                                                        <div class="shoes d-block"><span class="fw-bold">SHOES
-                                                            </span></div>
-                                                        <div class="eyes d-block"><span class="fw-bold">EYES
-                                                            </span><span class="text-lowercase"></span></div>
+                                                        <div class="height d-block"><span class="fw-bold">HEIGHT:
+                                                            </span><span id="model_height"></span></div>
+                                                        <div class="chest d-block"><span class="fw-bold">CHEST/BUST:
+                                                            </span><span id="model_chest"></span></div>
+                                                        <div class="waist d-block"><span class="fw-bold">WAIST:
+                                                            </span><span id="model_waist"></span></div>
+                                                        <div class="hips d-block"><span class="fw-bold">HIPS:
+                                                            </span><span id="model_hips"></span></div>
+                                                        <div class="shoes d-block"><span class="fw-bold">SHOES:
+                                                            </span><span id="model_shoes"></span></div>
+                                                        <div class="eyes d-block"><span class="fw-bold">EYES:
+                                                            </span><span id="model_eyes"></span></div>
                                                         <div class="d-block pt-2"><a href=""><i
                                                                     class="fa-brands fa-instagram"
                                                                     style="color: #000000; font-size: 2.5rem;"></i></a>
@@ -223,13 +222,39 @@
 </script>
 <script>
     $(document).ready(function() {
-        console.log("Document is ready.");
         $('.view-details-button').click(function() {
             var itemData = $(this).data('item');
+            var carouselInner = $('#carouselExampleControls .carousel-inner');
+            carouselInner.empty();
 
-            console.log(itemData);
+            $('#carouselExampleControls').append(
+                '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>'
+            );
+            $('#carouselExampleControls').append(
+                '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>'
+            );
 
-            $('#modal_title_res').text(itemData.model.name);
+            itemData.bookPhotos.forEach(function(photo, index) {
+                var carouselItem = $('<div>').addClass('carousel-item');
+                if (index === 0) {
+                    carouselItem.addClass('active');
+                }
+                var imgDiv = $('<div>').addClass('d-flex');
+                var img = $('<img>').attr('src', photo.photopath).attr('height', '657')
+                    .addClass('mx-auto d-block').attr('alt', '...');
+                imgDiv.append(img);
+                carouselItem.append(imgDiv);
+                carouselInner.append(carouselItem);
+            });
+            var model = itemData.model;
+            $('#modal_title_res').text(model.name);
+            $('#model_height').text(model.height);
+            $('#model_chest').text(model.chest);
+            $('#model_waist').text(model.waist);
+            $('#model_hips').text(model.hips);
+            $('#model_shoes').text(model.shoes);
+            $('#model_eyes').text(model.eyes);
+
         });
     });
 </script>
