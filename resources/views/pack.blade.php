@@ -156,7 +156,6 @@
                                                     alt="Model Photo" style="max-width: 100%;">
                                             </div>
                                             <div id="model_details" class="col-md-6 text-center">
-                                                <!-- Model özellikleri -->
                                             </div>
                                         </div>
                                     </div>
@@ -246,7 +245,6 @@
                 carouselItem.append(imgDiv);
                 carouselInner.append(carouselItem);
             });
-            // "Digitals" sekmesine fotoğrafları ekleme
             var digitalsCarouselInner = $('#carouselExampleCaptions .carousel-inner');
             digitalsCarouselInner.empty();
             itemData.digitalPhotos.forEach(function(photo, index) {
@@ -262,7 +260,6 @@
                 digitalsCarouselInner.append(carouselItem);
             });
 
-            // "Videos" sekmesine videoları ekleme
             var videosCarouselInner = $('#carouselvideos .carousel-inner');
             videosCarouselInner.empty();
             itemData.videos.forEach(function(video, index) {
@@ -352,10 +349,9 @@
                 if (model.profilephoto) {
                     modelPhotoImg.attr('src', model.profilephoto);
                 } else {
-                    // Eğer profil fotoğrafı yoksa, bir varsayılan görsel göstermek için aşağıdaki gibi bir kod ekleyebilirsiniz:
                     modelPhotoImg.attr('src',
                         '{{ asset('images/default_profile_photo.jpg') }}'
-                    ); // Varsayılan görselin yolu
+                    );
                 }
             });
         });
