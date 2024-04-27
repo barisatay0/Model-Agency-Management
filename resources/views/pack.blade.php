@@ -250,7 +250,6 @@
                 carouselItem.append(imgDiv);
                 carouselInner.append(carouselItem);
             });
-            // "Digitals" sekmesine fotoğrafları ekleme
             var digitalsCarouselInner = $('#carouselExampleCaptions .carousel-inner');
             digitalsCarouselInner.empty();
             itemData.digitalPhotos.forEach(function(photo, index) {
@@ -266,7 +265,6 @@
                 digitalsCarouselInner.append(carouselItem);
             });
 
-            // "Videos" sekmesine videoları ekleme
             var videosCarouselInner = $('#carouselvideos .carousel-inner');
             videosCarouselInner.empty();
             itemData.videos.forEach(function(video, index) {
@@ -284,14 +282,7 @@
                 videosCarouselInner.append(carouselItem);
             });
 
-            var model = itemData.model;
-            $('#modal_title_res').text(model.name);
-            $('#model_height').text(model.height);
-            $('#model_chest').text(model.chest);
-            $('#model_waist').text(model.waist);
-            $('#model_hips').text(model.hips);
-            $('#model_shoes').text(model.shoes);
-            $('#model_eyes').text(model.eyes);
+
 
         });
     });
