@@ -85,7 +85,12 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item text-center videodownload-button" data-id="">Videos</a></li>
+                        <form method="POST" action="{{ route('downloadVideos') }}">
+                            @csrf
+                            <input type="hidden" name="modelnameInput" id="modelnameInput" value="">
+                            <li><button type="submit" class="dropdown-item text-center download-button"
+                                    data-id="">Videos</button></li>
+                        </form>
                     </ul>
                     </li>
                     </ul><button type="button" class="btn-close px-3" data-bs-dismiss="modal"
