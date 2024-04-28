@@ -345,7 +345,7 @@
                 if (model.fdto && model.fdtt) {
                     var modelFdt = $('<p class="h5">').html('<strong>Available:</strong> ' +
                         model
-                        .fdto + ' <strong class="text-primary">/</strong> ' + model.fdtt);
+                        .fdto + ' <strong class="text-dark">/</strong> ' + model.fdtt);
                     modelDetailsDiv.append(modelFdt);
                 }
                 if (model.instagram) {

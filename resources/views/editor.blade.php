@@ -20,7 +20,7 @@
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
                 class="btn btn-dark w-25 py-1">Manager</button></a>
         <a class="text-black" style="text-decoration: none" href="{{ url('/List') }}"><button
-                class="btn btn-dark w-25 py-1">List Models</button></a>
+                class="btn btn-dark w-25 py-1">Models</button></a>
     </div>
     @if ($errors->any())
         <div class="alert alert-danger mt-2">
