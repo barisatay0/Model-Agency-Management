@@ -69,4 +69,20 @@ class ManagerController extends Controller
         Models::where('gender', '!=', 'women')->update(['selected' => 0]);
         return redirect('/');
     }
+    public function searchModels(Request $request)
+    {
+        // Arama metnini alın
+        $searchText = $request->input('searchText');
+
+        // En az iki karakter girildiyse modelleri filtreleyin
+        if (strlen($searchText) >= 2) {
+            $models = Models::where('name', 'like', '%' . $searchText . '%')->get();
+        } else {
+            // Eğer iki karakterden azsa, tüm modelleri getirin veya isteğinize uygun başka bir işlem yapın
+            $models = Models::all();
+        }
+
+        // JSON olarak modelleri döndürün
+        return response()->json($models);
+    }
 }

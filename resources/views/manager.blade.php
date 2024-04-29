@@ -370,6 +370,100 @@
             }
         });
     });
+    $(document).ready(function() {
+        $('#searchInput').on('input', function() {
+            var searchText = $(this).val();
+            if (searchText.length >= 2) {
+                searchModels(searchText);
+            }
+        });
+    });
+
+    function searchModels(searchText) {
+        $.ajax({
+            type: 'GET',
+            url: '/searchModels',
+            data: {
+                searchText: searchText
+            },
+            success: function(response) {
+                updateModelCards(response);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    function updateModelCards(models) {
+        $('.row.g-0').empty();
+        models.forEach(function(model) {
+            addModelCard(model);
+        });
+    }
+
+    function selectFirstFourModels() {
+        var allModels = $('.myCheckbox');
+
+        allModels.each(function(index, checkbox) {
+            var modelName = $(checkbox).closest('.card').find('.list-group-item').text();
+            if (modelName.slice(0, 4).toLowerCase() === 'uyum') {
+                checkbox.checked = true;
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        selectFirstFourModels();
+    });
+
+    function addModelCard(model) {
+        var cardHtml = '<div class="col-sm-3 mb-3">' +
+            '<div class="card shadow-lg border border-light" style="width: 17rem;" data-id="' + model.modelid + '">' +
+            '<li class="list-group-item text-center p-2 text-uppercase bg-dark text-white">' + model.name + '</li>' +
+            '<div class="card-body">' +
+            '<a href="http://localhost:8000/Model/' + model.name + '">' +
+            '<img src="' + model.profilephoto + '" style="height:22rem" class="card-img-top" alt="...">' +
+            '</a>' +
+            '</div>' +
+            '<div class="card-body">' +
+            '<div class="dropup-center dropup">' +
+            '<button class="btn btn-outline-dark dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">' +
+            'Features' +
+            '</button>' +
+            '<ul class="dropdown-menu w-100 text-center border border-black" aria-labelledby="dropdownMenuButton">' +
+            '<li><a class="dropdown-item" href="">HEIGHT: ' + model.height + '</a></li>' +
+            '<li><a class="dropdown-item" href="">' +
+            (model.gender == 'men' ? 'CHEST: ' : 'BUST: ') + model.chest_bust + '</a></li>' +
+            '<li><a class="dropdown-item" href="">WAIST: ' + model.waist + '</a></li>' +
+            '<li><a class="dropdown-item" href="">HIPS: ' + model.hips + '</a></li>' +
+            '<li><a class="dropdown-item" href="">SHOES: ' + model.shoes + '</a></li>' +
+            '<li><a class="dropdown-item" href="">EYES: ' + model.eyes + '</a></li>' +
+            '<li><a class="dropdown-item" href="">GENDER: ' + model.gender + '</a></li>';
+
+        if (model.nation) {
+            cardHtml += '<li><a class="dropdown-item" href="">NATİON: ' + model.nation + '</a></li>';
+        }
+
+        cardHtml += '</ul>' +
+            '</div>' +
+            '<div class=" btn-group-toggle mt-1" data-toggle="buttons">' +
+            '<label class="btn btn-outline-dark w-100">' +
+            '<input id="' + model.modelid + '" type="checkbox" class="myCheckbox" onchange="toggleSelection(' + model
+            .modelid + ')"' + (model.selected ? ' checked' : '') + '>' +
+            '</label>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        $('.row.g-0').append(cardHtml);
+
+        var modelName = model.name.toLowerCase();
+        if (modelName.length >= 4 && modelName.slice(0, 4) === 'uyum') {
+            $('#' + model.modelid).prop('checked', true);
+        }
+    }
 </script>
 </body>
 
