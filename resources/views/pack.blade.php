@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="https://reepmodel.com/wp-content/uploads/2022/05/fav.ico" sizes="32x32">
+    <link rel="icon" href="{{ asset('public/fav.ico') }}" sizes="32x32">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@
 
 <body>
     <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
-        <a href="https://reepmodel.com/"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;" alt=""></a>
+        <a href="#"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;" alt=""></a>
     </nav>
 
     <div class="container mt-3">
