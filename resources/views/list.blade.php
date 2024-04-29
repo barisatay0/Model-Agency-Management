@@ -26,7 +26,7 @@
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
                 class="btn btn-dark w-25 py-1">Manager</button></a>
         <a class="text-black " style="text-decoration: none" href="{{ url('/Editor') }}"><button
-                class="btn btn-dark w-25 py-1">Add Model</button></a>
+                class="btn btn-dark w-25 py-1">Add</button></a>
     </div>
     <div class="album py-5 bg-light">
         <div class="container">
