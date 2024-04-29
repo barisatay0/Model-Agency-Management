@@ -407,7 +407,7 @@
 
         allModels.each(function(index, checkbox) {
             var modelName = $(checkbox).closest('.card').find('.list-group-item').text();
-            if (modelName.slice(0, 4).toLowerCase() === 'uyum') {
+            if (modelName.slice(0, 4).toLowerCase() === 'length4') {
                 checkbox.checked = true;
             }
         });
@@ -460,7 +460,7 @@
         $('.row.g-0').append(cardHtml);
 
         var modelName = model.name.toLowerCase();
-        if (modelName.length >= 4 && modelName.slice(0, 4) === 'uyum') {
+        if (modelName.length >= 4 && modelName.slice(0, 4) === 'length4') {
             $('#' + model.modelid).prop('checked', true);
         }
     }
