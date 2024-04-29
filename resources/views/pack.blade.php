@@ -18,7 +18,7 @@
 
 <body>
     <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
-        <a href="https://reepmodel.com/"><img src="{{ asset('images/Logo.png') }}" alt=""></a>
+        <a href="https://reepmodel.com/"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;" alt=""></a>
     </nav>
 
     <div class="container mt-3">

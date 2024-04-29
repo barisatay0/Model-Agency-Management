@@ -14,7 +14,7 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
-        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" alt=""></a>
+        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;" alt=""></a>
     </nav>
     <div class="text-center"><a href="{{ url('/') }}"><button type="button"
                 class="btn btn-outline-dark px-5 py-2 mt-2 mx-2"><i class="fa-solid fa-backward"

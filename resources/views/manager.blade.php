@@ -78,7 +78,7 @@
         <div class="fixed-top p-3 text-bg-light border" style="width: 280px; height: 100%;">
             <a href="{{ url('/') }}"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                <img src="{{ asset('images/Logo.png') }}" alt="">
+                <img src="{{ asset('images/Logo.png') }}" style="width: 240px;height:70px;" alt="">
             </a>
             <hr>
             <div class="nav nav-pills sidebar_res" style="overflow: auto; height: 29rem;">

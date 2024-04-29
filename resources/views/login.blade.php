@@ -13,7 +13,7 @@
 
     <body>
         <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
-            <a href="#"><img src="{{ asset('images/Logo.png') }}" alt="Logo"></a>
+            <a href="#"><img src="{{ asset('images/Logo.png') }}" alt="Logo" style="width: 280px; height: 100%;"></a>
 
         </nav>
         <div class="container mt-5">
