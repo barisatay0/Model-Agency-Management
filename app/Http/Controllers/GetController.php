@@ -38,4 +38,16 @@ class GetController extends Controller
         }
         return view('list', ['models' => $models]);
     }
+    public function listsearchModels(Request $request)
+    {
+        $search = $request->input('search');
+
+        if ($search) {
+            $models = Models::where('name', 'like', '%' . $search . '%')->paginate(10);
+        } else {
+            $models = Models::paginate(10);
+        }
+
+        return response()->json($models);
+    }
 }

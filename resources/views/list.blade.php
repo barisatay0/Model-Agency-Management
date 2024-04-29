@@ -40,20 +40,22 @@
     var nextPage = 1;
 
     function loadModels() {
+        var searchQuery = $('input[name="search"]').val();
         $.ajax({
             url: '/list',
             type: 'GET',
             data: {
-                page: nextPage
+                page: nextPage,
+                search: searchQuery
             },
             success: function(response) {
                 console.log(response);
                 if (response.next_page_url) {
                     nextPage++;
                 } else {
-                    $('#moreButton')
-                        .hide();
+                    $('#moreButton').hide();
                 }
+                $('#Data-list').empty();
                 response.data.forEach(function(model) {
                     var card = `
                     <div class="col mx-5">
@@ -84,6 +86,10 @@
     });
 
     $(document).ready(function() {
+        loadModels();
+    });
+
+    $('input[name="search"]').on('input', function() {
         loadModels();
     });
 </script>
