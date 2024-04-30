@@ -59,7 +59,7 @@ class EditorController extends Controller
         $model->hips = $request->input('hips');
         $model->shoes = $request->input('shoes');
         $model->eyes = $request->input('eyes');
-        $model->nation = $request->input('nation');
+        $model->hair = $request->input('hair');
         $model->instagram = $request->input('instagram');
         $model->gender = $request->input('gender');
         $model->active = '1';

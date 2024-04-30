@@ -336,11 +336,11 @@
                         .eyes);
                     modelDetailsDiv.append(modeleyes);
                 }
-                if (model.nation) {
-                    var modelnation = $('<p class="h5">').html('<strong>Nation:</strong> ' +
+                if (model.hair) {
+                    var modelhair = $('<p class="h5">').html('<strong>Hair Color:</strong> ' +
                         model
-                        .nation);
-                    modelDetailsDiv.append(modelnation);
+                        .hair);
+                    modelDetailsDiv.append(modelhair);
                 }
                 if (model.fdto && model.fdtt) {
                     var modelFdt = $('<p class="h5">').html('<strong>Available:</strong> ' +

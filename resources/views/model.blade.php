@@ -66,9 +66,9 @@
                         </tr>
                         <tr>
                             <th scope="col">
-                                <label for="nation">Nation</label>
+                                <label for="hair">Hair Color :</label>
                                 <input class="form-control border-dark text-center bg-dark text-white" type="text"
-                                    value="{{ $model->nation }}" name="modelnation" id="nation">
+                                    value="{{ $model->hair }}" name="modelhair" id="hair">
                             </th>
                             <th scope="col">
                                 <span>Gender</span>

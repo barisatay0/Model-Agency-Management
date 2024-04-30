@@ -101,10 +101,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h6 class="mb-0 mb-1 text-center">Nation (Optional)</h6>
-                                            <input name="nation" type="text"
+                                            <h6 class="mb-0 mb-1 text-center">Hair Color :</h6>
+                                            <input name="hair" type="text"
                                                 class="form-control bg-light form-control-md  border border-black"
-                                                placeholder="Model Nation" />
+                                                placeholder="Model hair" />
                                         </td>
                                         <td>
                                             <h6 class="mb-0 mb-1 text-center">İnstagram</h6>

@@ -29,7 +29,7 @@ class ModelController extends Controller
         $model->hips = $request->input('modelhips');
         $model->shoes = $request->input('modelshoes');
         $model->eyes = $request->input('modeleyes');
-        $model->nation = $request->input('modelnation');
+        $model->hair = $request->input('modelhair');
         $model->gender = $request->input('gender');
         $model->busy = $request->input('busy');
         $model->active = $request->input('active');

@@ -172,9 +172,9 @@
                                                 {{ strtoupper($model->eyes) }}</a></li>
                                         <li><a class="dropdown-item" href="">GENDER:
                                                 {{ strtoupper($model->gender) }}</a></li>
-                                        @if ($model->nation)
+                                        @if ($model->hair)
                                             <li><a class="dropdown-item" href="">NATİON:
-                                                    {{ strtoupper($model->nation) }}</a></li>
+                                                    {{ strtoupper($model->hair) }}</a></li>
                                         @endif
 
                                     </ul>
@@ -441,8 +441,8 @@
             '<li><a class="dropdown-item" href="">EYES: ' + model.eyes + '</a></li>' +
             '<li><a class="dropdown-item" href="">GENDER: ' + model.gender + '</a></li>';
 
-        if (model.nation) {
-            cardHtml += '<li><a class="dropdown-item" href="">NATİON: ' + model.nation + '</a></li>';
+        if (model.hair) {
+            cardHtml += '<li><a class="dropdown-item" href="">NATİON: ' + model.hair + '</a></li>';
         }
 
         cardHtml += '</ul>' +
