@@ -217,7 +217,7 @@
     </div>
     <footer class="bg-light text-center text-lg-start justify-content-end">
         <div class="text-center mt-2 p-4 bg-light border-top">
-            <p>&copy; {{ date('Y') }} Copyright : Reep Model</p>
+            <p>&copy; {{ date('Y') }} Copyright : Model Agency</p>
         </div>
     </footer>
 
