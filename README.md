@@ -34,5 +34,4 @@ To get started with the Model Agency Management System, follow these steps:
 ## Contributing
 Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please submit them through GitHub issues or fork the repository and create a pull request.
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+
