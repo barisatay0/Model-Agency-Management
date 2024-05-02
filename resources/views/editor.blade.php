@@ -13,15 +13,20 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar d-flex justify-content-center p-2 bg-light border-bottom">
-        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" alt="Logo" style="width: 280px; height: 100%;"></a>
+        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" alt="Logo"
+                style="width: 280px; height: 100%;"></a>
     </nav>
+    <!-- Other Pages -->
     <div class="mt-2 text-center mb-2 w-100">
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
                 class="btn btn-dark w-25 py-1">Manager</button></a>
         <a class="text-black" style="text-decoration: none" href="{{ url('/List') }}"><button
                 class="btn btn-dark w-25 py-1">Models</button></a>
     </div>
+
+    <!-- Add Model -->
     @if ($errors->any())
         <div class="alert alert-danger mt-2">
             <ul>
@@ -30,7 +35,6 @@
                 @endforeach
             </ul>
         </div>
-        <!-- Model Add Form -->
     @endif
     <form action="{{ route('modeladd') }}" method="POST" enctype="multipart/form-data">
         @csrf

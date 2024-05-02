@@ -16,6 +16,7 @@ class GetController extends Controller
 
         return view('manager', ['models' => $models]);
     }
+    /* Get Model Data's From Name */
     public function modelpage($name)
     {
         $model = Models::where('name', $name)->first();
@@ -28,7 +29,7 @@ class GetController extends Controller
         $videos = Video::where('modelid', $model->modelid)->orderBy('videoorder')->get();
         return view('Model', compact('model', 'bookPhotos', 'digitalPhotos', 'videos'));
     }
-
+    /* List Models With Ajax */
     public function listmodels(Request $request)
     {
         $models = Models::paginate(9);
@@ -38,6 +39,7 @@ class GetController extends Controller
         }
         return view('list', ['models' => $models]);
     }
+    /* Search Models */
     public function listsearchModels(Request $request)
     {
         $search = $request->input('search');

@@ -370,6 +370,7 @@
             }
         });
     });
+    // Search Functions
     $(document).ready(function() {
         $('#searchInput').on('input', function() {
             var searchText = $(this).val();
@@ -402,7 +403,7 @@
         });
     }
 
-    function selectFirstFourModels() {
+    function selectFirstFourLetter() {
         var allModels = $('.myCheckbox');
 
         allModels.each(function(index, checkbox) {
@@ -414,9 +415,9 @@
     }
 
     $(document).ready(function() {
-        selectFirstFourModels();
+        selectFirstFourLetter();
     });
-
+    // Create Card After The Search
     function addModelCard(model) {
         var cardHtml = '<div class="col-sm-3 mb-3">' +
             '<div class="card shadow-lg border border-light" style="width: 17rem;" data-id="' + model.modelid + '">' +
@@ -463,7 +464,7 @@
         if (modelName.length >= 4 && modelName.slice(0, 4) === 'length4') {
             $('#' + model.modelid).prop('checked', true);
         }
-        
+
     }
 </script>
 </body>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ListController extends Controller
 {
+     /* Delete Model */
     public function deletemodel(Request $request)
     {
         $modelName = $request->input('modelname');

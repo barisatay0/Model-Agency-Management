@@ -15,30 +15,35 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar d-flex justify-content-center p-2 bg-light border-bottom">
-        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;" alt="Logo"></a>
+        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;"
+                alt="Logo"></a>
     </nav>
+    <!-- Search Bar -->
     <div class="mt-2 text-center mb-2">
         <form class="d-flex justify-content-center mb-1">
             <input name="search" type="search" placeholder="Search Model..." aria-label="Search"
                 class="form-control w-50 border border-dark mx-auto">
         </form>
+        <!-- Other Pages -->
         <a class="text-black " style="text-decoration: none" href="{{ url('/') }}"><button
                 class="btn btn-dark w-25 py-1">Manager</button></a>
         <a class="text-black " style="text-decoration: none" href="{{ url('/Editor') }}"><button
                 class="btn btn-dark w-25 py-1">Add</button></a>
     </div>
+    <!-- Model List -->
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-lg-4 g-4" id="Data-list">
-                <!-- Model -->
+                <!-- Model Data Coming Here -->
             </div>
         </div>
         <div class="text-center"><button id="moreButton" class="btn btn-dark w-50 mt-3">Show More</button></div>
 </body>
 <script>
     var nextPage = 1;
-
+    // Get models for pagination, search, and create cards.
     function loadModels() {
         var searchQuery = $('input[name="search"]').val();
         $.ajax({
@@ -56,6 +61,7 @@
                     $('#moreButton').hide();
                 }
                 $('#Data-list').empty();
+                // Make Cards
                 response.data.forEach(function(model) {
                     var card = `
                     <div class="col mx-5">
@@ -80,7 +86,7 @@
             }
         });
     }
-
+    // More Button ( Pagination )
     $('#moreButton').click(function() {
         loadModels();
     });
@@ -88,7 +94,7 @@
     $(document).ready(function() {
         loadModels();
     });
-
+    // Search
     $('input[name="search"]').on('input', function() {
         loadModels();
     });

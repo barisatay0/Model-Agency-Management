@@ -17,12 +17,15 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
-        <a href="#"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;" alt=""></a>
+        <a href="#"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;"
+                alt=""></a>
     </nav>
 
     <div class="container mt-3">
         <div class="row d-flex">
+            <!-- Display Models -->
             @foreach ($packData as $item)
                 <div class="col-md-3 mb-3">
                     <div class="card bg-white" style="border-radius:0;height:33rem">
@@ -31,6 +34,7 @@
                         <div class="card-body bg-white pt-1">
                             <h5 class="card-title text-dark text-center text-capitalize">{{ $item['model']->name }}
                             </h5>
+                            <!-- Open The Modal -->
                             <button class="btn border border-black w-100 view-details-button" style="border-radius:0;"
                                 data-bs-toggle="modal" data-bs-target="#modal" data-item="{{ json_encode($item) }}">View
                                 Details</button>
@@ -40,10 +44,12 @@
             @endforeach
         </div>
     </div>
+    <!-- Modal -->
     <div class="modal fade p-0" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-fullscreen" role="document">
             <div class="modal-content">
+                <!-- Modal Pages -->
                 <div class="modal-header py-0">
                     <img id="modal_img" src="{{ asset('images/Logo.png') }}" style="witdh:10rem; height:2rem;">
                     <h5 class="modal-title mx-5 text-center text-capitalize fw-bold fs-3 w-25 modal_title_res"
@@ -75,6 +81,7 @@
                                 data-bs-toggle="dropdown" href="#" role="button"
                                 aria-expanded="false">Download</a>
                             <ul class="dropdown-menu w-100 text-center">
+                                <!-- Download Photos -->
                                 <form method="POST" action="{{ route('downloadphotos') }}">
                                     @csrf
                                     <input type="hidden" name="modelnameInput" id="modelnameInput" value="">
@@ -85,6 +92,7 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
+                        <!-- Download Videos -->
                         <form method="POST" action="{{ route('downloadVideos') }}">
                             @csrf
                             <input type="hidden" name="modelnameInput" id="modelnameInputVideo" value="">
@@ -105,6 +113,7 @@
                                     <div class="carousel-item active">
                                         <div class="d-flex book_first_res">
                                             <div class="d-flex justify-content-end book_img_width" style="width:50%;">
+                                                <!-- Tab1 Coming Here -->
                                                 <img src="" height="657" alt="..." id="firstBook">
                                             </div>
                                             <div class="d-flex m-auto" style="width:50%;">
@@ -140,7 +149,7 @@
                                 <div class="carousel-inner">
                                     <div class="carousel-item">
                                         <div class="d-flex"><img src="" height="657"
-                                                class="mx-auto d-block" alt="..."></div>
+                                                class="mx-auto d-block" alt="..."><!-- Tab5 Coming Here --></div>
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button"
@@ -161,6 +170,7 @@
                                     <div class="col-md-12">
                                         <div class="row">
                                             <div id="model_photo" class="col-md-6 text-center">
+                                                <!-- Tab2 Coming Here -->
                                                 <img id="model_photo_img" class="w-75 rounded-3" src=""
                                                     alt="Model Photo" style="max-width: 100%;">
                                             </div>
@@ -181,6 +191,7 @@
                                         <div class="d-flex">
                                             <div class="ratio ratio-16x9" style="max-height: 650px;">
                                                 <video controls id="">
+                                                    <!-- Tab11 Coming Here -->
                                                     <source src="" type="video/mp4">
                                                 </video>
                                             </div>
@@ -207,6 +218,7 @@
             </div>
         </div>
     </div>
+    <!-- If Data Couldn't Found From Url  -->
     @if (empty($packData))
         <div class="col-md-4 mb-4">
             <p class="text-danger">Data not found</p>
@@ -215,6 +227,7 @@
 
     </div>
     </div>
+    <!-- Footer -->
     <footer class="bg-light text-center text-lg-start justify-content-end">
         <div class="text-center mt-2 p-4 bg-light border-top">
             <p>&copy; {{ date('Y') }} Copyright : Model Agency</p>
@@ -229,6 +242,7 @@
     integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
 </script>
 <script>
+    // Retrieve Data For The Modals And Display It On Pages.
     $(document).ready(function() {
         $('.view-details-button').click(function() {
             var itemData = $(this).data('item');

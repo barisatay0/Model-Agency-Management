@@ -12,6 +12,7 @@ use File;
 
 class PackController extends Controller
 {
+    /* Download Photos */
     public function downloadphotos(Request $request)
     {
         $model = Models::where('name', $request->input('modelnameInput'))->first();
@@ -43,6 +44,7 @@ class PackController extends Controller
             abort(404, 'Model Not Found.');
         }
     }
+    /* Download Videos */
     public function downloadVideos(Request $request)
     {
         $model = Models::where('name', $request->input('modelnameInput'))->first();
@@ -75,6 +77,7 @@ class PackController extends Controller
 
 
     }
+    /* Decrypt Url */
     public function decryptModels(Request $request)
     {
         $encryptedData = $request->input('models');

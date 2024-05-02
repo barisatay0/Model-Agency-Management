@@ -17,11 +17,14 @@
 </head>
 
 <body>
+    <!-- Navbar -->
     <nav class="navbar d-flex justify-content-center p-2 bg-light border-bottom">
-        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;" alt="Logo"></a>
+        <a href="{{ url('/') }}"><img src="{{ asset('images/Logo.png') }}" style="width: 280px; height: 100%;"
+                alt="Logo"></a>
     </nav>
     <div class=" text-center container mt-2">
         <div class="table-responsive">
+            <!-- Model features for updating and displaying. -->
             <form method="POST" action="{{ route('modelupdate') }}">
                 @csrf
                 <table class="table table-white table-hover text-center border border-black shadow-lg">
@@ -140,11 +143,14 @@
             </form>
         </div>
     </div>
+    <!-- Book -->
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">BOOK</h1>
     </div>
+
     <h5 class="text-center mt-1">ADD PHOTO TO BOOK</h5>
     <div class="input-group d-flex justify-content-center mt-2">
+        <!-- Book Form For Add Photos -->
         <form method="POST" action="{{ route('addbook') }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="modelid" value="{{ $model->modelid }}">
@@ -152,6 +158,7 @@
             <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
+    <!-- Display Book Photos -->
     @if ($bookPhotos->isNotEmpty())
         @foreach ($bookPhotos->chunk(40) as $chunk)
             <div id="bookcardorder" class="row g-0 mt-3">
@@ -179,12 +186,13 @@
         <div class="text-center"><button id="booksubmitButton" name="bookorderupdate"
                 class="btn btn-outline-success w-75">Save Order</button></div>
     @endif
-
+    <!-- Digital -->
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">DİGİTAL</h1>
     </div>
     <h5 class="text-center mt-1">ADD PHOTO TO DİGİTAL</h5>
     <div class="input-group d-flex justify-content-center mt-2">
+        <!-- Digital Form For Add Photos -->
         <form method="POST" action="{{ route('adddigital') }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="modelid" value="{{ $model->modelid }}">
@@ -192,6 +200,7 @@
             <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
+    <!-- Display Digital Photos -->
     @if ($digitalPhotos->isNotEmpty())
         @foreach ($digitalPhotos->chunk(40) as $chunk)
             <div id="digitalcardorder" class="row g-0 mt-3">
@@ -219,11 +228,13 @@
         <div class="text-center"><button id="digitalsubmitButton" name="digitalorderupdate"
                 class="btn btn-outline-success w-75">Save Order</button></div>
     @endif
+    <!-- Video -->
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">VİDEO</h1>
     </div>
     <h5 class="text-center mt-1">ADD VİDEO</h5>
     <div class="input-group d-flex justify-content-center mt-2">
+        <!-- Video Form For Add Videos -->
         <form method="POST" action="{{ route('addvideo') }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="modelid" value="{{ $model->modelid }}">
@@ -231,6 +242,7 @@
             <button class="btn btn-outline-success w-100 mt-2" type="submit">ADD</button>
         </form>
     </div>
+    <!-- Display Videos -->
     @foreach ($videos->chunk(20) as $chunk)
         <div class="row g-0 mt-3">
             @foreach ($chunk as $video)
@@ -268,6 +280,7 @@
     integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous">
 </script>
 <script>
+    //Function For Change Book Photo Orders
     $(function() {
         $(".row").sortable({
             revert: false,
@@ -313,6 +326,7 @@
     });
 </script>
 <script>
+    // Function For Change Digital Photo Orders
     $(function() {
         $(".row").sortable({
             revert: false,

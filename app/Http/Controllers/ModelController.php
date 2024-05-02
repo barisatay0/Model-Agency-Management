@@ -45,7 +45,7 @@ class ModelController extends Controller
         return redirect()->back();
     }
 
-
+    /* Delete Photos */
     public function photodelete(Request $request)
     {
 
@@ -66,6 +66,7 @@ class ModelController extends Controller
 
         return redirect()->back()->with('success', 'Photo deleted successfully.');
     }
+    /* Delete Videos */
     public function videodelete(Request $request)
     {
 
@@ -86,6 +87,7 @@ class ModelController extends Controller
 
         return redirect()->back()->with('success', 'Video deleted successfully.');
     }
+    /* Add Photos In Book */
     public function addbook(Request $request)
     {
         $bookPhotos = $request->file('bookphotos');
@@ -130,6 +132,7 @@ class ModelController extends Controller
 
         return redirect()->back()->with('error', 'No files uploaded.');
     }
+    /* Add Photos In Digital */
     public function adddigital(Request $request)
     {
         $DigitalPhotos = $request->file('digitalphotos');
@@ -174,6 +177,7 @@ class ModelController extends Controller
 
         return redirect()->back()->with('error', 'No files uploaded.');
     }
+    /* Add Videos */
     public function addvideo(Request $request)
     {
         $videos = $request->file('videos');
@@ -199,6 +203,7 @@ class ModelController extends Controller
 
         return redirect()->back()->with('error', 'No files uploaded.');
     }
+    /* Change The Photo Orders */
     public function photoorderupdate(Request $request)
     {
         $photoOrders = $request->input('photoOrders');

@@ -69,6 +69,7 @@ class ManagerController extends Controller
         Models::where('gender', '!=', 'women')->update(['selected' => 0]);
         return redirect('/');
     }
+    /* Search Models From Name */
     public function searchModels(Request $request)
     {
         $searchText = $request->input('searchText');

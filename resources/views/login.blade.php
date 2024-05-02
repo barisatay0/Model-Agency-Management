@@ -1,62 +1,65 @@
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login Sayfası</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-        <link rel="icon" href="{{ asset('fav.ico') }}" sizes="32x32">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Sayfası</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="icon" href="{{ asset('fav.ico') }}" sizes="32x32">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrapextras.css') }}">
+</head>
 
-    <body>
-        <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
-            <a href="#"><img src="{{ asset('images/Logo.png') }}" alt="Logo" style="width: 280px; height: 100%;"></a>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar d-flex justify-content-center p-4 bg-light border-bottom">
+        <a href="#"><img src="{{ asset('images/Logo.png') }}" alt="Logo"
+                style="width: 280px; height: 100%;"></a>
 
-        </nav>
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-black text-white text-center"
-                            style="font-family:'Roboto', sans-serif;font-weight: 700;color: #000;">
-                            Log In Pack
-                        </div>
-                        <div class="card-body">
-                            <form action="{{ route('userlogin') }}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" name="username" id="username"
-                                        placeholder="Enter username..." required autocomplete="name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password"
-                                        placeholder="Enter password..." required>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                                    <label class="form-check-label" for="remember">Remember me</label>
-                                </div>
-                                <button type="submit" class="btn btn-outline-dark w-100">Log in</button>
-                            </form>
+    </nav>
+    <!-- Logın Container -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-black text-white text-center"
+                        style="font-family:'Roboto', sans-serif;font-weight: 700;color: #000;">
+                        Log In Pack
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('userlogin') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" id="username"
+                                    placeholder="Enter username..." required autocomplete="name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="password"
+                                    placeholder="Enter password..." required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-outline-dark w-100">Log in</button>
+                        </form>
 
-                            <br>
-                            @if ($errors->has('login'))
-                                <div class="alert alert-danger">
-                                    {{ $errors->first('login') }}
-                                </div>
-                            @endif
-                        </div>
+                        <br>
+                        @if ($errors->has('login'))
+                            <div class="alert alert-danger">
+                                {{ $errors->first('login') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
 
-    </html>
+</html>
