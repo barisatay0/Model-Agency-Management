@@ -94,6 +94,7 @@ Route::post('/addbook', [ModelController::class, 'addbook'])->name('addbook');
 Route::post('/adddigital', [ModelController::class, 'adddigital'])->name('adddigital');
 Route::post('/addvideo', [ModelController::class, 'addvideo'])->name('addvideo');
 Route::post('/photoorderupdate', [ModelController::class, 'photoorderupdate'])->name('photoorderupdate');
+Route::post('/photochange', [ModelController::class, 'photochange'])->name('photochange');
 
 /* Pack Functions */
 Route::get('/Pack', [PackController::class, 'decryptModels']);

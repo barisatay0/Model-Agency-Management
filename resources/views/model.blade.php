@@ -143,6 +143,27 @@
             </form>
         </div>
     </div>
+    <!-- Profile Photo -->
+    <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
+        <h1 class="text-black">PROFILE PHOTO</h1>
+    </div>
+    <div class="input-group d-flex justify-content-center mt-2">
+        <!-- Profile Photo Form For Change Photo -->
+        <form method="POST" action="{{ route('photochange') }}" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="modelid" value="{{ $model->modelid }}">
+            <input type="file" name="newprofilephoto" class="form-control">
+            <button class="btn btn-outline-success w-100 mt-2" type="submit">CHANGE</button>
+        </form>
+    </div>
+    <div class="row g-0 mt-3">
+        <div class="card border border-light mx-auto" style="height:26rem">
+            <div class="d-flex justify-content-center align-items-center" style="height:100%;">
+                <img class="w-25" src="{{ asset($model->profilephoto) }}" style="max-height:100%; max-width:100%;" class="card-img-top" alt="Profile Photo">
+            </div>
+        </div>
+    </div>
+    
     <!-- Book -->
     <div class="navbar d-flex justify-content-center p-2 bg-light border-bottom mt-5">
         <h1 class="text-black">BOOK</h1>

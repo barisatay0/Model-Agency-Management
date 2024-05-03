@@ -218,5 +218,22 @@ class ModelController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function photochange(Request $request)
+    {
+        $modelId = $request->input('modelid');
+
+        $model = Models::where('modelid', $modelId)->first();
+        if ($model) {
+            $oldProfilePhotoPath = $model->profilephoto;
+            if ($oldProfilePhotoPath) {
+                Storage::delete($oldProfilePhotoPath);
+            }
+        }
+
+        $profilePhoto = $request->file('newprofilephoto');
+        $profilePhotoPath = $profilePhoto->storePublicly('public/Photos');
+        Models::where('modelid', $modelId)->update(['profilephoto' => $profilePhotoPath]);
+        return redirect()->back()->with('success', 'File uploaded successfully.');
+    }
 
 }
