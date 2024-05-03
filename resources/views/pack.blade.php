@@ -351,7 +351,7 @@
                     modelDetailsDiv.append(modeleyes);
                 }
                 if (model.hair) {
-                    var modelhair = $('<p class="h5">').html('<strong>Hair Color:</strong> ' +
+                    var modelhair = $('<p class="h5">').html('<strong>Hair:</strong> ' +
                         model
                         .hair);
                     modelDetailsDiv.append(modelhair);

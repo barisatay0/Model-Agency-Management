@@ -105,7 +105,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h6 class="mb-0 mb-1 text-center">Hair Color :</h6>
+                                            <h6 class="mb-0 mb-1 text-center">Hair:</h6>
                                             <input name="hair" type="text"
                                                 class="form-control bg-light form-control-md  border border-black"
                                                 placeholder="Model hair" />
