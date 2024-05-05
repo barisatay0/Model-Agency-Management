@@ -351,12 +351,11 @@
     //Save Selection Button
     $('#saveSelectionBtn').click(function() {
         var selectedModels = [];
-        $('.myCheckbox:checked').each(function() {
-            selectedModels.push($(this).closest('.card').data('id'));
+        $('#addedButtons button').each(function() {
+            selectedModels.push($(this).attr('id'));
         });
 
-        console.log("Selected Models:", selectedModels); // Kontrol için log ekle
-
+        console.log("Selected Models:", selectedModels);
         $.ajax({
             type: 'POST',
             url: '/saveSelection',
@@ -365,7 +364,7 @@
                 _token: '{{ csrf_token() }}'
             },
             success: function(response) {
-                console.log("Encrypted Data:", response.encryptedData); // Kontrol için log ekle
+                console.log("Encrypted Data:", response.encryptedData);
                 $('#linker').val(response.encryptedData);
             },
             error: function(xhr, status, error) {
@@ -373,6 +372,7 @@
             }
         });
     });
+
 
     // Search Functions
     $(document).ready(function() {

@@ -60,7 +60,6 @@
                 } else {
                     $('#moreButton').hide();
                 }
-                $('#Data-list').empty();
                 // Make Cards
                 response.data.forEach(function(model) {
                     var card = `
