@@ -355,6 +355,8 @@
             selectedModels.push($(this).closest('.card').data('id'));
         });
 
+        console.log("Selected Models:", selectedModels); // Kontrol için log ekle
+
         $.ajax({
             type: 'POST',
             url: '/saveSelection',
@@ -363,6 +365,7 @@
                 _token: '{{ csrf_token() }}'
             },
             success: function(response) {
+                console.log("Encrypted Data:", response.encryptedData); // Kontrol için log ekle
                 $('#linker').val(response.encryptedData);
             },
             error: function(xhr, status, error) {
@@ -370,6 +373,7 @@
             }
         });
     });
+
     // Search Functions
     $(document).ready(function() {
         $('#searchInput').on('input', function() {

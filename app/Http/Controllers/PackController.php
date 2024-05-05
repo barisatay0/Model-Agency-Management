@@ -81,7 +81,9 @@ class PackController extends Controller
     public function decryptModels(Request $request)
     {
         $encryptedData = $request->input('models');
+        echo "Encrypted Data: " . $encryptedData; // Kontrol için log ekle
         $decryptedData = Crypt::decrypt($encryptedData);
+        echo "Decrypted Data: " . $decryptedData; // Kontrol için log ekle
         $selectedModels = explode(',', $decryptedData);
 
         $models = Models::whereIn('modelid', $selectedModels)->get();
