@@ -288,11 +288,28 @@
     });
 
     function addSidebarButton(modelid, name) {
-        var buttonHtml = '<button type="button" class="btn bg-dark text-white text-capitalize mx-1 mb-2" id="' +
-            modelid +
-            '">' + name + '</button>';
-        $('#addedButtons').append(buttonHtml);
-    }
+    var buttonHtml = '<button type="button" class="btn bg-dark text-white text-capitalize mx-1 mb-2" id="' +
+        modelid +
+        '">' + name + '</button>';
+
+    $('#addedButtons').append(buttonHtml);
+
+    $('#addedButtons').on('click', '#' + modelid, function() {
+        var checkbox = $('[data-id="' + modelid + '"] .myCheckbox');
+        if (checkbox.length > 0) {
+            checkbox.prop('checked', false); 
+            toggleSelection(modelid); 
+        }
+        $(this).remove();
+    });
+
+    $('[data-id="' + modelid + '"] .myCheckbox').change(function() {
+        toggleSelection(modelid);
+    });
+}
+
+
+
     // Local Storage For Stability
     function checkCacheAndUpdateModels() {
         var cachedModels = localStorage.getItem('cachedModels');
