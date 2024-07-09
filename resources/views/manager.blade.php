@@ -348,30 +348,49 @@
         document.execCommand("copy");
         document.body.removeChild(tempTextarea);
     });
-    //Save Selection Button
-    $('#saveSelectionBtn').click(function() {
-        var selectedModels = [];
-        $('#addedButtons button').each(function() {
-            selectedModels.push($(this).attr('id'));
-        });
 
-        console.log("Selected Models:", selectedModels);
-        $.ajax({
-            type: 'POST',
-            url: '/saveSelection',
-            data: {
-                selectedModels: selectedModels,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(response) {
-                console.log("Encrypted Data:", response.encryptedData);
-                $('#linker').val(response.encryptedData);
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-        });
+
+    $('#saveSelectionBtn').click(function() {
+    var selectedModels = [];
+    $('#addedButtons button').each(function() {
+        selectedModels.push($(this).attr('id'));
     });
+
+    console.log("Selected Models:", selectedModels);
+    $.ajax({
+        type: 'POST',
+        url: '/saveSelection',
+        data: {
+            selectedModels: selectedModels,
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            console.log("Encrypted Data:", response.encryptedData);
+            $('#linker').val(response.encryptedData);
+            updateModels();
+            $('.myCheckbox').prop('checked', false);
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+});
+
+function updateModels() {
+    $.ajax({
+        type: 'GET',
+        url: '/selectedModels',
+        success: function(response) {
+            $('#addedButtons').empty();
+            response.forEach(function(model) {
+                addSidebarButton(model.modelid, model.name);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
 
 
     // Search Functions

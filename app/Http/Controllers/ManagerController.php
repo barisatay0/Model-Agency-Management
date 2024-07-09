@@ -54,6 +54,8 @@ class ManagerController extends Controller
         $dataToEncrypt = implode(',', $selectedModels);
         $encryptedData = Crypt::encrypt($dataToEncrypt);
         $exampleLink = 'http://localhost:8000/Pack?models=' . urlencode($encryptedData);
+        Models::query()->update(['selected' => 0]);
+    
         return response()->json(['encryptedData' => $exampleLink]);
     }
     /* Select Men And Women */
