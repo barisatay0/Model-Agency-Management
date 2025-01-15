@@ -1,7 +1,5 @@
 # Model Agency Management System
 
-[![Model Agency Management System](https://i9.ytimg.com/vi_webp/q4WnsSFs9OM/mq3.webp?sqp=CMDzybEG&rs=AOn4CLBHRkWokjQmhGGb-t8FOibyp3jSgw&retry=1)](https://youtu.be/q4WnsSFs9OM)
-
 Welcome to the Model Agency Management System! This application is built using Laravel and Ajax to provide a seamless experience for managing models in your agency.
 
 ## Features
